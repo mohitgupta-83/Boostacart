@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = "force-dynamic"
+
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
@@ -230,9 +232,8 @@ export default function SavedLeadsPage() {
                   leads.map((lead) => (
                     <tr
                       key={lead.id}
-                      className={`hover:bg-white/5 transition-colors duration-200 ${
-                        selectedLeads.has(lead.id) ? "bg-blue-500/10" : ""
-                      }`}
+                      className={`hover:bg-white/5 transition-colors duration-200 ${selectedLeads.has(lead.id) ? "bg-blue-500/10" : ""
+                        }`}
                     >
                       <td className="px-6 py-4">
                         <input

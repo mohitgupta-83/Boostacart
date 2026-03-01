@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = "force-dynamic"
+
 import type React from "react"
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
@@ -363,146 +365,144 @@ export default function AdminPanel() {
         </div>
 
         {activeTab === "stores" && (<>
-        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 mb-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search stores by name or domain..."
-              className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 mb-6">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search stores by name or domain..."
+                className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-4">
-            <div className="text-gray-400 text-sm mb-1">Total Stores</div>
-            <div className="text-3xl font-bold text-white">{stores.length}</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-4">
+              <div className="text-gray-400 text-sm mb-1">Total Stores</div>
+              <div className="text-3xl font-bold text-white">{stores.length}</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-4">
+              <div className="text-gray-400 text-sm mb-1">Free Plan</div>
+              <div className="text-3xl font-bold text-blue-400">{stores.filter((s) => s.plan === "Free").length}</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-4">
+              <div className="text-gray-400 text-sm mb-1">Paid Plans</div>
+              <div className="text-3xl font-bold text-green-400">{stores.filter((s) => s.plan !== "Free").length}</div>
+            </div>
           </div>
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-4">
-            <div className="text-gray-400 text-sm mb-1">Free Plan</div>
-            <div className="text-3xl font-bold text-blue-400">{stores.filter((s) => s.plan === "Free").length}</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-4">
-            <div className="text-gray-400 text-sm mb-1">Paid Plans</div>
-            <div className="text-3xl font-bold text-green-400">{stores.filter((s) => s.plan !== "Free").length}</div>
-          </div>
-        </div>
 
-        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-white/5 border-b border-white/20">
-                <tr>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                    Store Name
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                    Domain
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                    Plan
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                    Total Leads
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                    This Month
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                    Remaining
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
-                    Change Plan
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10">
-                {loading ? (
+          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-white/5 border-b border-white/20">
                   <tr>
-                    <td colSpan={7} className="px-4 py-8 text-center text-gray-400">
-                      <div className="flex items-center justify-center space-x-2">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-400"></div>
-                        <span>Loading stores...</span>
-                      </div>
-                    </td>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      Store Name
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      Domain
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      Plan
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      Total Leads
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      This Month
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      Remaining
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      Change Plan
+                    </th>
                   </tr>
-                ) : filteredStores.length === 0 ? (
-                  <tr>
-                    <td colSpan={7} className="px-4 py-8 text-center text-gray-400">
-                      No stores found
-                    </td>
-                  </tr>
-                ) : (
-                  filteredStores.map((store) => (
-                    <tr key={store.store_id} className="hover:bg-white/5 transition-colors">
-                      <td className="px-4 py-3 text-white font-medium">{store.store_name}</td>
-                      <td className="px-4 py-3 text-gray-300 text-sm">
-                        <div>{store.shopify_domain}</div>
-                        <div className="text-xs text-gray-500">{store.domain}</div>
-                      </td>
-                      <td className="px-4 py-3">
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            store.plan === "Free"
-                              ? "bg-gray-500/20 text-gray-300"
-                              : store.plan === "Starter"
-                                ? "bg-blue-500/20 text-blue-300"
-                                : "bg-purple-500/20 text-purple-300"
-                          }`}
-                        >
-                          {store.plan}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-white">{store.total_leads}</td>
-                      <td className="px-4 py-3 text-white">
-                        {store.leads_this_month} / {store.max_leads}
-                      </td>
-                      <td className="px-4 py-3">
-                        <span
-                          className={`font-semibold ${
-                            store.remaining_leads === 0
-                              ? "text-red-400"
-                              : store.remaining_leads < 10
-                                ? "text-orange-400"
-                                : "text-green-400"
-                          }`}
-                        >
-                          {store.remaining_leads}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3">
-                        <select
-                          value={store.plan}
-                          onChange={(e) => handlePlanChange(store.store_id, e.target.value)}
-                          disabled={updatingStore === store.store_id}
-                          className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          <option value="Free" className="bg-slate-800">
-                            Free (50)
-                          </option>
-                          <option value="Starter" className="bg-slate-800">
-                            Starter (600)
-                          </option>
-                          <option value="Pro" className="bg-slate-800">
-                            Pro (2000)
-                          </option>
-                        </select>
-                        {updatingStore === store.store_id && (
-                          <div className="inline-block ml-2">
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
-                          </div>
-                        )}
+                </thead>
+                <tbody className="divide-y divide-white/10">
+                  {loading ? (
+                    <tr>
+                      <td colSpan={7} className="px-4 py-8 text-center text-gray-400">
+                        <div className="flex items-center justify-center space-x-2">
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-400"></div>
+                          <span>Loading stores...</span>
+                        </div>
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ) : filteredStores.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} className="px-4 py-8 text-center text-gray-400">
+                        No stores found
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredStores.map((store) => (
+                      <tr key={store.store_id} className="hover:bg-white/5 transition-colors">
+                        <td className="px-4 py-3 text-white font-medium">{store.store_name}</td>
+                        <td className="px-4 py-3 text-gray-300 text-sm">
+                          <div>{store.shopify_domain}</div>
+                          <div className="text-xs text-gray-500">{store.domain}</div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-semibold ${store.plan === "Free"
+                                ? "bg-gray-500/20 text-gray-300"
+                                : store.plan === "Starter"
+                                  ? "bg-blue-500/20 text-blue-300"
+                                  : "bg-purple-500/20 text-purple-300"
+                              }`}
+                          >
+                            {store.plan}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-white">{store.total_leads}</td>
+                        <td className="px-4 py-3 text-white">
+                          {store.leads_this_month} / {store.max_leads}
+                        </td>
+                        <td className="px-4 py-3">
+                          <span
+                            className={`font-semibold ${store.remaining_leads === 0
+                                ? "text-red-400"
+                                : store.remaining_leads < 10
+                                  ? "text-orange-400"
+                                  : "text-green-400"
+                              }`}
+                          >
+                            {store.remaining_leads}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <select
+                            value={store.plan}
+                            onChange={(e) => handlePlanChange(store.store_id, e.target.value)}
+                            disabled={updatingStore === store.store_id}
+                            className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <option value="Free" className="bg-slate-800">
+                              Free (50)
+                            </option>
+                            <option value="Starter" className="bg-slate-800">
+                              Starter (600)
+                            </option>
+                            <option value="Pro" className="bg-slate-800">
+                              Pro (2000)
+                            </option>
+                          </select>
+                          {updatingStore === store.store_id && (
+                            <div className="inline-block ml-2">
+                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
         </>)}
 
         {activeTab === "withdrawals" && (
@@ -528,12 +528,11 @@ export default function AdminPanel() {
                       {w.admin_note && <p className="text-gray-300 text-xs mt-1 italic">{w.admin_note}</p>}
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                        w.status === "pending" ? "bg-yellow-400/10 text-yellow-400" :
-                        w.status === "paid" ? "bg-green-400/10 text-green-400" :
-                        w.status === "rejected" ? "bg-red-400/10 text-red-400" :
-                        "bg-blue-400/10 text-blue-400"
-                      }`}>{w.status}</span>
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${w.status === "pending" ? "bg-yellow-400/10 text-yellow-400" :
+                          w.status === "paid" ? "bg-green-400/10 text-green-400" :
+                            w.status === "rejected" ? "bg-red-400/10 text-red-400" :
+                              "bg-blue-400/10 text-blue-400"
+                        }`}>{w.status}</span>
                       <input
                         type="text"
                         placeholder="Admin note (optional)"
@@ -546,11 +545,10 @@ export default function AdminPanel() {
                           key={s}
                           disabled={updatingWithdrawal === w.id || w.status === s}
                           onClick={() => handleWithdrawalStatus(w.id, s)}
-                          className={`text-xs px-3 py-1 rounded-lg transition-colors disabled:opacity-40 ${
-                            s === "paid" ? "bg-green-600 hover:bg-green-700 text-white" :
-                            s === "approved" ? "bg-blue-600 hover:bg-blue-700 text-white" :
-                            "bg-red-600 hover:bg-red-700 text-white"
-                          }`}
+                          className={`text-xs px-3 py-1 rounded-lg transition-colors disabled:opacity-40 ${s === "paid" ? "bg-green-600 hover:bg-green-700 text-white" :
+                              s === "approved" ? "bg-blue-600 hover:bg-blue-700 text-white" :
+                                "bg-red-600 hover:bg-red-700 text-white"
+                            }`}
                         >
                           {s.charAt(0).toUpperCase() + s.slice(1)}
                         </button>

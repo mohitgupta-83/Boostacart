@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = "force-dynamic"
+
 import type React from "react"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
@@ -38,9 +40,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Sidebar */}
       <aside
-        className={`${
-          sidebarOpen ? "w-64" : "w-0"
-        } bg-white/5 backdrop-blur-sm border-r border-white/10 flex-shrink-0 transition-all duration-300 overflow-hidden`}
+        className={`${sidebarOpen ? "w-64" : "w-0"
+          } bg-white/5 backdrop-blur-sm border-r border-white/10 flex-shrink-0 transition-all duration-300 overflow-hidden`}
       >
         <div className="flex flex-col h-full w-64">
           {/* Logo/Brand */}
@@ -60,11 +61,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
-                    active
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${active
                       ? "bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-white border border-blue-500/30"
                       : "text-gray-400 hover:text-white hover:bg-white/5"
-                  }`}
+                    }`}
                 >
                   <Icon className="h-5 w-5" />
                   <span className="font-medium">{item.label}</span>
