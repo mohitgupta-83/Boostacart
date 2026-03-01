@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic"
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
-import { Copy, Check, Users, Gift, Wallet, TrendingUp, ExternalLink } from "lucide-react"
+import { Copy, Check, Users, Gift, Wallet, TrendingUp, ExternalLink, Share2, Tag, Info } from "lucide-react"
 
 interface ReferralWallet {
   credits_balance: number
@@ -42,6 +42,7 @@ export default function ReferralsPage() {
   const [withdrawals, setWithdrawals] = useState<WithdrawalRequest[]>([])
   const [loading, setLoading] = useState(true)
   const [copied, setCopied] = useState(false)
+  const [copiedCoupon, setCopiedCoupon] = useState(false)
 
   // Withdraw form
   const [showWithdrawForm, setShowWithdrawForm] = useState(false)
@@ -93,6 +94,32 @@ export default function ReferralsPage() {
     await navigator.clipboard.writeText(referralLink)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const copyCouponCode = async () => {
+    if (!referralCode) return
+    await navigator.clipboard.writeText(referralCode)
+    setCopiedCoupon(true)
+    setTimeout(() => setCopiedCoupon(false), 2000)
+  }
+
+  const shareLink = async () => {
+    if (!referralLink) return
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Join BoostACart",
+          text: `Sign up for BoostACart using my referral link and get started capturing leads!`,
+          url: referralLink,
+        })
+      } catch {
+        // User cancelled share
+      }
+    } else {
+      await navigator.clipboard.writeText(referralLink)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
   }
 
   const handleWithdraw = async (e: React.FormEvent) => {
@@ -154,13 +181,13 @@ export default function ReferralsPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold text-white mb-1">Referrals & Earnings</h1>
         <p className="text-slate-400 text-sm mb-8">
-          Share your link. Each signup earns you 10 free lead credits. Commission unlocks after 30 days.
+          Share your link or coupon code. Earn 40% commission on your referral&apos;s first subscription payment.
         </p>
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Lead Credits", value: wallet?.credits_balance ?? 0, icon: Gift, color: "text-green-400" },
+            { label: "Pending", value: `₹${(wallet?.pending_commission ?? 0).toFixed(2)}`, icon: Gift, color: "text-green-400" },
             { label: "Total Referrals", value: referrals.length, icon: Users, color: "text-blue-400" },
             { label: "Withdrawable", value: `₹${(wallet?.withdrawable_commission ?? 0).toFixed(2)}`, icon: Wallet, color: "text-purple-400" },
             { label: "Total Earned", value: `₹${(wallet?.total_earned ?? 0).toFixed(2)}`, icon: TrendingUp, color: "text-yellow-400" },
@@ -175,26 +202,57 @@ export default function ReferralsPage() {
           ))}
         </div>
 
-        {/* Referral Link */}
-        <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6">
-          <h2 className="text-white font-semibold mb-3">Your Referral Link</h2>
-          <div className="flex gap-2">
-            <input
-              readOnly
-              value={referralLink}
-              className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-sm text-white/80 font-mono truncate focus:outline-none"
-            />
+        {/* My Coupon Code */}
+        <div className="bg-gradient-to-br from-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-xl p-6 mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <Tag className="h-4 w-4 text-blue-400" />
+            <h2 className="text-white font-semibold">My Coupon Code</h2>
+          </div>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="bg-white/10 border border-white/20 rounded-lg px-6 py-3">
+              <span className="text-2xl font-bold text-white font-mono tracking-wider">{referralCode}</span>
+            </div>
             <button
-              onClick={copyLink}
+              onClick={copyCouponCode}
               className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors"
             >
-              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-              {copied ? "Copied" : "Copy"}
+              {copiedCoupon ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              {copiedCoupon ? "Copied" : "Copy Code"}
+            </button>
+            <button
+              onClick={shareLink}
+              className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded-lg transition-colors"
+            >
+              <Share2 className="h-4 w-4" />
+              Share
             </button>
           </div>
-          <p className="text-slate-500 text-xs mt-2">
-            Your code: <span className="text-slate-300 font-mono font-semibold">{referralCode}</span>
-          </p>
+          <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+            <p className="text-slate-400 text-xs mb-1">Share this signup link:</p>
+            <div className="flex gap-2">
+              <input
+                readOnly
+                value={referralLink}
+                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-1.5 text-xs text-white/80 font-mono truncate focus:outline-none"
+              />
+              <button
+                onClick={copyLink}
+                className="flex items-center gap-1 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs rounded-lg transition-colors"
+              >
+                {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                {copied ? "Copied" : "Copy"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Commission Model */}
+        <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 flex items-start gap-3">
+          <Info className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-white text-sm font-medium">Commission Model</p>
+            <p className="text-slate-400 text-xs mt-0.5">Earn 40% on first subscription month only. Commission unlocks 10 days after the referred store&apos;s first subscription remains active.</p>
+          </div>
         </div>
 
         {/* How it works */}
@@ -202,9 +260,9 @@ export default function ReferralsPage() {
           <h2 className="text-white font-semibold mb-4">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { step: "1", title: "Share your link", desc: "Send your referral link to other Shopify store owners." },
-              { step: "2", title: "They sign up", desc: "When someone signs up using your link, you instantly get 10 free lead credits." },
-              { step: "3", title: "Earn commission", desc: "Once they upgrade to a paid plan, you earn a commission after a 30-day holding period." },
+              { step: "1", title: "Share your link or code", desc: "Send your referral link or coupon code to Shopify store owners." },
+              { step: "2", title: "They sign up & subscribe", desc: "When they sign up using your link/code and subscribe to a paid plan." },
+              { step: "3", title: "Earn 40% commission", desc: "Earn 40% of their first subscription payment. Commission unlocks after 10 days." },
             ].map(({ step, title, desc }) => (
               <div key={step} className="flex gap-3">
                 <div className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-bold">
@@ -248,18 +306,32 @@ export default function ReferralsPage() {
         <div className="bg-white/5 border border-white/10 rounded-xl p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-white font-semibold">Withdrawal Requests</h2>
-            <button
-              onClick={() => { setShowWithdrawForm(!showWithdrawForm); setWithdrawSuccess(false) }}
-              className="flex items-center gap-2 text-xs px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
-            >
-              <ExternalLink className="h-3 w-3" />
-              Request Withdrawal
-            </button>
+            {(wallet?.withdrawable_commission ?? 0) > 0 ? (
+              <button
+                onClick={() => { setShowWithdrawForm(!showWithdrawForm); setWithdrawSuccess(false) }}
+                className="flex items-center gap-2 text-xs px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                <ExternalLink className="h-3 w-3" />
+                Request Withdrawal
+              </button>
+            ) : (
+              <div className="flex items-center gap-2 text-xs px-3 py-1.5 bg-white/5 border border-white/10 text-slate-400 rounded-lg cursor-not-allowed">
+                <ExternalLink className="h-3 w-3" />
+                Request Withdrawal
+              </div>
+            )}
           </div>
 
           {withdrawSuccess && (
             <div className="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 text-sm">
-              Withdrawal request submitted. We'll process it within 3-5 business days.
+              Withdrawal request submitted. We&apos;ll process it within 3-5 business days.
+            </div>
+          )}
+
+          {(wallet?.withdrawable_commission ?? 0) === 0 && (
+            <div className="mb-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg text-blue-300 text-xs flex items-start gap-2">
+              <Info className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" />
+              Commission unlocks 10 days after the referred store&apos;s first subscription remains active.
             </div>
           )}
 

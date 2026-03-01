@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useState, Suspense } from "react"
+import { useState, useEffect, Suspense } from "react"
 
 function SignUpForm() {
   const [email, setEmail] = useState("")
@@ -17,11 +17,44 @@ function SignUpForm() {
   const [repeatPassword, setRepeatPassword] = useState("")
   const [storeName, setStoreName] = useState("")
   const [storeDomain, setStoreDomain] = useState("")
+  const [referralCode, setReferralCode] = useState("")
+  const [referralValid, setReferralValid] = useState<boolean | null>(null)
+  const [referralChecking, setReferralChecking] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
   const refCode = searchParams.get("ref") || ""
+
+  // Auto-fill referral code from URL and validate
+  useEffect(() => {
+    if (refCode) {
+      setReferralCode(refCode.toUpperCase())
+      validateReferralCode(refCode.toUpperCase())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refCode])
+
+  const validateReferralCode = async (code: string) => {
+    if (!code.trim()) {
+      setReferralValid(null)
+      return
+    }
+    setReferralChecking(true)
+    try {
+      const supabase = createClient()
+      const { data } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("referral_code", code.toUpperCase())
+        .maybeSingle()
+      setReferralValid(!!data)
+    } catch {
+      setReferralValid(false)
+    } finally {
+      setReferralChecking(false)
+    }
+  }
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,6 +74,15 @@ function SignUpForm() {
       return
     }
 
+    // Block submission if referral code is entered but invalid
+    if (referralCode.trim() && referralValid === false) {
+      setError("Invalid referral code")
+      setIsLoading(false)
+      return
+    }
+
+    const finalRefCode = referralCode.trim().toUpperCase() || (refCode ? refCode.toUpperCase() : "")
+
     try {
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
@@ -52,7 +94,7 @@ function SignUpForm() {
           data: {
             store_name: storeName,
             store_domain: storeDomain,
-            ...(refCode ? { ref_code: refCode.toUpperCase() } : {}),
+            ...(finalRefCode ? { ref_code: finalRefCode } : {}),
           },
         },
       })
@@ -154,6 +196,37 @@ function SignUpForm() {
                       onChange={(e) => setStoreDomain(e.target.value)}
                       className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20"
                     />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="referral-code" className="text-white/70 text-xs">
+                      Referral / Coupon Code (Optional)
+                    </Label>
+                    <Input
+                      id="referral-code"
+                      type="text"
+                      placeholder="e.g. ABC123"
+                      value={referralCode}
+                      onChange={(e) => {
+                        const val = e.target.value.toUpperCase()
+                        setReferralCode(val)
+                        if (val.length >= 3) {
+                          validateReferralCode(val)
+                        } else {
+                          setReferralValid(null)
+                        }
+                      }}
+                      className={`bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20 ${referralValid === true ? "border-green-500" : referralValid === false ? "border-red-500" : ""
+                        }`}
+                    />
+                    {referralChecking && (
+                      <p className="text-xs text-slate-400">Checking code...</p>
+                    )}
+                    {!referralChecking && referralValid === true && (
+                      <p className="text-xs text-green-400">✓ Valid referral code applied</p>
+                    )}
+                    {!referralChecking && referralValid === false && referralCode.trim() && (
+                      <p className="text-xs text-red-400">Invalid referral code</p>
+                    )}
                   </div>
                   {error && <p className="text-sm text-red-400">{error}</p>}
                   <Button
