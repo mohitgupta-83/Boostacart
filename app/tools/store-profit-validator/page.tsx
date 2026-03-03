@@ -2,131 +2,161 @@
 
 import { useState } from "react"
 import ToolLayout from "@/components/tools/ToolLayout"
-import { Calculator, IndianRupee, DollarSign, Store } from "lucide-react"
+import { LayoutDashboard, IndianRupee, DollarSign, TrendingUp, Sparkles, Zap, ArrowRight, Activity, Percent, MousePointer2 } from "lucide-react"
+import Link from "next/link"
 
 export default function StoreProfitValidatorPage() {
     const [revenue, setRevenue] = useState("")
-    const [cogsPct, setCogsPct] = useState("")
     const [adSpend, setAdSpend] = useState("")
-    const [fixedCosts, setFixedCosts] = useState("")
+    const [cogs, setCogs] = useState("")
+    const [teamCost, setTeamCost] = useState("")
     const [currency, setCurrency] = useState<"INR" | "USD">("INR")
     const [hasCalculated, setHasCalculated] = useState(false)
-    const [results, setResults] = useState({ netProfit: 0, margin: 0 })
+    const [results, setResults] = useState({ grossProfit: 0, netProfit: 0, margin: 0, efficiency: 0 })
 
     const calculate = () => {
-        const r = parseFloat(revenue) || 0
-        const cPct = parseFloat(cogsPct) || 0
+        const rev = parseFloat(revenue) || 0
         const ads = parseFloat(adSpend) || 0
-        const fixed = parseFloat(fixedCosts) || 0
+        const cost = parseFloat(cogs) || 0
+        const team = parseFloat(teamCost) || 0
 
-        const cogs = r * (cPct / 100)
-        const netProfit = r - cogs - ads - fixed
-        const margin = r > 0 ? (netProfit / r) * 100 : 0
+        const grossProfit = rev - cost
+        const netProfit = rev - ads - cost - team
+        const margin = rev > 0 ? (netProfit / rev) * 100 : 0
+        const efficiency = rev > 0 ? (ads / rev) * 100 : 0
 
-        setResults({ netProfit, margin })
+        setResults({ grossProfit, netProfit, margin, efficiency })
         setHasCalculated(true)
     }
 
-    const formatCurr = (val: number) => new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(val)
+    const formatCurr = (val: number) => new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en-US", {
+        style: "currency",
+        currency,
+        maximumFractionDigits: 0
+    }).format(val)
 
-    const getHealth = (m: number) => {
-        if (m < 0) return { label: "Danger - Losing Money", color: "text-red-400", bg: "bg-red-500/10 border-red-500/20" }
-        if (m < 15) return { label: "Moderate Health", color: "text-orange-400", bg: "bg-orange-500/10 border-orange-500/20" }
-        return { label: "Excellent - High Profitability", color: "text-green-400", bg: "bg-green-500/10 border-green-500/20" }
+    const getInsight = () => {
+        if (results.margin < 5) return "Survival Warning: Your store is running on fumes. At a 5% margin, one bad day of ad spend can wipe out your entire month's profit. You are essentially working for the ad platforms. Implement high-efficiency retention like WhatsApp recovery to boost profit without increasing spend."
+        if (results.margin < 15) return "Growth Plateau: You have a healthy store, but you're not 'scaling' fast enough. Your ad efficiency is eating your potential. Focus on cross-selling and lead capture at the cart stage to increase your backend LTV."
+        return "Profit Machine: Your store economics are elite. 15%+ net margins mean you can afford to out-spend your competition and scale aggressively. Double down on your winners and use automated recovery to maintain this lead."
     }
 
     return (
         <ToolLayout
-            title="Store Profit Validator (Full Store)"
+            title="Ecom Store Profit Validator"
+            icon={LayoutDashboard}
             description={[
-                "Analyze the overall financial health of your entire ecommerce store.",
-                "See your true net profit and margin after accounting for COGS, advertising, and fixed overhead costs like software and salaries."
+                "Validate your entire store's monthly P&L in seconds.",
+                "Know your real net take-home profit after all overheads."
             ]}
-            ctaTitle="Want to increase your store's net margin?"
-            ctaDescription="The most efficient way to grow net profit is to increase the value of existing traffic. Recover abandoned carts without spending an extra dime on ads."
         >
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
-                <div className="grid md:grid-cols-2 gap-10">
-                    <div className="space-y-4">
-                        <div className="flex justify-between items-center mb-4">
-                            <h3 className="font-semibold text-white">Monthly Store Data</h3>
-                            <div className="flex gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
-                                <button onClick={() => setCurrency("INR")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>INR</button>
-                                <button onClick={() => setCurrency("USD")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>USD</button>
+            <div className="grid lg:grid-cols-12 gap-12 items-start animate-in fade-in slide-in-from-bottom-5 duration-700">
+                {/* Inputs Section */}
+                <div className="lg:col-span-6 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-10 md:p-14 shadow-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/5 blur-3xl rounded-full opacity-50"></div>
+
+                    <div className="flex justify-between items-center mb-10 relative z-10">
+                        <h3 className="text-xl font-black text-white tracking-widest uppercase flex items-center gap-3">
+                            <Sparkles className="w-5 h-5 text-purple-400" /> Monthly P&L
+                        </h3>
+                        <div className="flex bg-slate-950/50 p-1 rounded-xl border border-white/5">
+                            {["INR", "USD"].map((curr) => (
+                                <button key={curr} onClick={() => setCurrency(curr as any)} className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${currency === curr ? "bg-purple-600 text-white shadow-lg" : "text-slate-500 hover:text-white"}`}>
+                                    {curr}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="space-y-6 relative z-10">
+                        {[
+                            { label: "Total Monthly Revenue", state: revenue, set: setRevenue, help: "Gross Sales" },
+                            { label: "Total Ad Spend", state: adSpend, set: setAdSpend, help: "Meta/TikTok Total spend" },
+                            { label: "Total COGS", state: cogs, set: setCogs, help: "Product Sourcing + Shipping" },
+                            { label: "Overhead / Team Cost", state: teamCost, set: setTeamCost, help: "Tools + Salary + Rent" },
+                        ].map((field, i) => (
+                            <div key={i} className="group/field">
+                                <label className="text-[11px] font-black text-slate-500 uppercase tracking-widest mb-2 block px-1">{field.label}</label>
+                                <div className="relative">
+                                    <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500">
+                                        {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
+                                    </div>
+                                    <input
+                                        type="number"
+                                        value={field.state}
+                                        onChange={(e) => field.set(e.target.value)}
+                                        className="w-full bg-slate-950/50 border border-white/5 rounded-[1.5rem] py-5 transition-all focus:ring-4 focus:ring-purple-500/10 focus:border-purple-500/50 text-white font-medium pl-14 pr-10"
+                                        placeholder="0"
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        ))}
 
-                        <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Monthly Total Revenue</label>
-                            <input type="number" value={revenue} onChange={(e) => setRevenue(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="10,00,000" />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Product Cost (COGS) %</label>
-                            <input type="number" value={cogsPct} onChange={(e) => setCogsPct(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="35" />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Total Monthly Ad Spend</label>
-                            <input type="number" value={adSpend} onChange={(e) => setAdSpend(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="2,00,000" />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Fixed Costs (Staff, Software, etc.)</label>
-                            <input type="number" value={fixedCosts} onChange={(e) => setFixedCosts(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="1,00,000" />
-                        </div>
-
-                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 rounded-xl transition-all mt-6 shadow-lg shadow-blue-900/20">
-                            <Store className="w-5 h-5" /> Analyze Store Health
+                        <button
+                            onClick={calculate}
+                            className="w-full bg-gradient-to-r from-purple-700 to-indigo-700 hover:scale-[1.01] hover:brightness-110 active:scale-95 text-white font-black py-6 rounded-[1.5rem] transition-all flex items-center justify-center gap-4 text-xl border border-white/10 shadow-xl shadow-purple-900/40 uppercase tracking-widest mt-6"
+                        >
+                            <TrendingUp className="w-7 h-7" /> Validate Store P&L
                         </button>
                     </div>
+                </div>
 
-                    <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
-                        {!hasCalculated ? (
-                            <div className="text-center text-slate-500">
-                                <Store className="w-12 h-12 mx-auto mb-4 opacity-10" />
-                                <p>Perform a full financial health check for your ecommerce business.</p>
+                {/* Results Section */}
+                <div className="lg:col-span-6 space-y-8">
+                    {!hasCalculated ? (
+                        <div className="bg-[#0b0c0d] border border-white/5 border-dashed rounded-[3rem] p-12 text-center h-[620px] flex flex-col items-center justify-center group relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(168,85,247,0.05),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                            <div className="w-32 h-32 rounded-[2rem] bg-slate-900 flex items-center justify-center mb-10 group-hover:rotate-12 transition-transform duration-500 shadow-2xl border border-white/5">
+                                <LayoutDashboard className="w-16 h-16 text-slate-800" />
                             </div>
-                        ) : (
-                            <div className="space-y-6 text-center">
-                                <div>
-                                    <p className="text-sm text-slate-400 mb-1">Total Monthly Net Profit</p>
-                                    <p className={`text-4xl font-bold mb-2 ${results.netProfit >= 0 ? "text-green-400" : "text-red-400"}`}>
+                            <h4 className="text-3xl font-black text-slate-400 mb-2 italic tracking-tight uppercase">Audit Your Bottom Line</h4>
+                            <p className="text-[10px] text-slate-600 leading-relaxed max-w-[240px] mx-auto uppercase tracking-widest font-black italic">
+                                "Revenue is a vanity, scale is a choice, but profit is the mission."
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="space-y-6 animate-in fade-in slide-in-from-right-8 duration-500">
+                            {/* Net Profit Card */}
+                            <div className="bg-slate-950 border border-white/10 rounded-[3rem] p-12 text-center shadow-3xl relative overflow-hidden group">
+                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-1 bg-gradient-to-r from-transparent via-purple-500/40 to-transparent"></div>
+                                <div className="relative z-10">
+                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-4">Monthly Net Take-Home</p>
+                                    <h2 className={`text-8xl font-black transition-all drop-shadow-3xl tracking-tighter ${results.netProfit > 0 ? 'text-white' : 'text-red-500'}`}>
                                         {formatCurr(results.netProfit)}
-                                    </p>
-                                </div>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                                        <p className="text-sm text-slate-400 mb-1">Net Margin</p>
-                                        <p className="text-2xl font-bold text-white">{results.margin.toFixed(1)}%</p>
+                                    </h2>
+                                    <div className="mt-8 bg-purple-500/10 px-6 py-2 rounded-full border border-purple-500/20 w-fit mx-auto flex items-center gap-2">
+                                        <Activity className="w-4 h-4 text-purple-400" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-purple-400">Store Health Signal</span>
                                     </div>
-                                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-center">
-                                        <p className="text-sm text-slate-400 mb-1">COGS Impact</p>
-                                        <p className="text-xl font-bold text-slate-300">{formatCurr(parseFloat(revenue) * (parseFloat(cogsPct) / 100))}</p>
-                                    </div>
-                                </div>
-                                <div className={`p-4 rounded-xl border ${getHealth(results.margin).bg}`}>
-                                    <p className={`font-bold text-lg ${getHealth(results.margin).color}`}>
-                                        {getHealth(results.margin).label}
-                                    </p>
                                 </div>
                             </div>
-                        )}
-                    </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-[2.5rem] p-10 text-center hover:border-purple-500/20 transition-all">
+                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Net Margin</p>
+                                    <p className="text-3xl font-black text-white">{results.margin.toFixed(1)}%</p>
+                                </div>
+                                <div className="bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-[2.5rem] p-10 text-center hover:border-purple-500/20 transition-all">
+                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Ad Efficiency</p>
+                                    <p className="text-3xl font-black text-purple-400">{results.efficiency.toFixed(1)}%</p>
+                                </div>
+                            </div>
+
+                            {/* Insight Card */}
+                            <div className="bg-purple-600/5 border border-purple-500/10 rounded-3xl p-10 relative group overflow-hidden">
+                                <h5 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-4 underline decoration-purple-500/50 underline-offset-8">CEO Strategic Insight:</h5>
+                                <p className="text-slate-400 text-sm leading-relaxed font-light italic">
+                                    {getInsight()}
+                                </p>
+                            </div>
+
+                            <Link href="/" className="group flex items-center justify-between p-8 bg-white text-slate-950 rounded-[2rem] hover:bg-slate-200 transition-all font-black text-xs uppercase tracking-widest shadow-2xl">
+                                Scale your net profit without more ads <ArrowRight className="w-6 h-6" />
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
-            {/* FAQ Schema */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "mainEntity": [{
-                            "@type": "Question",
-                            "name": "What is a healthy net margin for an ecommerce store?",
-                            "acceptedAnswer": { "@type": "Answer", "text": "A healthy net margin for most ecommerce stores is between 15% and 25%. Stores below 10% are often at risk from rising ad costs." }
-                        }]
-                    })
-                }}
-            />
         </ToolLayout>
     )
 }

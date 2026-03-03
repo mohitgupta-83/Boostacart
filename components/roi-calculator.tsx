@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Calculator, IndianRupee, DollarSign, ArrowRight, percent, CheckCircle2 } from "lucide-react"
+import { Calculator, IndianRupee, DollarSign, ArrowRight, Percent, CheckCircle2 } from "lucide-react"
 
 export function RoiCalculator() {
     const [visitors, setVisitors] = useState<string>("")
