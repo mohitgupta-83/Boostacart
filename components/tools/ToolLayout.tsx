@@ -1,6 +1,9 @@
 import { ReactNode } from "react"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import ExitIntentModal from "@/components/ExitIntentModal"
+import SEOContentSection from "@/components/SEOContentSection"
+import FAQSection from "@/components/FAQSection"
 
 interface ToolLayoutProps {
     title: string;
@@ -24,6 +27,7 @@ export default function ToolLayout({
                 background: "radial-gradient(circle at top left, #0f172a, #020617)"
             }}
         >
+            <ExitIntentModal />
             {/* Subtle Noise Texture Overlay */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
 
@@ -83,6 +87,17 @@ export default function ToolLayout({
                     {children}
                 </div>
 
+                {/* Auto-injected SEO and FAQ Content Below Every Calculator */}
+                <SEOContentSection
+                    topic={title}
+                    relatedTools={[
+                        { name: "Profit Calculator", url: "/tools/ecommerce-profit-calculator" },
+                        { name: "CPA Analyzer", url: "/tools/cpa-analyzer" },
+                        { name: "ROAS Calculator", url: "/tools/roas-calculator" }
+                    ]}
+                />
+                <FAQSection topic={title} />
+
                 {/* Main Dynamic CTA within Layout */}
                 <div className="mt-12 text-center">
                     <div className="bg-gradient-to-r from-slate-900 to-slate-900/50 border border-slate-800 rounded-2xl p-8 max-w-3xl mx-auto shadow-2xl">
@@ -90,8 +105,8 @@ export default function ToolLayout({
                         <p className="text-slate-400 mb-6">
                             {ctaDescription}
                         </p>
-                        <Link href="/" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:brightness-110 font-bold px-8 py-3 rounded-full transition-all active:scale-[0.98] shadow-xl shadow-blue-500/20 hover:scale-105">
-                            Start Growing With BoostACart
+                        <Link href="/case-study/cart-recovery" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:brightness-110 font-bold px-8 py-3 rounded-full transition-all active:scale-[0.98] shadow-xl shadow-blue-500/20 hover:scale-105">
+                            See Real Cart Recovery Example
                         </Link>
                     </div>
                 </div>
@@ -100,8 +115,8 @@ export default function ToolLayout({
                 <div className="mt-16 text-center">
                     <div className="bg-gradient-to-r from-[#0a1128] to-[#1a1025] rounded-xl p-6 border border-slate-800/50 shadow-[0_0_30px_rgba(59,130,246,0.1)] inline-block">
                         <h4 className="text-xl font-bold text-white mb-3">Recover 2030% of Lost Add-to-Cart Revenue</h4>
-                        <Link href="/" className="inline-flex items-center gap-2 border border-slate-600 hover:border-blue-400 text-slate-300 hover:text-white px-6 py-2 rounded-full transition-all hover:bg-slate-800">
-                            Explore BoostACart
+                        <Link href="/case-study/cart-recovery" className="inline-flex items-center gap-2 border border-slate-600 hover:border-blue-400 text-slate-300 hover:text-white px-6 py-2 rounded-full transition-all hover:bg-slate-800">
+                            See Real Cart Recovery Example
                         </Link>
                     </div>
                 </div>
