@@ -99,7 +99,7 @@ export default function ToolLayout({
                 {/* Floating CTA Section at Bottom */}
                 <div className="mt-16 text-center">
                     <div className="bg-gradient-to-r from-[#0a1128] to-[#1a1025] rounded-xl p-6 border border-slate-800/50 shadow-[0_0_30px_rgba(59,130,246,0.1)] inline-block">
-                        <h4 className="text-xl font-bold text-white mb-3">Recover 2030% of Lost Add-to-Cart Revenue</h4>
+                        <h4 className="text-xl font-bold text-white mb-3">Recover 20–30% of Lost Add-to-Cart Revenue</h4>
                         <Link href="/" className="inline-flex items-center gap-2 border border-slate-600 hover:border-blue-400 text-slate-300 hover:text-white px-6 py-2 rounded-full transition-all hover:bg-slate-800">
                             Explore BoostACart
                         </Link>
