@@ -105,6 +105,9 @@ export default function LandingPage() {
                 </Link>
               ) : (
                 <>
+                  <Link href="/tools" className="text-gray-400 hover:text-white transition-colors px-4 py-2">
+                    Free Tools
+                  </Link>
                   <Link href="/auth/login" className="text-gray-400 hover:text-white transition-colors px-4 py-2">
                     Sign In
                   </Link>
@@ -138,6 +141,12 @@ export default function LandingPage() {
                       className="px-4 py-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-colors"
                     >
                       Contact Us
+                    </Link>
+                    <Link
+                      href="/tools"
+                      className="px-4 py-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-colors"
+                    >
+                      Free Tools
                     </Link>
                     {loading ? null : user ? (
                       <Link
