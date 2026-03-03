@@ -1,0 +1,69 @@
+﻿app/api/widget-store/route.ts(64,21): error TS2339: Property 'heading' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(65,25): error TS2339: Property 'description' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(66,25): error TS2339: Property 'button_text' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(67,30): error TS2339: Property 'background_color' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(68,24): error TS2339: Property 'text_color' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(69,26): error TS2339: Property 'button_color' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(70,29): error TS2339: Property 'overlay_opacity' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(71,23): error TS2339: Property 'is_active' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(72,24): error TS2339: Property 'show_email' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(73,24): error TS2339: Property 'show_phone' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(74,27): error TS2339: Property 'discount_code' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(75,26): error TS2339: Property 'redirect_url' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/api/widget-store/route.ts(76,30): error TS2339: Property 'show_coupon_page' does not exist on type '{ heading: any; description: any; button_text: any; background_color: any; text_color: any; button_color: any; overlay_opacity: any; is_active: any; show_email: any; show_phone: any; discount_code: any; redirect_url: any; show_coupon_page: any; }[]'.
+app/dashboard/page.tsx(347,29): error TS2739: Type '{ widgetSettings: WidgetSettings; id: string; name: string; domain: string; shopify_domain?: string | undefined; user_id: string; plan: string; max_leads?: number | undefined; remaining_leads?: number | undefined; total_leads?: number | undefined; leads_this_month?: number | undefined; }' is missing the following properties from type 'Store': totalLeads, leadsThisMonth, remainingLeads, maxLeads, createdAt
+app/dashboard/page.tsx(425,32): error TS2739: Type '{ widgetSettings: WidgetSettings; id: string; name: string; domain: string; shopify_domain?: string | undefined; user_id: string; plan: string; max_leads?: number | undefined; remaining_leads?: number | undefined; total_leads?: number | undefined; leads_this_month?: number | undefined; }' is missing the following properties from type 'Store': totalLeads, leadsThisMonth, remainingLeads, maxLeads, createdAt
+app/page.tsx(57,45): error TS7031: Binding element 'user' implicitly has an 'any' type.
+app/page.tsx(65,42): error TS7006: Parameter '_event' implicitly has an 'any' type.
+app/page.tsx(65,50): error TS7006: Parameter 'session' implicitly has an 'any' type.
+app/pricing/page.tsx(18,45): error TS7031: Binding element 'user' implicitly has an 'any' type.
+app/pricing/page.tsx(25,42): error TS7006: Parameter '_event' implicitly has an 'any' type.
+app/pricing/page.tsx(25,50): error TS7006: Parameter 'session' implicitly has an 'any' type.
+components/roi-calculator.tsx(4,59): error TS2724: '"lucide-react"' has no exported member named 'percent'. Did you mean 'Percent'?
+components/tools/index.ts(1,38): error TS2614: Module '"./ToolLayout"' has no exported member 'ToolLayoutProps'. Did you mean to use 'import ToolLayoutProps from "./ToolLayout"' instead?
+src/components/Auth/AuthModal.tsx(51,71): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "stores", never, "POST">', gave the following error.
+    Argument of type '{ name: string; domain: string; plan: string; user_id: string; total_leads: number; leads_this_month: number; remaining_leads: number; max_leads: number; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "stores", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'name' does not exist in type 'never[]'.
+src/components/Auth/AuthModal.tsx(72,52): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "widget_settings", never, "POST">', gave the following error.
+    Argument of type '{ store_id: any; heading: string; description: string; button_text: string; background_color: string; text_color: string; button_color: string; overlay_opacity: number; is_active: boolean; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "widget_settings", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'store_id' does not exist in type 'never[]'.
+src/components/Auth/AuthModal.tsx(73,35): error TS2339: Property 'id' does not exist on type 'never'.
+src/components/LeadsAnalytics.tsx(49,31): error TS2551: Property 'total_leads' does not exist on type 'Store'. Did you mean 'totalLeads'?
+src/components/LeadsAnalytics.tsx(50,35): error TS2551: Property 'leads_this_month' does not exist on type 'Store'. Did you mean 'leadsThisMonth'?
+src/components/LeadsAnalytics.tsx(167,29): error TS18046: 'b' is of type 'unknown'.
+src/components/LeadsAnalytics.tsx(167,33): error TS18046: 'a' is of type 'unknown'.
+src/hooks/useSupabase.ts(17,37): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/hooks/useSupabase.ts(18,37): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/supabase.ts(4,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/supabase.ts(5,37): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/main.tsx(3,17): error TS2307: Cannot find module './App.tsx' or its corresponding type declarations.
+src/services/supabaseService.ts(20,3): error TS2739: Type '{ heading: string; description: string; buttonText: string; backgroundColor: string; textColor: string; buttonColor: string; overlayOpacity: number; isActive: boolean; }' is missing the following properties from type 'WidgetSettings': showEmail, showPhone, discountCode, showCouponPage
+src/services/supabaseService.ts(62,55): error TS2339: Property 'store_id' does not exist on type 'never'.
+src/services/supabaseService.ts(62,74): error TS2339: Property 'id' does not exist on type 'never'.
+src/services/supabaseService.ts(63,83): error TS2339: Property 'id' does not exist on type 'never'.
+src/services/supabaseService.ts(90,8): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "stores", never, "POST">', gave the following error.
+    Argument of type '{ name: string; domain: string; plan: "Starter" | "Pro" | "Free"; total_leads: number; leads_this_month: number; remaining_leads: number; max_leads: number; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "stores", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'name' does not exist in type 'never[]'.
+src/services/supabaseService.ts(106,8): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "widget_settings", never, "POST">', gave the following error.
+    Argument of type '{ store_id: any; heading: string; description: string; button_text: string; background_color: string; text_color: string; button_color: string; overlay_opacity: number; is_active: boolean; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "widget_settings", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'store_id' does not exist in type 'never[]'.
+src/services/supabaseService.ts(107,25): error TS2339: Property 'id' does not exist on type 'never'.
+src/services/supabaseService.ts(140,69): error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'.
+src/services/supabaseService.ts(156,8): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "leads", never, "POST">', gave the following error.
+    Argument of type '{ store_id: string; name: string; phone: string | undefined; product: string; quantity: number | undefined; variant_id: string | undefined; source_url: string | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "leads", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'store_id' does not exist in type 'never[]'.
+src/services/supabaseService.ts(171,80): error TS2345: Argument of type '{ store_id: string; }' is not assignable to parameter of type 'undefined'.
+src/utils/dataGenerator.ts(3,92): error TS2322: Type '{ id?: string | undefined; heading: string; description: string; buttonText: string; backgroundColor: string; textColor: string; buttonColor: string; overlayOpacity: number; isActive: boolean; showEmail?: boolean | undefined; showPhone?: boolean | undefined; discountCode?: string | undefined; redirectUrl?: string | ...' is not assignable to type 'WidgetSettings'.
+  Types of property 'showEmail' are incompatible.
+    Type 'boolean | undefined' is not assignable to type 'boolean'.
+      Type 'undefined' is not assignable to type 'boolean'.
