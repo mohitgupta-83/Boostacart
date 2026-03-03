@@ -10,6 +10,7 @@ import { SpotlightCard } from "@/components/ui/spotlight-card"
 import { createClient } from "@/lib/supabase/client"
 import { useEffect, useState } from "react"
 import type { User } from "@supabase/supabase-js"
+import { RoiCalculator } from "@/components/roi-calculator"
 
 const ShoppingCartIcon = () => (
   <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -339,6 +340,11 @@ export default function LandingPage() {
             </SpotlightCard>
           </div>
         </div>
+      </section>
+
+      {/* ROI Calculator Section */}
+      <section className="py-12 sm:py-20 relative z-10 bg-slate-900/10">
+        <RoiCalculator />
       </section>
 
       {/* Who Should Use Section */}
