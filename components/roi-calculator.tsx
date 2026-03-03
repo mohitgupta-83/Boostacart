@@ -11,9 +11,11 @@ export function RoiCalculator() {
 
     const [hasCalculated, setHasCalculated] = useState(false)
     const [results, setResults] = useState({
+        currentRevenue: 0,
         abandonedCarts: 0,
         lostRevenue: 0,
-        recoveryPotential: 0,
+        recoveryPotential10: 0,
+        recoveryPotential25: 0,
     })
 
     const handleCalculate = () => {
@@ -23,14 +25,18 @@ export function RoiCalculator() {
 
         const estimated_orders = v * (cr / 100)
         const estimated_add_to_carts = v * 0.08
+        const current_revenue = estimated_orders * avgOrderValue
         const abandoned_carts = Math.max(0, estimated_add_to_carts - estimated_orders)
         const lost_revenue = abandoned_carts * avgOrderValue
-        const recovery_potential = lost_revenue * 0.25
+        const recovery_potential_10 = lost_revenue * 0.10
+        const recovery_potential_25 = lost_revenue * 0.25
 
         setResults({
+            currentRevenue: Math.round(current_revenue),
             abandonedCarts: Math.round(abandoned_carts),
             lostRevenue: Math.round(lost_revenue),
-            recoveryPotential: Math.round(recovery_potential),
+            recoveryPotential10: Math.round(recovery_potential_10),
+            recoveryPotential25: Math.round(recovery_potential_25),
         })
         setHasCalculated(true)
     }
@@ -166,15 +172,61 @@ export function RoiCalculator() {
                                     </p>
                                 </div>
 
-                                <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-5 mt-4">
-                                    <p className="text-sm text-green-400/80 font-medium mb-1">Potential Revenue Recoverable (25%)</p>
-                                    <p className="text-4xl font-bold text-green-400">
-                                        {formatCurrency(results.recoveryPotential)}
-                                    </p>
-                                    <p className="text-xs text-green-400/60 mt-2">
-                                        *Based on industry average abandoned cart behavior.
-                                    </p>
+                                {/* Revenue Graph */}
+                                {results.lostRevenue > 0 && (
+                                    <div className="space-y-3 mt-4 pt-4 border-t border-slate-800/50">
+                                        <p className="text-sm font-medium text-slate-300 mb-2">Revenue visual breakdown</p>
+
+                                        <div>
+                                            <div className="flex justify-between text-xs text-slate-400 mb-1">
+                                                <span>Current Revenue</span>
+                                                <span>{formatCurrency(results.currentRevenue)}</span>
+                                            </div>
+                                            <div className="w-full bg-slate-800 rounded-full h-2">
+                                                <div className="bg-blue-500 h-2 rounded-full" style={{ width: `${Math.min(100, (results.currentRevenue / (results.currentRevenue + results.lostRevenue)) * 100)}%` }}></div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div className="flex justify-between text-xs text-slate-400 mb-1">
+                                                <span>Lost Revenue</span>
+                                                <span className="text-red-400">{formatCurrency(results.lostRevenue)}</span>
+                                            </div>
+                                            <div className="w-full bg-slate-800 rounded-full h-2">
+                                                <div className="bg-red-500 h-2 rounded-full" style={{ width: `${Math.min(100, (results.lostRevenue / (results.currentRevenue + results.lostRevenue)) * 100)}%` }}></div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div className="flex justify-between text-xs text-slate-400 mb-1">
+                                                <span>Recoverable (25%)</span>
+                                                <span className="text-green-400">{formatCurrency(results.recoveryPotential25)}</span>
+                                            </div>
+                                            <div className="w-full bg-slate-800 rounded-full h-2">
+                                                <div className="bg-green-500 h-2 rounded-full" style={{ width: `${Math.min(100, (results.recoveryPotential25 / (results.currentRevenue + results.lostRevenue)) * 100)}%` }}></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                    <div className="bg-slate-900 border border-slate-700/50 rounded-xl p-4">
+                                        <p className="text-xs text-slate-400 font-medium mb-1">If you recover just 10% →</p>
+                                        <p className="text-xl font-bold text-white">
+                                            {formatCurrency(results.recoveryPotential10)}
+                                        </p>
+                                    </div>
+                                    <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 shadow-[0_0_15px_rgba(34,197,94,0.1)] relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-16 h-16 bg-green-500/10 rounded-full blur-xl -translate-y-1/2 translate-x-1/2"></div>
+                                        <p className="text-xs text-green-400 font-medium mb-1">If you recover 25% →</p>
+                                        <p className="text-2xl font-bold text-green-400 relative z-10">
+                                            {formatCurrency(results.recoveryPotential25)}
+                                        </p>
+                                    </div>
                                 </div>
+                                <p className="text-xs text-green-400/60 mt-1 text-center">
+                                    *Based on industry average abandoned cart recovery rates.
+                                </p>
                             </div>
                         )}
                     </div>
