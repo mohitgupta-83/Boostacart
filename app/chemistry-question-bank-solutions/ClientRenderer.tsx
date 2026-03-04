@@ -30,7 +30,12 @@ export default function ClientRenderer({ markdownContent }: { markdownContent: s
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] text-slate-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+        <div className="min-h-screen w-full overflow-x-hidden bg-[#050505] text-slate-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+            <style dangerouslySetInnerHTML={{
+                __html: `
+              .katex-display { overflow-x: auto; overflow-y: hidden; padding-bottom: 0.5rem; }
+              body { overflow-x: hidden; width: 100%; }
+            `}} />
             {/* Dynamic Background */}
             <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]" />
@@ -81,7 +86,7 @@ export default function ClientRenderer({ markdownContent }: { markdownContent: s
                     variants={containerVariants}
                     className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-2xl rounded-3xl p-6 md:p-12"
                 >
-                    <div className="prose prose-invert max-w-none prose-lg">
+                    <div className="prose prose-invert max-w-full overflow-hidden prose-lg break-words">
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm, remarkMath]}
                             rehypePlugins={[rehypeKatex]}
@@ -147,7 +152,7 @@ export default function ClientRenderer({ markdownContent }: { markdownContent: s
                                     </li>
                                 ),
                                 table: ({ node, ...props }) => (
-                                    <motion.div variants={itemVariants} className="overflow-x-auto my-10 rounded-2xl border border-white/10 shadow-xl bg-black/20">
+                                    <motion.div variants={itemVariants} className="overflow-x-auto w-full max-w-full my-10 rounded-2xl border border-white/10 shadow-xl bg-black/20">
                                         <table className="w-full text-left border-collapse min-w-[600px]">
                                             {props.children}
                                         </table>
