@@ -5,6 +5,7 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://boostacart.com"),
   title: "BoostACart – Add-to-Cart Lead Capture Tool to Recover Lost Sales",
   description:
     "BoostACart helps online stores capture email and phone numbers at add-to-cart to recover lost sales via WhatsApp, SMS, and email follow-ups.",
