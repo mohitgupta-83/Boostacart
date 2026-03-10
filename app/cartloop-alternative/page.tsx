@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Best CartLoop Alternative — Better Pre-Checkout Recovery Option",
-  description:
-    "BoostACart vs CartLoop: See how capturing leads at Add-to-Cart recovers more lost sales than post-checkout SMS tools.",
+  description: "BoostACart vs CartLoop: See how capturing leads at Add-to-Cart recovers more lost sales than post-checkout SMS tools.",
+  alternates: {
+    canonical: "https://boostacart.com/cartloop-alternative"
+  },
+  openGraph: {
+    title: "Best CartLoop Alternative — Better Pre-Checkout Recovery Option",
+    description: "BoostACart vs CartLoop: See how capturing leads at Add-to-Cart recovers more lost sales than post-checkout SMS tools.",
+    url: "https://boostacart.com/cartloop-alternative",
+    type: "website"
+  }
 }
 
 export default function CartLoopAlternativePage() {

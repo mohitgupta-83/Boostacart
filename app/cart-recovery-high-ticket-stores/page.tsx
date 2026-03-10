@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Cart Recovery for High Ticket Stores – BoostACart",
-  description:
-    "BoostACart helps high-ticket eCommerce stores recover lost carts by capturing shopper contact details at add-to-cart and enabling WhatsApp, SMS, and email follow-ups.",
+  description: "BoostACart helps high-ticket eCommerce stores recover lost carts by capturing shopper contact details at add-to-cart and enabling WhatsApp",
+  alternates: {
+    canonical: "https://boostacart.com/cart-recovery-high-ticket-stores"
+  },
+  openGraph: {
+    title: "Cart Recovery for High Ticket Stores – BoostACart",
+    description: "BoostACart helps high-ticket eCommerce stores recover lost carts by capturing shopper contact details at add-to-cart and enabling WhatsApp",
+    url: "https://boostacart.com/cart-recovery-high-ticket-stores",
+    type: "website"
+  }
 }
 
 export default function CartRecoveryHighTicketStoresPage() {

@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Cart Recovery Tool for Shopify – BoostACart",
-  description:
-    "BoostACart is a cart recovery tool for Shopify that captures leads at add-to-cart and helps store owners recover lost sales through WhatsApp, SMS, and email follow-ups.",
+  description: "BoostACart is a cart recovery tool for Shopify that captures leads at add-to-cart and helps store owners recover lost sales through WhatsApp",
+  alternates: {
+    canonical: "https://boostacart.com/cart-recovery-tool-for-shopify"
+  },
+  openGraph: {
+    title: "Cart Recovery Tool for Shopify – BoostACart",
+    description: "BoostACart is a cart recovery tool for Shopify that captures leads at add-to-cart and helps store owners recover lost sales through WhatsApp",
+    url: "https://boostacart.com/cart-recovery-tool-for-shopify",
+    type: "website"
+  }
 }
 
 export default function CartRecoveryToolForShopifyPage() {

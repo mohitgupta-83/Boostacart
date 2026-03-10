@@ -4,8 +4,16 @@ import { CheckCircle, ShoppingCart } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Case Study: Recovered 37 Orders — BoostACart",
-  description:
-    "Real example showing how BoostACart recovers lost sales using pre-checkout lead capture and automated follow-ups.",
+  description: "Real example showing how BoostACart recovers lost sales using pre-checkout lead capture and automated follow-ups.",
+  alternates: {
+    canonical: "https://boostacart.com/case-study-recovered-37-orders"
+  },
+  openGraph: {
+    title: "Case Study: Recovered 37 Orders — BoostACart",
+    description: "Real example showing how BoostACart recovers lost sales using pre-checkout lead capture and automated follow-ups.",
+    url: "https://boostacart.com/case-study-recovered-37-orders",
+    type: "website"
+  }
 }
 
 export default function CaseStudyRecovered37OrdersPage() {

@@ -4,8 +4,16 @@ import { ShoppingCart } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "BoostaCart vs Shopify Email — Which Recovers More Carts?",
-  description:
-    "Honest comparison of BoostACart and Shopify Email. Learn which tool captures leads earlier and recovers more lost carts.",
+  description: "Honest comparison of BoostACart and Shopify Email. Learn which tool captures leads earlier and recovers more lost carts.",
+  alternates: {
+    canonical: "https://boostacart.com/boostacart-vs-shopify-email"
+  },
+  openGraph: {
+    title: "BoostaCart vs Shopify Email — Which Recovers More Carts?",
+    description: "Honest comparison of BoostACart and Shopify Email. Learn which tool captures leads earlier and recovers more lost carts.",
+    url: "https://boostacart.com/boostacart-vs-shopify-email",
+    type: "website"
+  }
 }
 
 export default function BoostACartVsShopifyEmailPage() {

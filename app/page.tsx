@@ -1,15 +1,28 @@
-"use client"
 import Link from "next/link"
 import Image from "next/image"
+import { Metadata } from "next"
 import { HeroGeometric } from "@/components/ui/shape-landing-hero"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Check } from "lucide-react"
+import { Check } from "lucide-react"
 import { getWhatsAppLink } from "@/lib/whatsapp"
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon"
 import { SpotlightCard } from "@/components/ui/spotlight-card"
-import { createClient } from "@/lib/supabase/client"
-import { useEffect, useState } from "react"
-import type { User } from "@supabase/supabase-js"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import HeroCTA from "@/components/landing/HeroCTA"
+
+export const metadata: Metadata = {
+  title: "BoostACart – Add-to-Cart Lead Capture Tool to Recover Lost Sales",
+  description: "BoostACart helps online stores capture email and phone numbers at add-to-cart to recover lost sales via WhatsApp, SMS, and email follow-ups.",
+  alternates: {
+    canonical: "https://boostacart.com"
+  },
+  openGraph: {
+    title: "BoostACart – Add-to-Cart Lead Capture Tool to Recover Lost Sales",
+    description: "BoostACart helps online stores capture email and phone numbers at add-to-cart to recover lost sales via WhatsApp, SMS, and email follow-ups.",
+    url: "https://boostacart.com",
+    type: "website"
+  }
+}
 import { RoiCalculator } from "@/components/roi-calculator"
 
 const ShoppingCartIcon = () => (
@@ -47,27 +60,6 @@ const UsersIcon = () => (
 )
 
 export default function LandingPage() {
-  const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const supabase = createClient()
-
-    // Check current session
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user)
-      setLoading(false)
-    })
-
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-950 to-slate-950 relative overflow-hidden">
@@ -82,102 +74,25 @@ export default function LandingPage() {
       </div>
 
       {/* Header */}
-      <header className="bg-slate-900/50 backdrop-blur-md border-b border-slate-800/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center space-x-3">
-              <Image src="/favicon.png" alt="BoostACart Logo" width={32} height={32} className="rounded-lg" />
-              <span className="text-2xl font-bold text-white">BoostACart</span>
-            </Link>
-            <div className="hidden md:flex items-center space-x-4">
-              <Link
-                href="/contact"
-                className="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors border border-slate-700 rounded-lg hover:border-slate-600 hover:bg-slate-800/50"
-              >
-                Contact Us
-              </Link>
-              {loading ? null : user ? (
-                <Link
-                  href="/dashboard"
-                  className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 transition-colors font-medium"
-                >
-                  Go to Dashboard
-                </Link>
-              ) : (
-                <>
-                  <Link href="/tools" className="text-gray-400 hover:text-white transition-colors px-4 py-2">
-                    Free Tools
-                  </Link>
-                  <Link href="/auth/login" className="text-gray-400 hover:text-white transition-colors px-4 py-2">
-                    Sign In
-                  </Link>
-                  <Link
-                    href="/auth/sign-up"
-                    className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 transition-colors font-medium"
-                  >
-                    Get Started
-                  </Link>
-                </>
-              )}
-            </div>
-            <div className="md:hidden">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <button
-                    aria-label="Open menu"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-700 text-gray-300 hover:text-white hover:border-slate-600 hover:bg-slate-800/50 transition-colors"
-                  >
-                    <Menu className="h-5 w-5" />
-                    <span className="text-sm">Menu</span>
-                  </button>
-                </SheetTrigger>
-                <SheetContent side="right" className="bg-slate-950/95 border-slate-800">
-                  <SheetHeader>
-                    <SheetTitle className="text-white">Menu</SheetTitle>
-                  </SheetHeader>
-                  <div className="mt-6 flex flex-col gap-3">
-                    <Link
-                      href="/contact"
-                      className="px-4 py-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-colors"
-                    >
-                      Contact Us
-                    </Link>
-                    <Link
-                      href="/tools"
-                      className="px-4 py-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-colors"
-                    >
-                      Free Tools
-                    </Link>
-                    {loading ? null : user ? (
-                      <Link
-                        href="/dashboard"
-                        className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-center"
-                      >
-                        Go to Dashboard
-                      </Link>
-                    ) : (
-                      <>
-                        <Link
-                          href="/auth/login"
-                          className="px-4 py-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-800/50"
-                        >
-                          Sign In
-                        </Link>
-                        <Link
-                          href="/auth/sign-up"
-                          className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-center"
-                        >
-                          Get Started
-                        </Link>
-                      </>
-                    )}
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "BoostACart",
+            "operatingSystem": "Web",
+            "applicationCategory": "BusinessApplication",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "Add-to-Cart Lead Capture Tool to Recover Lost Sales for Shopify."
+          })
+        }}
+      />
 
       {/* Hero Section */}
       <HeroGeometric
@@ -193,27 +108,7 @@ export default function LandingPage() {
             BoostACart helps online stores capture email and phone numbers the moment a shopper clicks "Add to Cart", so
             you can recover lost sales with WhatsApp, SMS, and email follow-ups.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {loading ? (
-              <div className="px-8 py-4 bg-slate-800/50 text-gray-400 rounded-lg font-semibold text-lg">Loading...</div>
-            ) : (
-              <Link
-                href={user ? "/dashboard" : "/auth/sign-up"}
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
-              >
-                <span className="relative z-10">{user ? "Go to Dashboard" : "Start Capturing Cart Leads"}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Link>
-            )}
-            <a
-              href="https://youtu.be/sQOZcoPP31I"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group px-8 py-4 bg-slate-800/50 text-white rounded-lg font-semibold text-lg border border-slate-700 flex items-center justify-center transition-all duration-300 hover:border-slate-600 hover:bg-slate-700/60 hover:scale-105 hover:shadow-lg hover:shadow-slate-700/50"
-            >
-              See How It Works
-            </a>
-          </div>
+          <HeroCTA />
         </div>
       </section>
 
@@ -681,60 +576,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900/50 backdrop-blur-sm border-t border-slate-800/50 py-12 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-white font-semibold mb-4">Product</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/pricing" className="hover:text-white transition-colors">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/features" className="hover:text-white transition-colors">
-                    Features
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/about" className="hover:text-white transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-white transition-colors">
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors">
-                    Privacy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white transition-colors">
-                    Terms
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-slate-800/50 text-center text-gray-400">
-            <p>© 2026 BoostACart. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

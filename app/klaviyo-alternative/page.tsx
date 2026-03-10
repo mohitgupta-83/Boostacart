@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Best Klaviyo Alternative — Better Pre-Checkout Recovery Option",
-  description:
-    "BoostACart vs Klaviyo: Learn how capturing leads at Add-to-Cart recovers more lost sales than post-checkout email tools.",
+  description: "BoostACart vs Klaviyo: Learn how capturing leads at Add-to-Cart recovers more lost sales than post-checkout email tools.",
+  alternates: {
+    canonical: "https://boostacart.com/klaviyo-alternative"
+  },
+  openGraph: {
+    title: "Best Klaviyo Alternative — Better Pre-Checkout Recovery Option",
+    description: "BoostACart vs Klaviyo: Learn how capturing leads at Add-to-Cart recovers more lost sales than post-checkout email tools.",
+    url: "https://boostacart.com/klaviyo-alternative",
+    type: "website"
+  }
 }
 
 export default function KlaviyoAlternativePage() {

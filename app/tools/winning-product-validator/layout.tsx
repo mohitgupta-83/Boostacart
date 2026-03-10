@@ -4,12 +4,12 @@ export const metadata: Metadata = {
     title: "Winning Product Validator – Free Ecommerce Calculator for Shopify",
     description: "Use our free Winning Product Validator to calculate and optimize your Shopify store metrics. Discover data-driven insights to improve your conversion rates and ecommerce profitability.",
     alternates: {
-        canonical: "https://www.boostacart.com/tools/winning-product-validator"
+        canonical: "https://boostacart.com/tools/winning-product-validator"
     },
     openGraph: {
         title: "Winning Product Validator – Free Ecommerce Calculator for Shopify",
         description: "Use our free Winning Product Validator to calculate and optimize your Shopify store metrics. Discover data-driven insights to improve your conversion rates and ecommerce profitability.",
-        url: "https://www.boostacart.com/tools/winning-product-validator",
+        url: "https://boostacart.com/tools/winning-product-validator",
         type: "website"
     }
 };

@@ -1,9 +1,18 @@
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, TrendingUp, IndianRupee } from "lucide-react";
 
-export const metadata = {
+export const metadata: Metadata = {
+  title: "Case Study: How a Shopify Store Recovered ₹1,87,000 in 30 Days",
+  description: "Read how an average Shopify store used BoostACart to recover over ₹1",
+  alternates: {
+    canonical: "https://boostacart.com/case-study/cart-recovery"
+  },
+  openGraph: {
     title: "Case Study: How a Shopify Store Recovered ₹1,87,000 in 30 Days",
-    description: "Read how an average Shopify store used BoostACart to recover over ₹1,87,000 in lost add-to-cart leads in just 30 days without increasing ad spend."
+    description: "Read how an average Shopify store used BoostACart to recover over ₹1",
+    url: "https://boostacart.com/case-study/cart-recovery",
+    type: "website"
+  }
 };
 
 export default function CartRecoveryCaseStudy() {

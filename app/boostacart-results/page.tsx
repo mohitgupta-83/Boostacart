@@ -5,6 +5,15 @@ import { ShoppingCart, Check, Calendar } from "lucide-react"
 export const metadata: Metadata = {
   title: "BoostaCart Results — What Happens After You Install",
   description: "Summary of results merchants see after adding BoostACart to their store.",
+  alternates: {
+    canonical: "https://boostacart.com/boostacart-results"
+  },
+  openGraph: {
+    title: "BoostaCart Results — What Happens After You Install",
+    description: "Summary of results merchants see after adding BoostACart to their store.",
+    url: "https://boostacart.com/boostacart-results",
+    type: "website"
+  }
 }
 
 export default function ResultsPage() {

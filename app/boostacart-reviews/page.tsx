@@ -5,6 +5,15 @@ import { ShoppingCart, Check } from "lucide-react"
 export const metadata: Metadata = {
   title: "BoostaCart Reviews — Real Results from Store Owners",
   description: "See feedback and experiences from merchants using BoostACart to recover abandoned carts.",
+  alternates: {
+    canonical: "https://boostacart.com/boostacart-reviews"
+  },
+  openGraph: {
+    title: "BoostaCart Reviews — Real Results from Store Owners",
+    description: "See feedback and experiences from merchants using BoostACart to recover abandoned carts.",
+    url: "https://boostacart.com/boostacart-reviews",
+    type: "website"
+  }
 }
 
 export default function ReviewsPage() {

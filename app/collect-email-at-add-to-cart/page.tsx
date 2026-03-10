@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Collect Email at Add-to-Cart – BoostACart",
-  description:
-    "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp, SMS, and email to recover lost sales.",
+  description: "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp",
+  alternates: {
+    canonical: "https://boostacart.com/collect-email-at-add-to-cart"
+  },
+  openGraph: {
+    title: "Collect Email at Add-to-Cart – BoostACart",
+    description: "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp",
+    url: "https://boostacart.com/collect-email-at-add-to-cart",
+    type: "website"
+  }
 }
 
 export default function CollectEmailAtAddToCartPage() {

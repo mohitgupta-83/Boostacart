@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     title: "${toolName} – Free Ecommerce Calculator for Shopify",
     description: "Use our free ${toolName} to calculate and optimize your Shopify store metrics. Discover data-driven insights to improve your conversion rates and ecommerce profitability.",
     alternates: {
-        canonical: "https://www.boostacart.com/tools/${tool}"
+        canonical: "https://boostacart.com/tools/${tool}"
     },
     openGraph: {
         title: "${toolName} – Free Ecommerce Calculator for Shopify",
         description: "Use our free ${toolName} to calculate and optimize your Shopify store metrics. Discover data-driven insights to improve your conversion rates and ecommerce profitability.",
-        url: "https://www.boostacart.com/tools/${tool}",
+        url: "https://boostacart.com/tools/${tool}",
         type: "website"
     }
 };

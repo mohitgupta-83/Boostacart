@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Best Recart Alternative — Better Pre-Checkout Recovery Option",
-  description:
-    "BoostACart vs Recart: See how capturing leads at Add-to-Cart recovers more lost sales than post-checkout recovery tools.",
+  description: "BoostACart vs Recart: See how capturing leads at Add-to-Cart recovers more lost sales than post-checkout recovery tools.",
+  alternates: {
+    canonical: "https://boostacart.com/recart-alternative"
+  },
+  openGraph: {
+    title: "Best Recart Alternative — Better Pre-Checkout Recovery Option",
+    description: "BoostACart vs Recart: See how capturing leads at Add-to-Cart recovers more lost sales than post-checkout recovery tools.",
+    url: "https://boostacart.com/recart-alternative",
+    type: "website"
+  }
 }
 
 export default function RecartAlternativePage() {

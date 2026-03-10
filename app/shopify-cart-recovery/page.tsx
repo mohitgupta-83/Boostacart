@@ -5,8 +5,16 @@ import { ShoppingCart, Zap, TrendingUp, Users, MessageCircle, CheckCircle } from
 
 export const metadata: Metadata = {
   title: "Cart Recovery for Shopify Stores – BoostACart",
-  description:
-    "Recover abandoned Shopify carts using BoostACart's add-to-cart lead capture tool. Convert high-intent shoppers using WhatsApp, SMS, and email follow-ups.",
+  description: "Recover abandoned Shopify carts using BoostACart's add-to-cart lead capture tool. Convert high-intent shoppers using WhatsApp",
+  alternates: {
+    canonical: "https://boostacart.com/shopify-cart-recovery"
+  },
+  openGraph: {
+    title: "Cart Recovery for Shopify Stores – BoostACart",
+    description: "Recover abandoned Shopify carts using BoostACart's add-to-cart lead capture tool. Convert high-intent shoppers using WhatsApp",
+    url: "https://boostacart.com/shopify-cart-recovery",
+    type: "website"
+  }
 }
 
 export default function ShopifyCartRecoveryPage() {

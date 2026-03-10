@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Email Followup for Abandoned Carts – BoostACart",
-  description:
-    "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp, SMS, and email to recover lost sales.",
+  description: "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp",
+  alternates: {
+    canonical: "https://boostacart.com/email-followup-abandoned-carts"
+  },
+  openGraph: {
+    title: "Email Followup for Abandoned Carts – BoostACart",
+    description: "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp",
+    url: "https://boostacart.com/email-followup-abandoned-carts",
+    type: "website"
+  }
 }
 
 export default function EmailFollowupAbandonedCartsPage() {

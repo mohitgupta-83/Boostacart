@@ -4,8 +4,16 @@ import { ShoppingCart, Quote } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "What Store Owners Say About BoostACart",
-  description:
-    "Real feedback from store owners using BoostACart to recover abandoned carts and capture leads at add-to-cart.",
+  description: "Real feedback from store owners using BoostACart to recover abandoned carts and capture leads at add-to-cart.",
+  alternates: {
+    canonical: "https://boostacart.com/boostacart-user-feedback"
+  },
+  openGraph: {
+    title: "What Store Owners Say About BoostACart",
+    description: "Real feedback from store owners using BoostACart to recover abandoned carts and capture leads at add-to-cart.",
+    url: "https://boostacart.com/boostacart-user-feedback",
+    type: "website"
+  }
 }
 
 export default function UserFeedbackPage() {

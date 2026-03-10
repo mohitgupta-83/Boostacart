@@ -4,8 +4,16 @@ import { ShoppingCart } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "BoostaCart vs CartLoop — Which Recovers More Carts?",
-  description:
-    "Honest comparison of BoostACart and CartLoop. Learn which tool captures leads earlier and recovers more lost carts.",
+  description: "Honest comparison of BoostACart and CartLoop. Learn which tool captures leads earlier and recovers more lost carts.",
+  alternates: {
+    canonical: "https://boostacart.com/boostacart-vs-cartloop"
+  },
+  openGraph: {
+    title: "BoostaCart vs CartLoop — Which Recovers More Carts?",
+    description: "Honest comparison of BoostACart and CartLoop. Learn which tool captures leads earlier and recovers more lost carts.",
+    url: "https://boostacart.com/boostacart-vs-cartloop",
+    type: "website"
+  }
 }
 
 export default function BoostACartVsCartLoopPage() {

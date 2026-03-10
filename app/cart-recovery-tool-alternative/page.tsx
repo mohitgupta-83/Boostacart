@@ -4,8 +4,16 @@ import { ShoppingCart, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Cart Recovery Tool Alternative – BoostACart",
-  description:
-    "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp, SMS, and email to recover lost sales.",
+  description: "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp",
+  alternates: {
+    canonical: "https://boostacart.com/cart-recovery-tool-alternative"
+  },
+  openGraph: {
+    title: "Cart Recovery Tool Alternative – BoostACart",
+    description: "BoostACart captures email and phone numbers at Add-to-Cart and follows up through WhatsApp",
+    url: "https://boostacart.com/cart-recovery-tool-alternative",
+    type: "website"
+  }
 }
 
 export default function CartRecoveryToolAlternativePage() {

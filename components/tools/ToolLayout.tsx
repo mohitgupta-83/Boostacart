@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react"
 import ExitIntentModal from "@/components/ExitIntentModal"
 import SEOContentSection from "@/components/SEOContentSection"
 import FAQSection from "@/components/FAQSection"
+import Footer from "@/components/Footer"
 
 interface ToolLayoutProps {
     title: string;
@@ -122,6 +123,7 @@ export default function ToolLayout({
                 </div>
 
             </div>
+            <Footer />
         </div>
     )
 }
