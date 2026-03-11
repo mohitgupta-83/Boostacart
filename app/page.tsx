@@ -9,6 +9,10 @@ import { SpotlightCard } from "@/components/ui/spotlight-card"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import HeroCTA from "@/components/landing/HeroCTA"
+import { Syne, Outfit } from 'next/font/google'
+
+const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'] })
+const outfit = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] })
 
 export const metadata: Metadata = {
   title: "BoostACart – Add-to-Cart Lead Capture Tool to Recover Lost Sales",
@@ -62,17 +66,16 @@ const UsersIcon = () => (
 export default function LandingPage() {
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-950 to-slate-950 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-64 h-64 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-2xl animate-bounce"></div>
-        <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div
-          className="absolute top-1/2 right-1/3 w-56 h-56 bg-gradient-to-br from-cyan-500/15 to-blue-500/15 rounded-full blur-2xl animate-pulse"
-          style={{ animationDelay: "1s" }}
-        ></div>
+    <main className={`min-h-screen bg-[#04091A] text-slate-200 selection:bg-fuchsia-500/30 overflow-hidden ${outfit.className}`}>
+      {/* Abstract Background Noise & Geometry */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
+
+      <div className="fixed inset-0 z-0 pointer-events-none flex justify-center items-center">
+         <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-fuchsia-600/10 rounded-full blur-[120px] mix-blend-screen opacity-50 animate-pulse"></div>
+         <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-cyan-600/10 rounded-full blur-[120px] mix-blend-screen opacity-50"></div>
       </div>
 
+      <div className="relative z-10">
       {/* Header */}
       <Navbar />
       <script
@@ -104,7 +107,7 @@ export default function LandingPage() {
       {/* Call to Action Section */}
       <section className="py-16 relative z-10">
         <div className="max-w-4xl mx-auto text-center px-4 relative">
-          <p className="text-xl text-gray-400 mb-8 leading-relaxed">
+          <p className="text-xl text-indigo-100/70 mb-8 leading-relaxed">
             BoostACart helps online stores capture email and phone numbers the moment a shopper clicks "Add to Cart", so
             you can recover lost sales with WhatsApp, SMS, and email follow-ups.
           </p>
@@ -116,8 +119,8 @@ export default function LandingPage() {
       <section className="py-12 sm:py-20 relative z-10">
         <div className="max-w-4xl mx-auto px-4 relative">
           <SpotlightCard className="p-8 sm:p-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">What Is BoostACart?</h2>
-            <div className="text-lg text-gray-400 leading-relaxed space-y-4">
+            <h2 className={`${syne.className} text-3xl sm:text-4xl font-bold text-white mb-6 text-center`}>What Is BoostACart?</h2>
+            <div className="text-lg text-indigo-100/70 leading-relaxed space-y-4">
               <p>
                 BoostACart is an add-to-cart lead capture tool for online stores. Instead of waiting for customers to
                 abandon checkout, BoostACart captures their contact details at the add-to-cart stage, when purchase
@@ -133,41 +136,41 @@ export default function LandingPage() {
       <section className="py-12 sm:py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">How BoostACart Works</h2>
-            <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto px-2">
+            <h2 className={`${syne.className} text-2xl sm:text-4xl font-bold text-white mb-3 sm:mb-4`}>How BoostACart Works</h2>
+            <p className="text-base sm:text-xl text-indigo-100/70 max-w-3xl mx-auto px-2">
               Simple 5-step process to capture leads and recover lost sales
             </p>
           </div>
 
           <div className="max-w-3xl mx-auto mb-16">
             <SpotlightCard className="p-6 sm:p-8">
-              <ol className="space-y-4 text-gray-400">
+              <ol className="space-y-4 text-indigo-100/70">
                 <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-fuchsia-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     1
                   </span>
                   <span className="pt-1">A shopper clicks "Add to Cart"</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-fuchsia-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     2
                   </span>
                   <span className="pt-1">BoostACart displays a small popup or widget</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-fuchsia-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     3
                   </span>
                   <span className="pt-1">The shopper enters their email or phone number</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-fuchsia-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     4
                   </span>
                   <span className="pt-1">The lead is captured instantly</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-fuchsia-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     5
                   </span>
                   <span className="pt-1">You follow up and recover the sale</span>
@@ -178,66 +181,66 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <SpotlightCard className="p-4 sm:p-6 hover:scale-[1.02] transition-transform">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-cyan-400 to-fuchsia-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
                 <ZapIcon />
               </div>
               <h3 className="text-base sm:text-xl font-semibold text-white mb-3 sm:mb-4">
                 Lead Capture at Add-to-Cart
               </h3>
-              <p className="text-xs sm:text-base text-gray-400 leading-relaxed">
+              <p className="text-xs sm:text-base text-indigo-100/70 leading-relaxed">
                 Customer clicks Add to Cart → BoostACart widget pops up and never lose anonymous shoppers again.
               </p>
             </SpotlightCard>
 
             <SpotlightCard className="p-4 sm:p-6 hover:scale-[1.02] transition-transform">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
                 <TrendingUpIcon />
               </div>
               <h3 className="text-base sm:text-xl font-semibold text-white mb-3 sm:mb-4">Customizable Widget</h3>
-              <p className="text-xs sm:text-base text-gray-400 leading-relaxed">
+              <p className="text-xs sm:text-base text-indigo-100/70 leading-relaxed">
                 Collects Name, Email, or Phone → customer details saved in your dashboard. Change text, colors, and
                 design to match your brand.
               </p>
             </SpotlightCard>
 
             <SpotlightCard className="p-4 sm:p-6 hover:scale-[1.02] transition-transform">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
                 <UsersIcon />
               </div>
               <h3 className="text-base sm:text-xl font-semibold text-white mb-3 sm:mb-4">Smart Dashboard</h3>
-              <p className="text-xs sm:text-base text-gray-400 leading-relaxed">
+              <p className="text-xs sm:text-base text-indigo-100/70 leading-relaxed">
                 Redirects to Checkout or Shows Discount → you keep them moving towards purchase. Track leads, monthly
                 limits, and plan status.
               </p>
             </SpotlightCard>
 
             <SpotlightCard className="p-4 sm:p-6 hover:scale-[1.02] transition-transform">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-rose-500 to-orange-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
                 <ShoppingCartIcon />
               </div>
               <h3 className="text-base sm:text-xl font-semibold text-white mb-3 sm:mb-4">Exit-Intent Popup</h3>
-              <p className="text-xs sm:text-base text-gray-400 leading-relaxed">
+              <p className="text-xs sm:text-base text-indigo-100/70 leading-relaxed">
                 Catch visitors before they leave your store and turn them into leads you can follow up with.
               </p>
             </SpotlightCard>
 
             <SpotlightCard className="p-4 sm:p-6 hover:scale-[1.02] transition-transform">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-cyan-500 to-teal-400 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
                 <TrendingUpIcon />
               </div>
               <h3 className="text-base sm:text-xl font-semibold text-white mb-3 sm:mb-4">Follow-Up Ready</h3>
-              <p className="text-xs sm:text-base text-gray-400 leading-relaxed">
+              <p className="text-xs sm:text-base text-indigo-100/70 leading-relaxed">
                 Export leads for WhatsApp, SMS, or sales calls. Increase conversions by 20–30% and reduce cost per
                 purchase.
               </p>
             </SpotlightCard>
 
             <SpotlightCard className="p-4 sm:p-6 hover:scale-[1.02] transition-transform">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-blue-600 to-violet-600 rounded-xl flex items-center justify-center mb-4 sm:mb-6 text-white">
                 <ZapIcon />
               </div>
               <h3 className="text-base sm:text-xl font-semibold text-white mb-3 sm:mb-4">Why BoostACart?</h3>
-              <p className="text-xs sm:text-base text-gray-400 leading-relaxed">
+              <p className="text-xs sm:text-base text-indigo-100/70 leading-relaxed">
                 Ad spend is expensive. Purchases are fewer than Add-to-Carts. Without customer details, you can't
                 recover those carts.
               </p>
@@ -247,7 +250,7 @@ export default function LandingPage() {
       </section>
 
       {/* ROI Calculator Section */}
-      <section className="py-12 sm:py-20 relative z-10 bg-slate-900/10">
+      <section className="py-12 sm:py-20 relative z-10 bg-[#02050f]">
         <RoiCalculator />
       </section>
 
@@ -256,9 +259,9 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto px-4 relative">
           <SpotlightCard className="p-6 sm:p-8">
             <div className="text-center">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Who Should Use BoostACart?</h2>
-              <p className="text-lg text-gray-400 mb-6">BoostACart is built for:</p>
-              <ul className="space-y-3 text-left text-gray-400 max-w-2xl mx-auto">
+              <h2 className={`${syne.className} text-3xl sm:text-4xl font-bold text-white mb-6`}>Who Should Use BoostACart?</h2>
+              <p className="text-lg text-indigo-100/70 mb-6">BoostACart is built for:</p>
+              <ul className="space-y-3 text-left text-indigo-100/70 max-w-2xl mx-auto">
                 <li className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                   <span>Shopify and eCommerce store owners</span>
@@ -280,7 +283,7 @@ export default function LandingPage() {
                   <span>Marketing agencies managing eCommerce clients</span>
                 </li>
               </ul>
-              <p className="text-lg text-gray-400 mt-6">
+              <p className="text-lg text-indigo-100/70 mt-6">
                 If you are losing customers before checkout, BoostACart helps you recover them.
               </p>
               <div className="mt-8">
@@ -302,13 +305,13 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto px-4 relative">
           <SpotlightCard className="p-6 sm:p-8">
             <div className="text-center">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Why Store Owners Use BoostACart</h2>
-              <ul className="space-y-4 text-left text-gray-400 max-w-2xl mx-auto">
+              <h2 className={`${syne.className} text-3xl sm:text-4xl font-bold text-white mb-6`}>Why Store Owners Use BoostACart</h2>
+              <ul className="space-y-4 text-left text-indigo-100/70 max-w-2xl mx-auto">
                 <li className="flex items-start gap-3">
                   <div className="flex-shrink-0 text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">
                     Capture high-intent shoppers before checkout
                   </span>
                 </li>
@@ -316,7 +319,7 @@ export default function LandingPage() {
                   <div className="flex-shrink-0 text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">
                     Recover lost carts using WhatsApp, SMS, or email
                   </span>
                 </li>
@@ -324,13 +327,13 @@ export default function LandingPage() {
                   <div className="flex-shrink-0 text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Increase conversion rates without ads</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Increase conversion rates without ads</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="flex-shrink-0 text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">
                     Lower cost-per-purchase with owned traffic
                   </span>
                 </li>
@@ -338,7 +341,7 @@ export default function LandingPage() {
                   <div className="flex-shrink-0 text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">
                     Automate follow-ups using integrations
                   </span>
                 </li>
@@ -352,54 +355,54 @@ export default function LandingPage() {
       <section className="py-12 sm:py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">
+            <h2 className={`${syne.className} text-2xl sm:text-4xl font-bold text-white mb-3 sm:mb-4`}>
               Choose the plan that fits your store
             </h2>
-            <p className="text-base sm:text-xl text-gray-400">Capture more leads from the same ad budget</p>
+            <p className="text-base sm:text-xl text-indigo-100/70">Capture more leads from the same ad budget</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {/* Free Plan */}
-            <div className="group bg-slate-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-800/50 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2">
+            <div className="group bg-[#0b1026]/80 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/5 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2">
               <div className="text-center mb-6 sm:mb-8">
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 transition-colors group-hover:text-blue-400">
                   Free Plan
                 </h3>
                 <div className="text-3xl sm:text-4xl font-bold text-white mb-2">$0</div>
-                <p className="text-gray-400 text-sm sm:text-base">Try it risk-free</p>
+                <p className="text-indigo-100/70 text-sm sm:text-base">Try it risk-free</p>
               </div>
               <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Up to 50 leads/month</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Up to 50 leads/month</span>
                 </li>
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Basic analytics</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Basic analytics</span>
                 </li>
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Email support</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Email support</span>
                 </li>
               </ul>
               <Link
                 href="/auth/sign-up"
-                className="w-full py-2 sm:py-3 px-4 bg-slate-800/50 text-white rounded-lg transition-all duration-300 hover:bg-slate-700/70 hover:shadow-lg font-medium text-center block border border-slate-700 hover:border-slate-600 text-sm sm:text-base"
+                className="w-full py-2 sm:py-3 px-4 bg-[#0b1026]/50 text-white rounded-lg transition-all duration-300 hover:bg-slate-700/70 hover:shadow-lg font-medium text-center block border border-[#1e274f] hover:border-slate-600 text-sm sm:text-base"
               >
                 Get Started Free
               </Link>
             </div>
 
             {/* Starter Plan - Most Popular */}
-            <div className="group bg-slate-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border-2 border-blue-500/50 relative transition-all duration-300 hover:scale-110 hover:border-blue-400/80 hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-3">
+            <div className="group bg-[#0b1026]/80 backdrop-blur-sm p-6 sm:p-8 rounded-xl border-2 border-blue-500/50 relative transition-all duration-300 hover:scale-110 hover:border-blue-400/80 hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-3">
               <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-medium">
+                <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-medium">
                   Most Popular
                 </span>
               </div>
@@ -408,72 +411,72 @@ export default function LandingPage() {
                   Starter Plan
                 </h3>
                 <div className="text-3xl sm:text-4xl font-bold text-white mb-2">$19</div>
-                <p className="text-gray-400 text-sm sm:text-base">For growing stores</p>
+                <p className="text-indigo-100/70 text-sm sm:text-base">For growing stores</p>
               </div>
               <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">600 leads per month</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">600 leads per month</span>
                 </li>
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Advanced analytics</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Advanced analytics</span>
                 </li>
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Priority support</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Priority support</span>
                 </li>
               </ul>
               <a
                 href={getWhatsAppLink("918303208502", "pricing")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 sm:py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl transition-all duration-300 hover:from-blue-600 hover:to-purple-600 hover:shadow-xl hover:shadow-blue-500/50 font-medium text-center block text-sm sm:text-base"
+                className="w-full py-2 sm:py-3 px-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-xl transition-all duration-300 hover:from-cyan-600 hover:to-fuchsia-600 hover:shadow-xl hover:shadow-cyan-500/50 font-medium text-center block text-sm sm:text-base"
               >
                 Get Started Free - Limited Time
               </a>
             </div>
 
             {/* Pro Plan */}
-            <div className="group bg-slate-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-800/50 transition-all duration-300 hover:scale-105 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2">
+            <div className="group bg-[#0b1026]/80 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/5 transition-all duration-300 hover:scale-105 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2">
               <div className="text-center mb-6 sm:mb-8">
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 transition-colors group-hover:text-purple-400">
                   Pro Plan
                 </h3>
                 <div className="text-3xl sm:text-4xl font-bold text-white mb-2">$99</div>
-                <p className="text-gray-400 text-xs sm:text-base">For scaling brands with heavy traffic</p>
+                <p className="text-indigo-100/70 text-xs sm:text-base">For scaling brands with heavy traffic</p>
               </div>
               <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Unlimited leads</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Unlimited leads</span>
                 </li>
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Custom integrations</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Custom integrations</span>
                 </li>
                 <li className="flex items-center">
                   <div className="text-green-400">
                     <Check className="w-5 h-5" />
                   </div>
-                  <span className="text-gray-400 ml-3 text-sm sm:text-base">Dedicated support</span>
+                  <span className="text-indigo-100/70 ml-3 text-sm sm:text-base">Dedicated support</span>
                 </li>
               </ul>
               <a
                 href={getWhatsAppLink("918303208502", "upgrade")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 sm:py-3 px-4 bg-slate-800/50 text-white rounded-lg transition-all duration-300 hover:bg-slate-700/70 hover:shadow-lg font-medium text-center block border border-slate-700 hover:border-slate-600 text-sm sm:text-base"
+                className="w-full py-2 sm:py-3 px-4 bg-[#0b1026]/50 text-white rounded-lg transition-all duration-300 hover:bg-slate-700/70 hover:shadow-lg font-medium text-center block border border-[#1e274f] hover:border-slate-600 text-sm sm:text-base"
               >
                 Get Started Free - Limited Time
               </a>
@@ -486,14 +489,14 @@ export default function LandingPage() {
               <div className="inline-block bg-green-500/20 border border-green-500/50 rounded-full px-4 py-1 mb-4">
                 <span className="text-green-400 font-semibold text-sm sm:text-base">🎉 Early Access Offer</span>
               </div>
-              <h3 className="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
+              <h3 className={`${syne.className} text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4`}>
                 Completely FREE for Limited Time!
               </h3>
-              <p className="text-base sm:text-lg text-gray-300 mb-2">
+              <p className="text-base sm:text-lg text-indigo-100/80 mb-2">
                 All plans are <span className="text-green-400 font-semibold">100% free</span> during our early access
                 period.
               </p>
-              <p className="text-sm sm:text-base text-gray-400">
+              <p className="text-sm sm:text-base text-indigo-100/70">
                 Use BoostACart unlimited times, capture unlimited leads, and boost your sales without any cost. Start
                 now and lock in your early access benefits!
               </p>
@@ -501,13 +504,13 @@ export default function LandingPage() {
           </div>
 
           <div className="text-center mt-8 sm:mt-16">
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Still on the fence?</h3>
-            <p className="text-base sm:text-xl text-gray-400 mb-6 sm:mb-8">
+            <h3 className={`${syne.className} text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4`}>Still on the fence?</h3>
+            <p className="text-base sm:text-xl text-indigo-100/70 mb-6 sm:mb-8">
               Try BoostACart free and see how many sales you recover this week.
             </p>
             <Link
               href="/auth/sign-up"
-              className="inline-flex px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold text-base sm:text-lg"
+              className="inline-flex px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-xl font-semibold text-base sm:text-lg"
             >
               Start Free Trial →
             </Link>
@@ -518,7 +521,7 @@ export default function LandingPage() {
       {/* Setup Guide Card Section */}
       <section className="py-12 sm:py-16 relative z-10">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 sm:p-10 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
+          <div className="bg-[#0b1026]/50 backdrop-blur-sm border border-[#1e274f]/50 rounded-xl p-8 sm:p-10 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full mb-6">
                 <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -536,14 +539,14 @@ export default function LandingPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Quick Setup Guide</h3>
-              <p className="text-gray-400 text-base sm:text-lg mb-6 max-w-xl mx-auto">
+              <h3 className={`${syne.className} text-2xl sm:text-3xl font-bold text-white mb-4`}>Quick Setup Guide</h3>
+              <p className="text-indigo-100/70 text-base sm:text-lg mb-6 max-w-xl mx-auto">
                 Get started in minutes with our step-by-step setup guide. Configure your widget and start capturing
                 leads right away.
               </p>
               <Link
                 href="/setup"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-semibold transition-all duration-300 hover:from-blue-600 hover:to-purple-600 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-lg font-semibold transition-all duration-300 hover:from-cyan-600 hover:to-fuchsia-600 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/50"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -559,15 +562,15 @@ export default function LandingPage() {
       <section className="py-16 sm:py-24 relative z-10">
         <div className="max-w-4xl mx-auto text-center px-4 relative">
           <SpotlightCard className="p-8 sm:p-12">
-            <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6">
+            <h2 className={`${syne.className} text-3xl sm:text-5xl font-bold text-white mb-6`}>
               Ready to Stop Losing Customers at Add-to-Cart?
             </h2>
-            <p className="text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-indigo-100/70 mb-8 max-w-2xl mx-auto">
               Join hundreds of eCommerce stores using BoostACart to capture leads and recover sales. Start free today.
             </p>
             <Link
               href="/dashboard"
-              className="inline-flex px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-600 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
+              className="inline-flex px-8 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:from-cyan-600 hover:to-fuchsia-600 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/50"
             >
               Start Free Trial →
             </Link>
@@ -577,6 +580,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <Footer />
-    </div>
+      </div>
+    </main>
   )
 }
