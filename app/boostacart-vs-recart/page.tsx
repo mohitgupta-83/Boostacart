@@ -1,221 +1,119 @@
-import Link from "next/link"
-import type { Metadata } from "next"
-import { ShoppingCart } from "lucide-react"
+import type { Metadata } from 'next';
+import SeoLandingPage, { SeoPageData } from '@/components/seo/SeoLandingPage';
 
 export const metadata: Metadata = {
-  title: "BoostaCart vs Recart — Which Recovers More Carts?",
-  description: "Honest comparison of BoostACart and Recart. Learn which tool captures leads earlier and recovers more lost carts.",
+  title: "BoostACart vs Recart - The Winning Alternative (2025)",
+  description: "Compare BoostACart and Recart for cart recovery. Discover why capturing leads at add-to-cart recovers significantly more revenue than Recart.",
   alternates: {
     canonical: "https://boostacart.com/boostacart-vs-recart"
   },
   openGraph: {
-    title: "BoostaCart vs Recart — Which Recovers More Carts?",
-    description: "Honest comparison of BoostACart and Recart. Learn which tool captures leads earlier and recovers more lost carts.",
+    title: "BoostACart vs Recart - The Winning Alternative (2025)",
+    description: "Compare BoostACart and Recart for cart recovery. Discover why capturing leads at add-to-cart recovers significantly more revenue than Recart.",
     url: "https://boostacart.com/boostacart-vs-recart",
     type: "website"
   }
-}
+};
 
-export default function BoostACartVsRecartPage() {
-  return (
-    <main className="min-h-screen bg-[#030303]">
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#030303] via-[#0a0a1f] to-[#030303]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-900/20 via-transparent to-transparent"></div>
-        <div className="max-w-6xl mx-auto px-4 py-20 text-center relative z-10">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            BoostaCart vs Recart
-          </h1>
-          <p className="text-xl text-white/70 mb-8 max-w-3xl mx-auto">
-            A practical breakdown of how both tools work and who they're best for.
-          </p>
-        </div>
-      </section>
+const pageData: SeoPageData = {
+  "slug": "boostacart-vs-recart",
+  "metaTitle": "BoostACart vs Recart - The Winning Alternative (2025)",
+  "metaDescription": "Compare BoostACart and Recart for cart recovery. Discover why capturing leads at add-to-cart recovers significantly more revenue than Recart.",
+  "heroBadge": "Recart Alternative",
+  "heroTitleLight": "Why Brands Are Leaving",
+  "heroTitleHighlight": "Recart",
+  "heroSubtitle": "Native email and traditional tools like Recart wait for checkout. We capture the shopper at highest intent—when they click Add-to-Cart.",
+  "problemBadge": "The Core Problem with Recart",
+  "problemTitle": "Recart Waits Too Long",
+  "problemHighlight": "To Save Carts",
+  "problemText1": "Recart relies entirely on customers reaching the checkout page to type their email in. If they abandon on the product or cart page, they are gone forever.",
+  "problemText2": "BoostACart solves this by intercepting the shopper exactly at the moment they add to cart. We capture 10x more leads than Recart and reach them on WhatsApp and SMS.",
+  "problemStat1": "Misses 70% of early abandoners",
+  "problemStat2": "Relies mostly on email (20% open rate)",
+  "solutionBadge": "The BoostACart Solution",
+  "solutionTitle": "Capture Leads Instantly",
+  "solutionText": "BoostACart is built for modern D2C scaling. Instead of hoping traffic makes it to checkout to trigger a Recart flow, we guarantee lead capture on the spot.",
+  "solutionFeature1Title": "Pre-Checkout Capture",
+  "solutionFeature1Text": "Trigger a seamless modal the exact millisecond they hit Add-to-Cart.",
+  "solutionFeature2Title": "WhatsApp & SMS",
+  "solutionFeature2Text": "Bypass crowded email inboxes and hit their phone directly.",
+  "featuresTitle": "Why Shopify Scaling Brands Switch From",
+  "featuresHighlight": "Recart",
+  "featuresSubtitle": "It's not just another email tool. It's a fundamental shift in how you prevent cart abandonment.",
+  "features": [
+    {
+      "icon": "cart",
+      "title": "Capture Early",
+      "text": "Trigger our modal exactly when they click Add-to-Cart. Do not wait for checkout."
+    },
+    {
+      "icon": "message",
+      "title": "Omnichannel Approach",
+      "text": "Reach out via Email, SMS, and WhatsApp to guarantee 90%+ open rates."
+    },
+    {
+      "icon": "trending",
+      "title": "Maximum ROAS",
+      "text": "The absolute cheapest way to acquire customers is saving the ones you already paid for."
+    },
+    {
+      "icon": "shield",
+      "title": "Lightning Fast",
+      "text": "A completely asynchronous script that will never harm your Core Web Vitals."
+    },
+    {
+      "icon": "chart",
+      "title": "Real-Time Dashboard",
+      "text": "Watch the recovered revenue metrics pour in live as campaigns fire."
+    },
+    {
+      "icon": "clock",
+      "title": "2-Minute Setup",
+      "text": "Zero developer required. Just plug the snippet into your Shopify theme."
+    }
+  ],
+  "internalLinks": [
+    {
+      "slug": "shopify-cart-recovery",
+      "color": "fuchsia",
+      "title": "Shopify Cart Recovery",
+      "subtitle": "Our flagship add-to-cart capture method."
+    },
+    {
+      "slug": "whatsapp-cart-recovery-tool",
+      "color": "cyan",
+      "title": "WhatsApp Cart Recovery",
+      "subtitle": "Double your open rates instantly."
+    },
+    {
+      "slug": "boostacart-vs-klaviyo",
+      "color": "purple",
+      "title": "BoostACart vs Klaviyo",
+      "subtitle": "See why pre-checkout capture wins."
+    },
+    {
+      "slug": "stop-abandoned-carts-shopify",
+      "color": "orange",
+      "title": "Stop Abandonment",
+      "subtitle": "Strategies to hold onto your traffic."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How is BoostACart different from Recart?",
+      "answer": "Recart is primarily a post-checkout or popup email tool. BoostACart is deeply integrated to fire specifically on the Add-to-Cart action, allowing us to capture intent much earlier."
+    },
+    {
+      "question": "Can I use both BoostACart and Recart together?",
+      "answer": "Yes! Many stores use BoostACart to drastically increase their initial pre-checkout lead capture, and then sync those emails to Recart for long-term newsletters."
+    },
+    {
+      "question": "Is it easy to migrate from Recart?",
+      "answer": "Incredibly easy. Our installation takes 2 minutes and our system immediately overtakes your cart recovery efforts, yielding immediate positive ROI."
+    }
+  ]
+};
 
-      {/* Intro Section */}
-      <section className="py-20 bg-[#030303] relative">
-        <div className="max-w-4xl mx-auto px-4 relative">
-          <div className="bg-white/5 backdrop-blur-sm p-8 sm:p-12 rounded-2xl border border-white/10">
-            <p className="text-lg text-white/70 leading-relaxed">
-              Both BoostACart and Recart focus on cart recovery, but they capture leads at different stages. This
-              comparison explains the key differences and how to choose the right tool.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Difference Section */}
-      <section className="py-20 bg-[#030303] relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-900/5 to-transparent"></div>
-        <div className="max-w-4xl mx-auto px-4 relative">
-          <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm p-8 sm:p-12 rounded-2xl border border-white/10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">The Key Difference</h2>
-            <p className="text-lg text-white/70 leading-relaxed mb-6">
-              <strong className="text-white">BoostACart</strong> captures leads at Add-to-Cart stage, before customers
-              even reach checkout.
-            </p>
-            <p className="text-lg text-white/70 leading-relaxed">
-              <strong className="text-white">Recart</strong> captures leads at and after checkout stage, focusing on
-              customers who started the checkout process.
-            </p>
-            <p className="text-lg text-white/70 leading-relaxed mt-6">
-              This means BoostACart reaches customers earlier when intent is highest, recovering shoppers Recart never
-              sees.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Comparison Section */}
-      <section className="py-20 bg-[#030303] relative">
-        <div className="max-w-4xl mx-auto px-4 relative">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Feature Comparison</h2>
-
-          <div className="space-y-6">
-            <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-3">Lead Capture Timing</h3>
-              <p className="text-white/70">
-                <strong className="text-white">BoostACart:</strong> At Add-to-Cart (before checkout)
-              </p>
-              <p className="text-white/70">
-                <strong className="text-white">Recart:</strong> At checkout page
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-3">WhatsApp Support</h3>
-              <p className="text-white/70">
-                <strong className="text-white">BoostACart:</strong> Yes, built-in
-              </p>
-              <p className="text-white/70">
-                <strong className="text-white">Recart:</strong> Yes, available
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-3">SMS Messaging</h3>
-              <p className="text-white/70">
-                <strong className="text-white">BoostACart:</strong> Yes, included
-              </p>
-              <p className="text-white/70">
-                <strong className="text-white">Recart:</strong> Yes, SMS available
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-3">Email Campaigns</h3>
-              <p className="text-white/70">
-                <strong className="text-white">BoostACart:</strong> Basic email included
-              </p>
-              <p className="text-white/70">
-                <strong className="text-white">Recart:</strong> Advanced email flows
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-3">Ease of Use</h3>
-              <p className="text-white/70">
-                <strong className="text-white">BoostACart:</strong> Very simple, one-click setup
-              </p>
-              <p className="text-white/70">
-                <strong className="text-white">Recart:</strong> User-friendly but more complex
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Who Should Use Section */}
-      <section className="py-20 bg-[#030303] relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-900/5 to-transparent"></div>
-        <div className="max-w-4xl mx-auto px-4 relative">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">Who Should Use Which?</h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10">
-              <h3 className="text-2xl font-bold text-orange-400 mb-6">Choose BoostACart If:</h3>
-              <ul className="space-y-3 text-white/70">
-                <li>• You want to capture Add-to-Cart abandoners (40%+ of all abandonment)</li>
-                <li>• You want the simplest possible setup</li>
-                <li>• You want a cost-effective solution</li>
-                <li>• You focus on WhatsApp and SMS messaging</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10">
-              <h3 className="text-2xl font-bold text-amber-400 mb-6">Choose Recart If:</h3>
-              <ul className="space-y-3 text-white/70">
-                <li>• You only focus on post-checkout recovery</li>
-                <li>• You need advanced email automation flows</li>
-                <li>• You want all features in one platform</li>
-                <li>• You're willing to invest in more complex setup</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-8 bg-gradient-to-br from-orange-500/10 to-amber-500/10 backdrop-blur-sm p-8 sm:p-10 rounded-2xl border border-white/10">
-            <p className="text-lg text-white/70">
-              <strong className="text-white">Winning Combination:</strong> Smart merchants use BoostACart to capture
-              Add-to-Cart abandoners with quick SMS and WhatsApp, then use Recart for post-checkout follow-ups. This
-              covers both stages and recovers significantly more revenue.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-[#030303] relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-900/5 to-transparent"></div>
-        <div className="max-w-4xl mx-auto px-4 relative">
-          <div className="bg-gradient-to-r from-orange-600/20 to-amber-600/20 backdrop-blur-sm p-8 sm:p-12 rounded-2xl text-white border border-white/10 text-center">
-            <h3 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Start Recovering Carts?</h3>
-            <p className="text-lg text-white/70 mb-8">
-              Capture the 40%+ of customers who abandon before checkout. Try BoostACart free today.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/auth/sign-up"
-                className="px-8 py-4 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl hover:from-orange-700 hover:to-amber-700 transition-all duration-300 font-semibold text-lg shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transform hover:-translate-y-0.5 flex items-center justify-center"
-              >
-                Try BoostACart Free
-              </Link>
-              <Link
-                href="/cart-recovery-tool-for-shopify"
-                className="px-8 py-4 bg-white/10 text-white rounded-xl hover:bg-white/20 transition-all duration-300 font-semibold text-lg shadow-lg border border-white/20 flex items-center justify-center backdrop-blur-sm hover:border-white/30"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-black/40 backdrop-blur-sm text-white py-12 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-              <ShoppingCart className="w-6 h-6 text-orange-400" />
-              <span className="text-xl font-bold">BoostACart</span>
-            </Link>
-            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-6 text-sm">
-              <Link href="/" className="text-white/60 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/cart-recovery-tool-for-shopify" className="text-white/60 hover:text-white transition-colors">
-                Cart Recovery Tools
-              </Link>
-              <Link href="/contact" className="text-white/60 hover:text-white transition-colors">
-                Contact Us
-              </Link>
-              <Link href="/auth/sign-up" className="text-white/60 hover:text-white transition-colors">
-                Sign Up
-              </Link>
-            </div>
-          </div>
-          <div className="text-center text-white/40 text-sm mt-8">© 2025 BoostACart. All rights reserved.</div>
-        </div>
-      </footer>
-    </main>
-  )
+export default function Page() {
+  return <SeoLandingPage data={pageData} />;
 }

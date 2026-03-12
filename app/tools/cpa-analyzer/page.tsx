@@ -40,14 +40,14 @@ export default function CpaAnalyzerPage() {
             ctaTitle="Is your CPA too high?"
             ctaDescription="Improve CPA by recovering high-intent visitors before checkout."
         >
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                 <div className="grid md:grid-cols-2 gap-10">
                     <div className="space-y-4">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-semibold text-white">Campaign Metrics</h3>
-                            <div className="flex gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
-                                <button onClick={() => setCurrency("INR")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>INR</button>
-                                <button onClick={() => setCurrency("USD")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>USD</button>
+                            <div className="flex gap-2 bg-white/5 p-1 rounded-lg border border-white/10">
+                                <button onClick={() => setCurrency("INR")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}>INR</button>
+                                <button onClick={() => setCurrency("USD")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}>USD</button>
                             </div>
                         </div>
 
@@ -58,10 +58,10 @@ export default function CpaAnalyzerPage() {
                             { label: "Product Cost per unit", val: cost, set: setCost, icon: true },
                         ].map((field, i) => (
                             <div key={i}>
-                                <label className="block text-sm font-medium text-slate-300 mb-1">{field.label}</label>
+                                <label className="block text-sm font-medium text-white/80 mb-1">{field.label}</label>
                                 <div className="relative">
                                     {field.icon && (
-                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                                             {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
                                         </div>
                                     )}
@@ -69,34 +69,34 @@ export default function CpaAnalyzerPage() {
                                         type="number"
                                         value={field.val}
                                         onChange={(e) => field.set(e.target.value)}
-                                        className={`w-full bg-slate-950 border border-slate-800 rounded-xl py-3 text-white focus:border-blue-500 focus:outline-none ${field.icon ? 'pl-10 pr-4' : 'px-4'}`}
+                                        className={`w-full bg-white/5 border border-white/10 rounded-xl py-3 text-white focus:border-blue-500 focus:outline-none ${field.icon ? 'pl-10 pr-4' : 'px-4'}`}
                                     />
                                 </div>
                             </div>
                         ))}
 
-                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 rounded-xl transition-all mt-6">
+                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 border border-white/10 text-white font-semibold py-4 rounded-xl transition-all mt-6">
                             <Calculator className="w-5 h-5" /> Analyze CPA
                         </button>
                     </div>
 
-                    <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
+                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
                         {!hasCalculated ? (
-                            <div className="text-center text-slate-500">
+                            <div className="text-center text-white/40">
                                 <Calculator className="w-12 h-12 mx-auto mb-4 opacity-20" />
                                 <p>Enter your ad metrics to analyze your true CPA.</p>
                             </div>
                         ) : (
                             <div className="space-y-6 text-center">
                                 <div>
-                                    <p className="text-sm text-slate-400 mb-1">Your Actual CPA</p>
+                                    <p className="text-sm text-white/60 mb-1">Your Actual CPA</p>
                                     <p className="text-5xl font-bold text-white mb-2">
                                         {formatCurr(results.cpa)}
                                     </p>
                                 </div>
                                 <div className="h-px w-full bg-slate-800"></div>
                                 <div>
-                                    <p className="text-sm text-slate-400 mb-1">Total Net Profit</p>
+                                    <p className="text-sm text-white/60 mb-1">Total Net Profit</p>
                                     <p className={`text-3xl font-bold ${results.netProfit >= 0 ? "text-green-400" : "text-red-400"}`}>
                                         {formatCurr(results.netProfit)}
                                     </p>

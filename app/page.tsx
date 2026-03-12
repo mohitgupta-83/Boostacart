@@ -250,7 +250,12 @@ export default function LandingPage() {
       </section>
 
       {/* ROI Calculator Section */}
-      <section className="py-12 sm:py-20 relative z-10 bg-[#02050f]">
+      <section className="py-16 sm:py-24 relative z-10">
+        {/* Background Glows for Calculator Section */}
+        <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center overflow-hidden">
+           <div className="absolute top-1/4 left-1/4 w-[30vw] h-[30vw] bg-cyan-600/10 rounded-full blur-[100px] mix-blend-screen opacity-60"></div>
+           <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-fuchsia-600/10 rounded-full blur-[100px] mix-blend-screen opacity-60 animate-pulse"></div>
+        </div>
         <RoiCalculator />
       </section>
 
@@ -437,16 +442,16 @@ export default function LandingPage() {
                 href={getWhatsAppLink("918303208502", "pricing")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 sm:py-3 px-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-xl transition-all duration-300 hover:from-cyan-600 hover:to-fuchsia-600 hover:shadow-xl hover:shadow-cyan-500/50 font-medium text-center block text-sm sm:text-base"
+                className="w-full py-2 sm:py-3 px-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-full transition-all duration-300 hover:from-cyan-600 hover:to-fuchsia-600 hover:shadow-xl hover:shadow-cyan-500/50 font-bold text-center block text-sm sm:text-base"
               >
                 Get Started Free - Limited Time
               </a>
             </div>
 
             {/* Pro Plan */}
-            <div className="group bg-[#0b1026]/80 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-white/5 transition-all duration-300 hover:scale-105 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2">
+            <div className="group bg-[#0b1026]/80 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-[#1e274f] transition-all duration-300 hover:scale-105 hover:border-fuchsia-500/50 hover:shadow-2xl hover:shadow-fuchsia-500/20 hover:-translate-y-2">
               <div className="text-center mb-6 sm:mb-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 transition-colors group-hover:text-purple-400">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 transition-colors group-hover:text-fuchsia-400">
                   Pro Plan
                 </h3>
                 <div className="text-3xl sm:text-4xl font-bold text-white mb-2">$99</div>
@@ -476,7 +481,7 @@ export default function LandingPage() {
                 href={getWhatsAppLink("918303208502", "upgrade")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 sm:py-3 px-4 bg-[#0b1026]/50 text-white rounded-lg transition-all duration-300 hover:bg-slate-700/70 hover:shadow-lg font-medium text-center block border border-[#1e274f] hover:border-slate-600 text-sm sm:text-base"
+                className="w-full py-2 sm:py-3 px-4 bg-white/5 text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:shadow-lg font-bold text-center block border border-white/10 hover:border-white/20 text-sm sm:text-base"
               >
                 Get Started Free - Limited Time
               </a>
@@ -485,9 +490,9 @@ export default function LandingPage() {
 
           {/* Early Access Promotional Banner */}
           <div className="mt-8 sm:mt-12 max-w-4xl mx-auto">
-            <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6 sm:p-8 text-center">
-              <div className="inline-block bg-green-500/20 border border-green-500/50 rounded-full px-4 py-1 mb-4">
-                <span className="text-green-400 font-semibold text-sm sm:text-base">🎉 Early Access Offer</span>
+            <div className="bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-fuchsia-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 sm:p-8 text-center shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+              <div className="inline-block bg-emerald-500/20 border border-emerald-500/50 rounded-full px-4 py-1 mb-4">
+                <span className="text-emerald-400 font-semibold text-sm sm:text-base">🎉 Early Access Offer</span>
               </div>
               <h3 className={`${syne.className} text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4`}>
                 Completely FREE for Limited Time!
@@ -510,7 +515,7 @@ export default function LandingPage() {
             </p>
             <Link
               href="/auth/sign-up"
-              className="inline-flex px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-xl font-semibold text-base sm:text-lg"
+              className="inline-flex px-8 py-4 w-full sm:w-auto bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-full hover:brightness-110 transition-all duration-300 font-bold text-lg shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:shadow-[0_0_60px_rgba(217,70,239,0.5)] hover:scale-105 items-center justify-center gap-2"
             >
               Start Free Trial →
             </Link>
@@ -521,10 +526,10 @@ export default function LandingPage() {
       {/* Setup Guide Card Section */}
       <section className="py-12 sm:py-16 relative z-10">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-[#0b1026]/50 backdrop-blur-sm border border-[#1e274f]/50 rounded-xl p-8 sm:p-10 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
+          <div className="bg-[#0b1026]/50 backdrop-blur-sm border border-[#1e274f]/50 rounded-xl p-8 sm:p-10 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full mb-6">
-                <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-fuchsia-500/20 rounded-full mb-6">
+                <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -546,7 +551,7 @@ export default function LandingPage() {
               </p>
               <Link
                 href="/setup"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-lg font-semibold transition-all duration-300 hover:from-cyan-600 hover:to-fuchsia-600 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/50"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 text-white rounded-full font-bold transition-all duration-300 hover:bg-white/10 hover:border-white/20 border border-white/10 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] justify-center"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -570,7 +575,7 @@ export default function LandingPage() {
             </p>
             <Link
               href="/dashboard"
-              className="inline-flex px-8 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:from-cyan-600 hover:to-fuchsia-600 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/50"
+              className="inline-flex px-8 py-4 w-full sm:w-auto bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-full hover:brightness-110 transition-all duration-300 font-bold text-lg shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:shadow-[0_0_60px_rgba(217,70,239,0.5)] hover:scale-105 items-center justify-center gap-2"
             >
               Start Free Trial →
             </Link>

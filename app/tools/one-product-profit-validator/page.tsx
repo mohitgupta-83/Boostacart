@@ -36,7 +36,7 @@ export default function OneProductProfitValidatorPage() {
             ctaTitle="Ready to scale your store?"
             ctaDescription="High-volume one-product stores are the most vulnerable to cart abandonment. Protect your growth."
         >
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                 <div className="grid md:grid-cols-2 gap-10">
                     <div className="space-y-4">
                         <div className="flex justify-between items-center mb-4">
@@ -48,40 +48,40 @@ export default function OneProductProfitValidatorPage() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Product Price</label>
-                            <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="1999" />
+                            <label className="block text-sm font-medium text-white/80 mb-1">Product Price</label>
+                            <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="1999" />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Total Cost per order (Product + Ads + Ship)</label>
-                            <input type="number" value={cost} onChange={(e) => setCost(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="1200" />
+                            <label className="block text-sm font-medium text-white/80 mb-1">Total Cost per order (Product + Ads + Ship)</label>
+                            <input type="number" value={cost} onChange={(e) => setCost(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="1200" />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Projected Daily Orders</label>
-                            <input type="number" value={orders} onChange={(e) => setOrders(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="50" />
+                            <label className="block text-sm font-medium text-white/80 mb-1">Projected Daily Orders</label>
+                            <input type="number" value={orders} onChange={(e) => setOrders(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="50" />
                         </div>
 
-                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6 shadow-lg shadow-blue-900/20">
+                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 hover:brightness-110 border border-white/10 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6 shadow-lg shadow-blue-900/20">
                             <ShoppingBag className="w-5 h-5" /> Validate Scalability
                         </button>
                     </div>
 
-                    <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
+                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
                         {!hasCalculated ? (
-                            <div className="text-center text-slate-500">
+                            <div className="text-center text-white/40">
                                 <ShoppingBag className="w-12 h-12 mx-auto mb-4 opacity-10" />
                                 <p>Project your earnings for a high-volume one-product store.</p>
                             </div>
                         ) : (
                             <div className="space-y-6 text-center">
                                 <div>
-                                    <p className="text-sm text-slate-400 mb-1">Estimated Daily Profit</p>
-                                    <p className="text-4xl font-bold text-green-400 mb-2">
+                                    <p className="text-sm text-white/60 mb-1">Estimated Daily Profit</p>
+                                    <p className={`text-4xl font-bold text-green-400 mb-2`}>
                                         {formatCurr(results.daily)}
                                     </p>
                                 </div>
                                 <div className="h-px w-full bg-slate-800"></div>
                                 <div>
-                                    <p className="text-sm text-slate-400 mb-1">Estimated Monthly Profit</p>
+                                    <p className="text-sm text-white/60 mb-1">Estimated Monthly Profit</p>
                                     <p className="text-5xl font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                                         {formatCurr(results.monthly)}
                                     </p>

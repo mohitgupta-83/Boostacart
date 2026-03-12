@@ -29,9 +29,9 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({ children, className = "",
     return () => document.removeEventListener("pointermove", syncPointer)
   }, [])
 
-  // Using theme colors: blue (220) to purple (280) gradient
-  const base = 240 // slate-blue base
-  const spread = 60 // subtle spread to purple
+  // Using theme colors: cyan (190) to fuchsia (300) gradient
+  const base = 190 // cyan base
+  const spread = 110 // spread to fuchsia (190 + 110 = 300)
 
   const getInlineStyles = () => {
     return {
@@ -39,8 +39,8 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({ children, className = "",
       "--spread": spread,
       "--radius": "12",
       "--border": "1",
-      "--backdrop": "rgb(15 23 42 / 0.5)", // slate-900/50
-      "--backup-border": "rgb(30 41 59 / 0.5)", // slate-800/50
+      "--backdrop": "rgb(11 16 38 / 0.5)", // #0b1026/50
+      "--backup-border": "rgb(30 39 79 / 0.5)", // #1e274f/50
       "--size": "200",
       "--outer": "1",
       "--border-size": "calc(var(--border, 1) * 1px)",

@@ -49,7 +49,7 @@ export default function PsychologicalPricingPage() {
             ctaTitle="Boost Conversions Further"
             ctaDescription="Psychological pricing gets them to Add to Cart. BoostACart gets them to complete the purchase."
         >
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                 <div className="grid md:grid-cols-2 gap-10">
                     <div className="space-y-4">
                         <div className="flex justify-between items-center mb-4">
@@ -61,37 +61,37 @@ export default function PsychologicalPricingPage() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Product Sourcing Cost</label>
-                            <input type="number" value={cost} onChange={(e) => setCost(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="400" />
+                            <label className="block text-sm font-medium text-white/80 mb-1">Product Sourcing Cost</label>
+                            <input type="number" value={cost} onChange={(e) => setCost(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="400" />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Desired Profit Margin (%)</label>
-                            <input type="number" value={margin} onChange={(e) => setMargin(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="60" />
+                            <label className="block text-sm font-medium text-white/80 mb-1">Desired Profit Margin (%)</label>
+                            <input type="number" value={margin} onChange={(e) => setMargin(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none" placeholder="60" />
                         </div>
 
-                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6 shadow-lg shadow-blue-900/20">
+                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 hover:brightness-110 border border-white/10 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6 shadow-lg shadow-blue-900/20">
                             <Tag className="w-5 h-5" /> Generate Price Tiers
                         </button>
                     </div>
 
-                    <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
+                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
                         {!hasCalculated ? (
-                            <div className="text-center text-slate-500">
+                            <div className="text-center text-white/40">
                                 <Tag className="w-12 h-12 mx-auto mb-4 opacity-10" />
                                 <p>Enter your cost and target margin to see suggested price points.</p>
                             </div>
                         ) : (
                             <div className="space-y-4">
-                                <p className="text-sm font-semibold text-slate-300 mb-2">Recommended Pricing Tiers:</p>
+                                <p className="text-sm font-semibold text-white/80 mb-2">Recommended Pricing Tiers:</p>
                                 {tiers.map((t, i) => (
-                                    <div key={i} className="flex items-center justify-between p-4 bg-slate-900 border border-slate-800 rounded-xl hover:border-blue-500/50 transition-colors group">
+                                    <div key={i} className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-colors group">
                                         <div>
                                             <p className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">{formatCurr(t.price)}</p>
-                                            <p className="text-xs text-slate-500">Ending in {t.ending}</p>
+                                            <p className="text-xs text-white/40">Ending in {t.ending}</p>
                                         </div>
                                         <div className="text-right">
                                             <p className="text-sm font-medium text-green-400">+{t.marginPct.toFixed(1)}% Margin</p>
-                                            <p className="text-xs text-slate-500">Profit: {formatCurr(t.profit)}</p>
+                                            <p className="text-xs text-white/40">Profit: {formatCurr(t.profit)}</p>
                                         </div>
                                     </div>
                                 ))}

@@ -13,8 +13,14 @@ import {
     BarChart3,
     MousePointerClick,
     FileSpreadsheet,
-    Zap
+    Zap,
+    ArrowLeft
 } from "lucide-react"
+
+import { Syne, Outfit } from 'next/font/google'
+
+const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'] })
+const outfit = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] })
 
 const tools = [
     {
@@ -126,49 +132,60 @@ const tools = [
 
 export default function ToolsIndexPage() {
     return (
-        <div className="min-h-screen bg-[#020817] text-white py-16 px-4 font-sans">
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-6">
+        <div className={`min-h-screen bg-[#04091A] text-slate-200 py-16 px-4 selection:bg-purple-500/30 overflow-hidden relative ${outfit.className}`}>
+            {/* Abstract Background Noise & Geometry */}
+            <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
+
+            <div className="fixed inset-0 z-0 pointer-events-none flex justify-center items-center">
+                 <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-fuchsia-600/10 rounded-full blur-[120px] mix-blend-screen opacity-50 animate-pulse"></div>
+                 <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-cyan-600/10 rounded-full blur-[120px] mix-blend-screen opacity-50"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10 pt-10">
+                <div className="text-center mb-20">
+                    <h1 className={`${syne.className} text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-transparent mb-6`}>
                         Free Ecommerce Tools & Calculators
                     </h1>
-                    <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+                    <p className="text-indigo-100/60 text-xl max-w-2xl mx-auto font-light">
                         Professional-grade tools to help you optimize margins, analyze ad performance, and stop losing revenue to abandoned carts.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {tools.map((tool, i) => (
                         <Link
                             key={i}
                             href={tool.href}
-                            className="group block p-6 bg-slate-900/50 border border-slate-800 rounded-3xl hover:border-blue-500/50 hover:bg-slate-900 transition-all duration-300 shadow-xl shadow-black/20"
+                            className="group block p-8 bg-[#0b1026] border border-white/5 rounded-3xl hover:border-cyan-500/30 hover:bg-[#0d1430] transition-all duration-300 shadow-xl relative overflow-hidden"
                         >
-                            <div className={`w-12 h-12 rounded-2xl bg-slate-950 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ${tool.color}`}>
-                                <tool.icon className="w-6 h-6" />
+                            <div className="absolute top-0 left-0 w-2 h-full bg-cyan-500/10 group-hover:bg-cyan-500 transition-colors"></div>
+                            <div className={`w-14 h-14 rounded-2xl bg-[#121b3b] shadow-inner flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ${tool.color}`}>
+                                <tool.icon className="w-7 h-7" />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                            <h3 className={`${syne.className} text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors`}>
                                 {tool.title}
                             </h3>
-                            <p className="text-slate-400 text-sm leading-relaxed">
+                            <p className="text-indigo-100/60 text-base leading-relaxed">
                                 {tool.description}
                             </p>
                         </Link>
                     ))}
                 </div>
 
-                <div className="mt-20 text-center">
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl p-10 shadow-2xl shadow-blue-900/20 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                        <h2 className="text-3xl font-bold text-white mb-4 relative z-10">
-                            Stop Guessing, Start Recovering.
-                        </h2>
-                        <p className="text-blue-100 mb-8 max-w-xl mx-auto relative z-10">
-                            The best way to improve your profit margin is to stop losing customers who already added to cart. Join 500+ stores using BoostACart.
-                        </p>
-                        <Link href="/auth/sign-up" className="inline-flex items-center gap-2 bg-white text-blue-600 hover:bg-slate-100 font-bold px-8 py-4 rounded-full transition-all relative z-10 active:scale-95 shadow-lg">
-                            Get Started Free
-                        </Link>
+                <div className="mt-24 text-center">
+                    <div className="bg-[#0b1026] backdrop-blur-xl border border-white/5 rounded-[2rem] p-12 shadow-2xl relative overflow-hidden group">
+                        <div className="absolute -inset-[1px] bg-gradient-to-br from-fuchsia-500/0 via-transparent to-cyan-500/0 group-hover:from-fuchsia-500/20 group-hover:to-cyan-500/20 rounded-[2rem] transition-colors duration-500 blur-sm z-0"></div>
+                        <div className="relative z-10">
+                            <h2 className={`${syne.className} text-4xl font-bold text-white mb-6 relative z-10`}>
+                                Stop Guessing, Start Recovering.
+                            </h2>
+                            <p className="text-indigo-100/70 mb-10 max-w-2xl mx-auto relative z-10 text-lg leading-relaxed">
+                                The best way to improve your profit margin is to stop losing customers who already added to cart. Join 500+ stores using BoostACart to recover instantly.
+                            </p>
+                            <Link href="/" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white font-bold px-10 py-5 rounded-full transition-all hover:brightness-110 shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:shadow-[0_0_60px_rgba(217,70,239,0.5)] hover:scale-105 active:scale-95 text-lg">
+                                Get Started Free <ArrowLeft className="w-5 h-5 rotate-180" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

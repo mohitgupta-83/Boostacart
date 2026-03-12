@@ -37,21 +37,21 @@ export default function AdsScalingSimulatorPage() {
             ctaTitle="Scared of ROAS dropping when scaling?"
             ctaDescription="Increase revenue without scaling your budget. Recover abandoned carts instead of paying for more traffic."
         >
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                 <div className="grid md:grid-cols-2 gap-10">
                     <div className="space-y-4">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-semibold text-white">Current Metrics</h3>
-                            <div className="flex gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
-                                <button onClick={() => setCurrency("INR")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>INR</button>
-                                <button onClick={() => setCurrency("USD")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>USD</button>
+                            <div className="flex gap-2 bg-white/5 p-1 rounded-lg border border-white/10">
+                                <button onClick={() => setCurrency("INR")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}>INR</button>
+                                <button onClick={() => setCurrency("USD")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}>USD</button>
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Current Daily Budget</label>
+                            <label className="block text-sm font-medium text-white/80 mb-1">Current Daily Budget</label>
                             <div className="relative">
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                                     {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
                                 </div>
                                 <input
@@ -59,13 +59,13 @@ export default function AdsScalingSimulatorPage() {
                                     value={budget}
                                     placeholder="5000"
                                     onChange={(e) => setBudget(e.target.value)}
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-white focus:border-blue-500 focus:outline-none"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-white focus:border-blue-500 focus:outline-none"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Current ROAS (Multiplier)</label>
+                            <label className="block text-sm font-medium text-white/80 mb-1">Current ROAS (Multiplier)</label>
                             <div className="relative">
                                 <input
                                     type="number"
@@ -73,48 +73,48 @@ export default function AdsScalingSimulatorPage() {
                                     step="0.1"
                                     placeholder="2.5"
                                     onChange={(e) => setRoas(e.target.value)}
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none"
                                 />
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">x</div>
+                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">x</div>
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-1">Scaling Percentage (%)</label>
+                            <label className="block text-sm font-medium text-white/80 mb-1">Scaling Percentage (%)</label>
                             <div className="relative">
                                 <input
                                     type="number"
                                     value={scalePct}
                                     placeholder="30"
                                     onChange={(e) => setScalePct(e.target.value)}
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none"
                                 />
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">%</div>
+                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">%</div>
                             </div>
                         </div>
 
-                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6">
+                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 hover:brightness-110 border border-white/10 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6">
                             <TrendingUp className="w-5 h-5" /> Simulate Scale
                         </button>
                     </div>
 
-                    <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
+                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
                         {!hasCalculated ? (
-                            <div className="text-center text-slate-500">
+                            <div className="text-center text-white/40">
                                 <Calculator className="w-12 h-12 mx-auto mb-4 opacity-20" />
                                 <p>Enter your daily budget and target scale (%) to map revenue volume.</p>
                             </div>
                         ) : (
                             <div className="space-y-6 text-center">
                                 <div>
-                                    <p className="text-sm text-slate-400 mb-1">New Projected Daily Budget</p>
+                                    <p className="text-sm text-white/60 mb-1">New Projected Daily Budget</p>
                                     <p className="text-3xl font-bold text-white mb-2">
                                         {formatCurr(results.newBudget)}
                                     </p>
                                 </div>
                                 <div className="h-px w-full bg-slate-800"></div>
                                 <div>
-                                    <p className="text-sm text-slate-400 mb-1">Projected Monthly Revenue</p>
+                                    <p className="text-sm text-white/60 mb-1">Projected Monthly Revenue</p>
                                     <p className="text-5xl font-bold text-green-400 drop-shadow-[0_0_15px_rgba(74,222,128,0.2)]">
                                         {formatCurr(results.monthlyRevenue)}
                                     </p>

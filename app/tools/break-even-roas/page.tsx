@@ -40,13 +40,13 @@ export default function BreakEvenRoasPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#020817] text-white py-16 px-4 font-sans select-none">
-            <div className="max-w-4xl mx-auto">
+        <div className={`min-h-screen bg-[#04091A] text-white py-16 px-4 select-none relative overflow-hidden `}>
+            <div className="max-w-4xl mx-auto relative z-10">
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-6">
+                    <h1 className={`text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-transparent mb-6`}>
                         Break-Even ROAS Calculator
                     </h1>
-                    <div className="text-slate-400 text-lg max-w-2xl mx-auto space-y-4">
+                    <div className="text-white/60 text-lg max-w-2xl mx-auto space-y-4">
                         <p>
                             Break-Even Return on Ad Spend (ROAS) is the minimum ROAS your ads must hit to ensure you don't lose money on a sale.
                         </p>
@@ -56,23 +56,23 @@ export default function BreakEvenRoasPage() {
                     </div>
                 </div>
 
-                <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                     <div className="grid md:grid-cols-2 gap-10">
 
                         {/* Input Section */}
                         <div className="space-y-5">
                             <div className="flex justify-between items-center mb-2">
-                                <h3 className="text-lg font-semibold text-white">Product Economics</h3>
-                                <div className="flex gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
+                                <h3 className={`text-xl font-bold text-white`}>Product Economics</h3>
+                                <div className="flex gap-2 bg-white/5 p-1 rounded-lg border border-white/10">
                                     <button
                                         onClick={() => setCurrency("INR")}
-                                        className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}
+                                        className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}
                                     >
                                         INR
                                     </button>
                                     <button
                                         onClick={() => setCurrency("USD")}
-                                        className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}
+                                        className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}
                                     >
                                         USD
                                     </button>
@@ -80,9 +80,9 @@ export default function BreakEvenRoasPage() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-1">Selling Price</label>
+                                <label className="block text-sm font-medium text-white/80 mb-1">Selling Price</label>
                                 <div className="relative">
-                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                                         {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
                                     </div>
                                     <input
@@ -91,15 +91,15 @@ export default function BreakEvenRoasPage() {
                                         value={price}
                                         onChange={(e) => setPrice(e.target.value)}
                                         placeholder="2000"
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500 transition-colors"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-1">Product Cost (COGS)</label>
+                                <label className="block text-sm font-medium text-white/80 mb-1">Product Cost (COGS)</label>
                                 <div className="relative">
-                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                                         {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
                                     </div>
                                     <input
@@ -108,15 +108,15 @@ export default function BreakEvenRoasPage() {
                                         value={cost}
                                         onChange={(e) => setCost(e.target.value)}
                                         placeholder="500"
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500 transition-colors"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-1">Shipping Cost</label>
+                                <label className="block text-sm font-medium text-white/80 mb-1">Shipping Cost</label>
                                 <div className="relative">
-                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                                         {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
                                     </div>
                                     <input
@@ -125,13 +125,13 @@ export default function BreakEvenRoasPage() {
                                         value={shipping}
                                         onChange={(e) => setShipping(e.target.value)}
                                         placeholder="100"
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500 transition-colors"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-1">Payment Gateway Fees (Optional %)</label>
+                                <label className="block text-sm font-medium text-white/80 mb-1">Payment Gateway Fees (Optional %)</label>
                                 <div className="relative">
                                     <input
                                         type="number"
@@ -139,15 +139,15 @@ export default function BreakEvenRoasPage() {
                                         value={fees}
                                         onChange={(e) => setFees(e.target.value)}
                                         placeholder="2"
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500 transition-colors"
                                     />
-                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">%</div>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40">%</div>
                                 </div>
                             </div>
 
                             <button
                                 onClick={handleCalculate}
-                                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 rounded-xl transition-all mt-4"
+                                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 border border-white/10 text-white font-semibold py-4 rounded-xl transition-all mt-4"
                             >
                                 <Calculator className="w-5 h-5" />
                                 Calculate Break-Even
@@ -155,9 +155,9 @@ export default function BreakEvenRoasPage() {
                         </div>
 
                         {/* Results Section */}
-                        <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
+                        <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
                             {!hasCalculated ? (
-                                <div className="text-center text-slate-500">
+                                <div className="text-center text-white/40">
                                     <TrendingUp className="w-12 h-12 mx-auto mb-4 opacity-20" />
                                     <p>Enter your product economics to see your margin and target ROAS.</p>
                                 </div>
@@ -170,9 +170,9 @@ export default function BreakEvenRoasPage() {
                                     ) : (
                                         <>
                                             <div>
-                                                <p className="text-sm text-slate-400 mb-1">Required Break-Even ROAS</p>
+                                                <p className="text-sm text-white/60 mb-1">Required Break-Even ROAS</p>
                                                 <p className="text-5xl font-bold text-white mb-2">{results.breakEvenRoas}x</p>
-                                                <p className="text-sm text-slate-400">
+                                                <p className="text-sm text-white/60">
                                                     Your ads must return at least this multiple to turn a profit. Anything above this is pure profit!
                                                 </p>
                                             </div>
@@ -181,11 +181,11 @@ export default function BreakEvenRoasPage() {
 
                                             <div className="grid grid-cols-2 gap-4">
                                                 <div>
-                                                    <p className="text-sm text-slate-400 mb-1">Gross Margin</p>
+                                                    <p className="text-sm text-white/60 mb-1">Gross Margin</p>
                                                     <p className="text-2xl font-semibold text-green-400">{results.marginPercent}%</p>
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm text-slate-400 mb-1">Profit per Sale</p>
+                                                    <p className="text-sm text-white/60 mb-1">Profit per Sale</p>
                                                     <p className="text-2xl font-semibold text-white">{results.profitMarginText}</p>
                                                 </div>
                                             </div>
@@ -198,9 +198,9 @@ export default function BreakEvenRoasPage() {
                 </div>
 
                 <div className="mt-12 text-center">
-                    <div className="bg-gradient-to-r from-slate-900 to-slate-900/50 border border-slate-800 rounded-2xl p-8 max-w-3xl mx-auto">
+                    <div className="bg-gradient-to-br from-fuchsia-500/10 to-cyan-500/10 backdrop-blur-md border border-white/10 rounded-2xl p-8 max-w-3xl mx-auto">
                         <h3 className="text-2xl font-bold text-white mb-4">Are you struggling to hit your Break-Even ROAS?</h3>
-                        <p className="text-slate-400 mb-6">
+                        <p className="text-white/60 mb-6">
                             If your ROAS is close to Break-Even, recovering abandoned carts is the fastest way to improve profitability across your entire store without spending more on ads.
                         </p>
                         <Link href="/auth/sign-up" className="inline-flex items-center gap-2 bg-white text-slate-900 hover:bg-gray-100 font-semibold px-6 py-3 rounded-full transition-colors">

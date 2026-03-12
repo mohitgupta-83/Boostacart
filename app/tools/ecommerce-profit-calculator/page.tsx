@@ -49,14 +49,14 @@ export default function EcommerceProfitCalculatorPage() {
             ctaTitle="Want to increase margins?"
             ctaDescription="Recover abandoned carts to increase margin without increasing your ad spend."
         >
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                 <div className="grid md:grid-cols-2 gap-10">
                     <div className="space-y-4">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-semibold text-white">Metrics</h3>
-                            <div className="flex gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
-                                <button onClick={() => setCurrency("INR")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>INR</button>
-                                <button onClick={() => setCurrency("USD")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}>USD</button>
+                            <div className="flex gap-2 bg-white/5 p-1 rounded-lg border border-white/10">
+                                <button onClick={() => setCurrency("INR")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "INR" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}>INR</button>
+                                <button onClick={() => setCurrency("USD")} className={`text-xs px-3 py-1 rounded-md transition-all ${currency === "USD" ? "bg-slate-800 text-white" : "text-white/40 hover:text-white/80"}`}>USD</button>
                             </div>
                         </div>
 
@@ -68,10 +68,10 @@ export default function EcommerceProfitCalculatorPage() {
                             { label: "Ad Cost Per Purchase (CPA)", val: adCost, set: setAdCost, icon: true },
                         ].map((field, i) => (
                             <div key={i}>
-                                <label className="block text-sm font-medium text-slate-300 mb-1">{field.label}</label>
+                                <label className="block text-sm font-medium text-white/80 mb-1">{field.label}</label>
                                 <div className="relative">
                                     {field.icon && (
-                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                                             {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
                                         </div>
                                     )}
@@ -79,38 +79,38 @@ export default function EcommerceProfitCalculatorPage() {
                                         type="number"
                                         value={field.val}
                                         onChange={(e) => field.set(e.target.value)}
-                                        className={`w-full bg-slate-950 border border-slate-800 rounded-xl py-3 text-white focus:border-blue-500 focus:outline-none ${field.icon ? 'pl-10 pr-4' : 'px-4'}`}
+                                        className={`w-full bg-white/5 border border-white/10 rounded-xl py-3 text-white focus:border-blue-500 focus:outline-none ${field.icon ? 'pl-10 pr-4' : 'px-4'}`}
                                     />
                                 </div>
                             </div>
                         ))}
 
-                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6">
+                        <button onClick={calculate} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 hover:brightness-110 border border-white/10 text-white font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-0 text-white font-semibold py-4 rounded-xl transition-all mt-6">
                             <Calculator className="w-5 h-5" /> Calculate Margin
                         </button>
                     </div>
 
-                    <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
+                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
                         {!hasCalculated ? (
-                            <div className="text-center text-slate-500">
+                            <div className="text-center text-white/40">
                                 <Calculator className="w-12 h-12 mx-auto mb-4 opacity-20" />
                                 <p>Enter your economics to see your true profit margin.</p>
                             </div>
                         ) : (
                             <div className="space-y-6 text-center">
                                 <div>
-                                    <p className="text-sm text-slate-400 mb-1">Net Profit per Unit</p>
+                                    <p className="text-sm text-white/60 mb-1">Net Profit per Unit</p>
                                     <p className={`text-4xl font-bold ${results.netProfit >= 0 ? "text-green-400" : "text-red-400"}`}>
                                         {formatCurr(results.netProfit)}
                                     </p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4 mt-6">
-                                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                                        <p className="text-sm text-slate-400 mb-1">Profit Margin</p>
+                                    <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+                                        <p className="text-sm text-white/60 mb-1">Profit Margin</p>
                                         <p className="text-2xl font-bold text-white">{results.margin.toFixed(2)}%</p>
                                     </div>
-                                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-center items-center">
-                                        <p className="text-sm text-slate-400 mb-1">Status</p>
+                                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-center items-center">
+                                        <p className="text-sm text-white/60 mb-1">Status</p>
                                         <div className={`mt-1 inline-block px-3 py-1 rounded-full border text-sm font-semibold ${getStatus(results.margin).color}`}>
                                             {getStatus(results.margin).text}
                                         </div>

@@ -2,44 +2,44 @@ import type { Metadata } from 'next';
 import SeoLandingPage, { SeoPageData } from '@/components/seo/SeoLandingPage';
 
 export const metadata: Metadata = {
-  title: "Case Study: How Our Top Clients achieved Incredible Reviews with BoostACart",
-  description: "Read the in-depth case study on how Our Top Clients deployed pre-checkout cart recovery to achieve Incredible Reviews scaling their D2C brand on Shopify.",
+  title: "Case Study: How Our Portfolio achieved a 25x ROI with BoostACart",
+  description: "Read the in-depth case study on how Our Portfolio deployed pre-checkout cart recovery to achieve a 25x ROI scaling their D2C brand on Shopify.",
   alternates: {
-    canonical: "https://boostacart.com/boostacart-reviews"
+    canonical: "https://boostacart.com/case-study"
   },
   openGraph: {
-    title: "Case Study: How Our Top Clients achieved Incredible Reviews with BoostACart",
-    description: "Read the in-depth case study on how Our Top Clients deployed pre-checkout cart recovery to achieve Incredible Reviews scaling their D2C brand on Shopify.",
-    url: "https://boostacart.com/boostacart-reviews",
+    title: "Case Study: How Our Portfolio achieved a 25x ROI with BoostACart",
+    description: "Read the in-depth case study on how Our Portfolio deployed pre-checkout cart recovery to achieve a 25x ROI scaling their D2C brand on Shopify.",
+    url: "https://boostacart.com/case-study",
     type: "website"
   }
 };
 
 const pageData: SeoPageData = {
-  "slug": "boostacart-reviews",
-  "metaTitle": "Case Study: How Our Top Clients achieved Incredible Reviews with BoostACart",
-  "metaDescription": "Read the in-depth case study on how Our Top Clients deployed pre-checkout cart recovery to achieve Incredible Reviews scaling their D2C brand on Shopify.",
+  "slug": "case-study",
+  "metaTitle": "Case Study: How Our Portfolio achieved a 25x ROI with BoostACart",
+  "metaDescription": "Read the in-depth case study on how Our Portfolio deployed pre-checkout cart recovery to achieve a 25x ROI scaling their D2C brand on Shopify.",
   "heroBadge": "Verified Case Study",
-  "heroTitleLight": "How Our Top Clients Achieved",
-  "heroTitleHighlight": "Incredible Reviews",
-  "heroSubtitle": "An inside look at the exact timing, sequences, and scripts Our Top Clients used to recover massive amounts of abandoned revenue using BoostACart.",
+  "heroTitleLight": "How Our Portfolio Achieved",
+  "heroTitleHighlight": "a 25x ROI",
+  "heroSubtitle": "An inside look at the exact timing, sequences, and scripts Our Portfolio used to recover massive amounts of abandoned revenue using BoostACart.",
   "problemBadge": "The Challenge",
-  "problemTitle": "Our Top Clients Was Losing Traffic At",
+  "problemTitle": "Our Portfolio Was Losing Traffic At",
   "problemHighlight": "The Cart Page",
-  "problemText1": "Before using BoostACart, Our Top Clients was spending thousands on Meta and TikTok ads, driving heavy traffic that would click Add-to-Cart but bounce before typing their email at checkout.",
+  "problemText1": "Before using BoostACart, Our Portfolio was spending thousands on Meta and TikTok ads, driving heavy traffic that would click Add-to-Cart but bounce before typing their email at checkout.",
   "problemText2": "They were using standard email tools, but those tools were blind to the 80% of users who abandoned too early. They needed a pre-checkout intervention.",
   "problemStat1": "Wasting $10k+/mo on dead traffic",
   "problemStat2": "Terrible standard recovery ROAS",
   "solutionBadge": "The Implementation",
   "solutionTitle": "Deploying BoostACart",
-  "solutionText": "Our Top Clients installed our async snippet in exactly 2 minutes. They enabled the WhatsApp fallback mechanism and offered a 10% discount to users who unlocked their cart.",
+  "solutionText": "Our Portfolio installed our async snippet in exactly 2 minutes. They enabled the WhatsApp fallback mechanism and offered a 10% discount to users who unlocked their cart.",
   "solutionFeature1Title": "Immediate Uptick",
   "solutionFeature1Text": "Lead capture volume increased by 400% on day one.",
   "solutionFeature2Title": "WhatsApp Dominance",
   "solutionFeature2Text": "Their WhatsApp sequence achieved an unprecedented 94% open rate.",
   "featuresTitle": "The Exact Strategy For",
   "featuresHighlight": "Massive Recovery",
-  "featuresSubtitle": "Here are the tools in our platform that allowed Our Top Clients to completely transform their back-end economics.",
+  "featuresSubtitle": "Here are the tools in our platform that allowed Our Portfolio to completely transform their back-end economics.",
   "features": [
     {
       "icon": "cart",
@@ -100,11 +100,11 @@ const pageData: SeoPageData = {
   ],
   "faqs": [
     {
-      "question": "Can my store replicate Our Top Clients's results?",
+      "question": "Can my store replicate Our Portfolio's results?",
       "answer": "Yes. This is a highly replicable strategy. The only variable is your traffic volume. The conversion principles remain identical."
     },
     {
-      "question": "Did Our Top Clients need a developer for this?",
+      "question": "Did Our Portfolio need a developer for this?",
       "answer": "No. They copy-pasted our snippet exactly as instructed in the onboarding."
     },
     {

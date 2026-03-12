@@ -1,43 +1,43 @@
 "use client"
 
-import { useState } from "react"
-import { Calculator, IndianRupee, DollarSign, ArrowRight, percent, CheckCircle2 } from "lucide-react"
+import { useState, useEffect } from "react"
+import { IndianRupee, DollarSign, TrendingUp, ShoppingBag, ArrowRight, Calculator } from "lucide-react"
+import { Syne } from "next/font/google"
+import Link from "next/link"
+
+const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'] })
 
 export function RoiCalculator() {
     const [visitors, setVisitors] = useState<string>("")
     const [conversionRate, setConversionRate] = useState<string>("")
     const [aov, setAov] = useState<string>("")
     const [currency, setCurrency] = useState<"INR" | "USD">("INR")
-
     const [hasCalculated, setHasCalculated] = useState(false)
-    const [results, setResults] = useState({
-        currentRevenue: 0,
-        abandonedCarts: 0,
-        lostRevenue: 0,
-        recoveryPotential10: 0,
-        recoveryPotential25: 0,
-    })
+
+    // Derive state during render directly (React best practice, fixes SSR mismatch)
+    const v = parseFloat(visitors) || 0
+    const cr = parseFloat(conversionRate) || 0
+    const avgOrderValue = parseFloat(aov) || 0
+
+    const estimated_orders = v * (cr / 100)
+    // Industry average add-to-cart rate is around 8%
+    const estimated_add_to_carts = v * 0.08
+    const current_revenue = estimated_orders * avgOrderValue
+    const abandoned_carts = Math.max(0, estimated_add_to_carts - estimated_orders)
+    const lost_revenue = abandoned_carts * avgOrderValue
+    const recovery_10 = lost_revenue * 0.10
+    const recovery_25 = lost_revenue * 0.25
+    
+    const results = {
+        currentRevenue: Math.round(current_revenue),
+        abandonedCarts: Math.round(abandoned_carts),
+        lostRevenue: Math.round(lost_revenue),
+        recoveryPotential10: Math.round(recovery_10),
+        recoveryPotential25: Math.round(recovery_25),
+        totalPotentialRevenue: Math.round(current_revenue + recovery_25)
+    }
 
     const handleCalculate = () => {
-        const v = parseFloat(visitors) || 0
-        const cr = parseFloat(conversionRate) || 0
-        const avgOrderValue = parseFloat(aov) || 0
-
-        const estimated_orders = v * (cr / 100)
-        const estimated_add_to_carts = v * 0.08
-        const current_revenue = estimated_orders * avgOrderValue
-        const abandoned_carts = Math.max(0, estimated_add_to_carts - estimated_orders)
-        const lost_revenue = abandoned_carts * avgOrderValue
-        const recovery_potential_10 = lost_revenue * 0.10
-        const recovery_potential_25 = lost_revenue * 0.25
-
-        setResults({
-            currentRevenue: Math.round(current_revenue),
-            abandonedCarts: Math.round(abandoned_carts),
-            lostRevenue: Math.round(lost_revenue),
-            recoveryPotential10: Math.round(recovery_potential_10),
-            recoveryPotential25: Math.round(recovery_potential_25),
-        })
         setHasCalculated(true)
     }
 
@@ -57,206 +57,209 @@ export function RoiCalculator() {
     }
 
     return (
-        <div className="w-full max-w-4xl mx-auto py-12 px-4 relative z-10">
-            <h2 className="sr-only">Abandoned Cart Loss Calculator for Shopify Stores</h2>
-
-            <div className="text-center mb-10">
-                <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                    Abandoned Cart Revenue Loss Calculator
+        <div className="w-full max-w-6xl mx-auto py-8 sm:py-16 px-4 relative z-10">
+            <div className="text-center mb-16">
+                <h3 className={`${syne.className} text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-indigo-300 mb-6 drop-shadow-[0_2px_10px_rgba(255,255,255,0.1)]`}>
+                    Calculate Your Lost Revenue
                 </h3>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Most Shopify stores lose 60–80% of add-to-cart visitors. This free calculator helps estimate how much revenue may be slipping away.
+                <p className="text-indigo-200/70 text-lg sm:text-xl max-w-2xl mx-auto font-light">
+                    Over 70% of shoppers abandon their cart. See how much money you're leaving on the table every month and what you can easily recover.
                 </p>
             </div>
 
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-blue-500/5 hover:shadow-blue-500/10 transition-shadow">
+            <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden">
+                {/* Subtle light leak for depth */}
+                <div className="absolute top-0 right-1/4 w-[40rem] h-[40rem] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
 
-                <div className="grid md:grid-cols-2 gap-10">
-
-                    {/* Inputs Section */}
-                    <div className="space-y-6">
+                <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 relative z-10">
+                    
+                    {/* --------- Left: Input Controls --------- */}
+                    <div className="lg:col-span-5 flex flex-col justify-center space-y-8">
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Monthly Store Visitors</label>
-                            <div className="relative">
-                                <input
-                                    type="number"
-                                    min="0"
-                                    value={visitors}
-                                    onChange={(e) => setVisitors(e.target.value)}
-                                    placeholder="10000"
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Conversion Rate (%)</label>
-                            <div className="relative">
-                                <input
-                                    type="number"
-                                    min="0"
-                                    step="0.01"
-                                    value={conversionRate}
-                                    onChange={(e) => setConversionRate(e.target.value)}
-                                    placeholder="2"
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                                />
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-medium">%</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="flex justify-between mb-2">
-                                <label className="block text-sm font-medium text-gray-300">Average Order Value</label>
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={() => setCurrency("INR")}
-                                        className={`text-xs px-2 py-0.5 rounded transition-colors ${currency === "INR" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}
-                                    >
-                                        INR
-                                    </button>
-                                    <button
-                                        onClick={() => setCurrency("USD")}
-                                        className={`text-xs px-2 py-0.5 rounded transition-colors ${currency === "USD" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300"}`}
-                                    >
-                                        USD
-                                    </button>
+                            <h4 className="text-2xl font-semibold text-white mb-2">Store Metrics</h4>
+                            <p className="text-sm text-indigo-200/60 mb-8">Enter your monthly numbers to generate your live report.</p>
+                            
+                            <div className="space-y-6">
+                                {/* Visitors Input */}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-indigo-100/90 ml-1">Monthly Store Visitors</label>
+                                    <div className="relative group">
+                                        <input
+                                            type="number"
+                                            value={visitors}
+                                            onChange={(e) => setVisitors(e.target.value)}
+                                            className="w-full bg-[#0a0f25]/50 border border-indigo-500/20 rounded-2xl px-5 py-4 text-white placeholder:text-indigo-300/30 focus:outline-none focus:border-cyan-400/50 focus:bg-[#0a0f25]/80 transition-all font-medium text-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        />
+                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+                                            <span className="text-xs font-semibold tracking-wider text-indigo-300/50 uppercase bg-[#1e274f]/50 px-3 py-1.5 rounded-lg backdrop-blur-sm">Visitors</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="relative">
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
-                                    {currency === "INR" ? <IndianRupee className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
+
+                                {/* Conversion Rate Input */}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-indigo-100/90 ml-1">Conversion Rate (%)</label>
+                                    <div className="relative group">
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            value={conversionRate}
+                                            onChange={(e) => setConversionRate(e.target.value)}
+                                            className="w-full bg-[#0a0f25]/50 border border-indigo-500/20 rounded-2xl px-5 py-4 text-white placeholder:text-indigo-300/30 focus:outline-none focus:border-cyan-400/50 focus:bg-[#0a0f25]/80 transition-all font-medium text-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        />
+                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+                                            <span className="text-xs font-semibold tracking-wider text-indigo-300/50 uppercase bg-[#1e274f]/50 px-3 py-1.5 rounded-lg backdrop-blur-sm">% Rate</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    value={aov}
-                                    onChange={(e) => setAov(e.target.value)}
-                                    placeholder="1500"
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                                />
+
+                                {/* AOV Input and Currency Toggle */}
+                                <div className="space-y-2">
+                                    <div className="flex justify-between items-center mb-2 px-1">
+                                        <label className="text-sm font-medium text-indigo-100/90">Average Order Value</label>
+                                        <div className="flex bg-[#0a0f25]/80 p-1 rounded-xl border border-indigo-500/20">
+                                            <button
+                                                onClick={() => setCurrency("INR")}
+                                                className={`text-xs px-4 py-1.5 font-bold rounded-lg transition-all duration-300 ${currency === "INR" ? "bg-cyan-500 text-white shadow-md" : "text-indigo-300/50 hover:text-white"}`}
+                                            >
+                                                INR
+                                            </button>
+                                            <button
+                                                onClick={() => setCurrency("USD")}
+                                                className={`text-xs px-4 py-1.5 font-bold rounded-lg transition-all duration-300 ${currency === "USD" ? "bg-cyan-500 text-white shadow-md" : "text-indigo-300/50 hover:text-white"}`}
+                                            >
+                                                USD
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="relative group">
+                                        <div className="absolute left-5 top-1/2 -translate-y-1/2 text-cyan-400 font-bold bg-transparent">
+                                            {currency === "INR" ? <IndianRupee className="w-5 h-5" /> : <DollarSign className="w-5 h-5" />}
+                                        </div>
+                                        <input
+                                            type="number"
+                                            value={aov}
+                                            onChange={(e) => setAov(e.target.value)}
+                                            className="w-full bg-[#0a0f25]/50 border border-indigo-500/20 rounded-2xl pl-14 pr-5 py-4 text-white placeholder:text-indigo-300/30 focus:outline-none focus:border-cyan-400/50 focus:bg-[#0a0f25]/80 transition-all font-medium text-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        />
+                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+                                            <span className="text-xs font-semibold tracking-wider text-indigo-300/50 uppercase bg-[#1e274f]/50 px-3 py-1.5 rounded-lg backdrop-blur-sm">/ Order</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button
+                                    onClick={handleCalculate}
+                                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 border border-white/10 text-white font-bold py-4 rounded-2xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] mt-4 active:scale-[0.98]"
+                                >
+                                    <Calculator className="w-5 h-5" /> Calculate Lost Revenue
+                                </button>
                             </div>
                         </div>
-
-                        <button
-                            onClick={handleCalculate}
-                            className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg shadow-blue-900/20 active:scale-[0.98]"
-                        >
-                            <Calculator className="w-5 h-5" />
-                            Calculate My Lost Revenue
-                        </button>
                     </div>
 
-                    {/* Results Section */}
-                    <div className="bg-slate-950/50 rounded-2xl p-6 border border-slate-800/80 flex flex-col justify-center">
+                    {/* --------- Right: Live Results --------- */}
+                    <div className="lg:col-span-7 bg-[#050814]/80 backdrop-blur-md rounded-[2rem] border border-white/5 p-8 sm:p-10 flex flex-col justify-center relative shadow-2xl overflow-hidden">
+                        <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-fuchsia-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+                        
                         {!hasCalculated ? (
-                            <div className="text-center text-slate-500 py-10">
-                                <Calculator className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                                <p>Enter your store metrics to see your<br />abandoned cart revenue loss.</p>
+                            <div className="relative z-10 text-center text-white/40 h-full flex flex-col justify-center items-center py-20 min-h-[400px]">
+                                <Calculator className="w-16 h-16 mx-auto mb-6 opacity-20" />
+                                <h4 className={`${syne.className} text-2xl text-white/80 font-bold mb-4`}>Ready to see your lost revenue?</h4>
+                                <p className="max-w-xs mx-auto text-indigo-200/60 leading-relaxed text-sm">Enter your store metrics on the left and click calculate to generate your recovery potential report.</p>
                             </div>
                         ) : (
-                            <div className="space-y-6">
-                                <div>
-                                    <p className="text-sm text-slate-400 mb-1">Estimated Abandoned Carts</p>
-                                    <p className="text-2xl font-semibold text-white">
-                                        {new Intl.NumberFormat("en-US").format(results.abandonedCarts)} <span className="text-xl text-slate-500 font-normal">/ month</span>
-                                    </p>
-                                </div>
-
-                                <div className="h-px w-full bg-slate-800/50"></div>
-
-                                <div>
-                                    <p className="text-sm text-slate-400 mb-1">Estimated Monthly Revenue Lost</p>
-                                    <p className="text-3xl font-bold text-red-400">
+                            <div className="relative z-10 space-y-10 animate-[fade-in-up_400ms_ease-out]">
+                            
+                            {/* Top Metric - Lost Revenue */}
+                            <div>
+                                <h5 className="text-xs font-bold text-indigo-200/50 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                                    Monthly Revenue Slipping Away
+                                </h5>
+                                <div className="flex items-end gap-3">
+                                    <span className={`${syne.className} text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-orange-300 to-rose-400 drop-shadow-sm`}>
                                         {formatCurrency(results.lostRevenue)}
-                                    </p>
+                                    </span>
                                 </div>
-
-                                {/* Revenue Graph */}
-                                {results.lostRevenue > 0 && (
-                                    <div className="space-y-3 mt-4 pt-4 border-t border-slate-800/50">
-                                        <p className="text-sm font-medium text-slate-300 mb-2">Revenue visual breakdown</p>
-
-                                        <div>
-                                            <div className="flex justify-between text-xs text-slate-400 mb-1">
-                                                <span>Current Revenue</span>
-                                                <span>{formatCurrency(results.currentRevenue)}</span>
-                                            </div>
-                                            <div className="w-full bg-slate-800 rounded-full h-2">
-                                                <div className="bg-blue-500 h-2 rounded-full" style={{ width: `${Math.min(100, (results.currentRevenue / (results.currentRevenue + results.lostRevenue)) * 100)}%` }}></div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div className="flex justify-between text-xs text-slate-400 mb-1">
-                                                <span>Lost Revenue</span>
-                                                <span className="text-red-400">{formatCurrency(results.lostRevenue)}</span>
-                                            </div>
-                                            <div className="w-full bg-slate-800 rounded-full h-2">
-                                                <div className="bg-red-500 h-2 rounded-full" style={{ width: `${Math.min(100, (results.lostRevenue / (results.currentRevenue + results.lostRevenue)) * 100)}%` }}></div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div className="flex justify-between text-xs text-slate-400 mb-1">
-                                                <span>Recoverable (25%)</span>
-                                                <span className="text-green-400">{formatCurrency(results.recoveryPotential25)}</span>
-                                            </div>
-                                            <div className="w-full bg-slate-800 rounded-full h-2">
-                                                <div className="bg-green-500 h-2 rounded-full" style={{ width: `${Math.min(100, (results.recoveryPotential25 / (results.currentRevenue + results.lostRevenue)) * 100)}%` }}></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                <div className="grid grid-cols-2 gap-4 mt-6">
-                                    <div className="bg-slate-900 border border-slate-700/50 rounded-xl p-4">
-                                        <p className="text-xs text-slate-400 font-medium mb-1">If you recover just 10% →</p>
-                                        <p className="text-xl font-bold text-white">
-                                            {formatCurrency(results.recoveryPotential10)}
-                                        </p>
-                                    </div>
-                                    <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 shadow-[0_0_15px_rgba(34,197,94,0.1)] relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 w-16 h-16 bg-green-500/10 rounded-full blur-xl -translate-y-1/2 translate-x-1/2"></div>
-                                        <p className="text-xs text-green-400 font-medium mb-1">If you recover 25% →</p>
-                                        <p className="text-2xl font-bold text-green-400 relative z-10">
-                                            {formatCurrency(results.recoveryPotential25)}
-                                        </p>
-                                    </div>
-                                </div>
-                                <p className="text-xs text-green-400/60 mt-1 text-center">
-                                    *Based on industry average abandoned cart recovery rates.
+                                <p className="text-sm text-indigo-200/50 mt-3 font-medium">
+                                    Based on <span className="text-white">{new Intl.NumberFormat("en-US").format(results.abandonedCarts)}</span> abandoned carts every month.
                                 </p>
+                            </div>
+
+                            <div className="h-px w-full bg-gradient-to-r from-transparent via-[#1e274f] to-transparent opacity-50"></div>
+
+                            {/* Potential Recovery Layout */}
+                            <div>
+                                <h5 className="text-xs font-bold text-indigo-200/50 uppercase tracking-widest mb-5 flex items-center gap-2">
+                                    <TrendingUp className="w-4 h-4 text-emerald-400" />
+                                    Your Recovery Potential
+                                </h5>
+
+                                <div className="grid sm:grid-cols-2 gap-4">
+                                    <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:bg-white/[0.04] transition-colors">
+                                        <p className="text-xs text-indigo-200/60 font-semibold uppercase tracking-wider mb-2">Conservative (10%)</p>
+                                        <p className="text-2xl font-bold text-white">
+                                            {formatCurrency(results.recoveryPotential10)}
+                                            <span className="text-sm font-normal text-indigo-200/50 ml-1">/ mo</span>
+                                        </p>
+                                        <p className="text-xs text-indigo-300/40 mt-2">Recovering just 1 in 10 carts.</p>
+                                    </div>
+                                    <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-6 relative overflow-hidden group hover:border-emerald-500/40 transition-all cursor-default">
+                                        <div className="absolute right-0 top-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-500/20 transition-all"></div>
+                                        <p className="text-xs text-emerald-400/80 font-bold uppercase tracking-wider mb-2 relative z-10">Optimistic (25%)</p>
+                                        <p className="text-3xl font-extrabold text-emerald-400 relative z-10 drop-shadow-sm">
+                                            {formatCurrency(results.recoveryPotential25)}
+                                            <span className="text-sm font-medium text-emerald-400/50 ml-1">/ mo</span>
+                                        </p>
+                                        <p className="text-xs text-emerald-400/60 mt-2 relative z-10 font-medium">Industry standard with BoostACart.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="pt-2">
+                                <Link
+                                    href="/shopify-cart-recovery"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-100 hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                                >
+                                    Start Recovering Carts Today
+                                    <ArrowRight className="w-4 h-4" />
+                                </Link>
+                            </div>
                             </div>
                         )}
                     </div>
                 </div>
+            </div>
 
-                {/* Suggested Recovery Flow */}
-                {hasCalculated && (
-                    <div className="mt-10 pt-8 border-t border-slate-800/80">
-                        <h4 className="text-lg font-semibold text-white mb-6 text-center">Suggested Recovery Flow</h4>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 flex flex-col items-center text-center">
-                                <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 mb-3">1</div>
-                                <p className="text-sm text-gray-300 font-medium">Capture contact at Add-to-Cart</p>
-                            </div>
-                            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 flex flex-col items-center text-center">
-                                <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 mb-3">2</div>
-                                <p className="text-sm text-gray-300 font-medium">Send WhatsApp within 5 minutes</p>
-                            </div>
-                            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 flex flex-col items-center text-center">
-                                <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center text-green-400 mb-3">3</div>
-                                <p className="text-sm text-gray-300 font-medium">Offer limited-time discount</p>
-                            </div>
-                            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 flex flex-col items-center text-center">
-                                <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 mb-3">4</div>
-                                <p className="text-sm text-gray-300 font-medium">Follow-up reminder in 24 hours</p>
-                            </div>
-                        </div>
+            {/* Seamless Strategy Section */}
+            <div className="mt-16 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                <div className="text-center mb-10">
+                    <h4 className={`${syne.className} text-2xl font-bold text-white`}>How We Recover <span className="text-emerald-400">25%+</span> Of Your Revenue</h4>
+                    <p className="text-indigo-200/60 mt-2 text-sm">Automated flows that trigger the moment a customer shows exit intent.</p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="bg-[#0b102b]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-6 relative hover:border-cyan-500/30 transition-all group">
+                        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 font-bold mb-4 shadow-sm border border-cyan-500/20">1</div>
+                        <h5 className="text-white font-semibold mb-2">Capture Lead</h5>
+                        <p className="text-sm text-indigo-200/60 leading-relaxed">BoostACart securely grabs their contact details precisely at Add-to-Cart.</p>
                     </div>
-                )}
-
+                    <div className="bg-[#0b102b]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-6 relative hover:border-fuchsia-500/30 transition-all group">
+                        <div className="w-10 h-10 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 font-bold mb-4 shadow-sm border border-fuchsia-500/20">2</div>
+                        <h5 className="text-white font-semibold mb-2">Immediate Outreach</h5>
+                        <p className="text-sm text-indigo-200/60 leading-relaxed">A gentle, automated WhatsApp or SMS goes out within 5 minutes of abandonment.</p>
+                    </div>
+                    <div className="bg-[#0b102b]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-6 relative hover:border-emerald-500/30 transition-all group">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4 shadow-sm border border-emerald-500/20">3</div>
+                        <h5 className="text-white font-semibold mb-2">Sweeten the Deal</h5>
+                        <p className="text-sm text-indigo-200/60 leading-relaxed">If they don't bite, offer a time-sensitive 10% discount to push them over the edge.</p>
+                    </div>
+                    <div className="bg-[#0b102b]/50 backdrop-blur-sm border border-white/5 rounded-2xl p-6 relative hover:border-orange-500/30 transition-all group">
+                        <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 font-bold mb-4 shadow-sm border border-orange-500/20">4</div>
+                        <h5 className="text-white font-semibold mb-2">Nurture Flow</h5>
+                        <p className="text-sm text-indigo-200/60 leading-relaxed">Follow-up reminders in 24 hours to secure the sale before the lead goes cold.</p>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -39,7 +39,7 @@ export default function CheckoutRecoveryScorePage() {
             ctaTitle="Want a perfect 100/100 score?"
             ctaDescription="Implement a fully automated Add-to-Cart lead capture system with BoostACart."
         >
-            <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                 <div className="grid md:grid-cols-2 gap-10">
                     <div className="space-y-4">
                         <h3 className="font-semibold text-white mb-4">Complete Your Checklist</h3>
@@ -52,8 +52,8 @@ export default function CheckoutRecoveryScorePage() {
                                 { id: "q4", label: "Capture Add-to-Cart leads?" },
                                 { id: "q5", label: "Use retargeting ads?" },
                             ].map((item, i) => (
-                                <label key={i} className="flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-slate-950 cursor-pointer hover:border-blue-500/50 transition-colors">
-                                    <span className="text-sm font-medium text-slate-300 pointer-events-none select-none">{item.label}</span>
+                                <label key={i} className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-blue-500/50 transition-colors">
+                                    <span className="text-sm font-medium text-white/80 pointer-events-none select-none">{item.label}</span>
                                     <div className="relative">
                                         <input
                                             type="checkbox"
@@ -68,13 +68,13 @@ export default function CheckoutRecoveryScorePage() {
                         </div>
                     </div>
 
-                    <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 flex flex-col justify-center">
+                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-center">
                         <div className="text-center space-y-6">
                             <div>
-                                <p className="text-sm text-slate-400 mb-1">Your Store Readiness Score</p>
+                                <p className="text-sm text-white/60 mb-1">Your Store Readiness Score</p>
                                 <div className="flex items-center justify-center gap-3">
                                     <p className="text-6xl font-bold text-white">{score}</p>
-                                    <span className="text-xl text-slate-500">/ 100</span>
+                                    <span className="text-xl text-white/40">/ 100</span>
                                 </div>
                             </div>
 
@@ -87,17 +87,17 @@ export default function CheckoutRecoveryScorePage() {
                                     {score >= 70 ? <ShieldCheck className={`w-5 h-5 ${getRisk().color}`} /> : <ShieldAlert className={`w-5 h-5 ${getRisk().color}`} />}
                                     <p className={`font-bold ${getRisk().color}`}>{getRisk().label}</p>
                                 </div>
-                                <p className="text-xs text-slate-400">
+                                <p className="text-xs text-white/60">
                                     {score < 40 ? "You are losing significant revenue every day." : score < 70 ? "There is still plenty of room to improve recovery." : "Your recovery system is highly optimized."}
                                 </p>
                             </div>
 
                             {missing.length > 0 && (
                                 <div className="text-left mt-6">
-                                    <p className="text-sm font-semibold text-slate-300 mb-2">Vulnerabilities Detected:</p>
+                                    <p className="text-sm font-semibold text-white/80 mb-2">Vulnerabilities Detected:</p>
                                     <ul className="space-y-1">
                                         {missing.map((msg, i) => (
-                                            <li key={i} className="text-xs text-slate-400 flex items-start gap-2">
+                                            <li key={i} className="text-xs text-white/60 flex items-start gap-2">
                                                 <span className="text-red-400">•</span> {msg}
                                             </li>
                                         ))}
