@@ -1,10 +1,5 @@
 import Link from "next/link"
 import {
-export const metadata = {
-  alternates: { canonical: "https://boostacart.com/setup" }
-};
-
-
   ArrowLeft,
   CheckCircle,
   Copy,
@@ -16,10 +11,15 @@ export const metadata = {
   ShoppingCart,
 } from "lucide-react"
 
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/setup" },
+  title: "Setup Guide | BoostACart",
+  description: "Get your BoostACart widget up and running in minutes. Follow these simple steps to start capturing more leads.",
+};
+
 export default function SetupGuidePage() {
   return (
     <div className="min-h-screen bg-[#030303]">
-      {/* Header */}
       <header className="bg-black/20 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 py-3 sm:py-0 sm:h-16">
