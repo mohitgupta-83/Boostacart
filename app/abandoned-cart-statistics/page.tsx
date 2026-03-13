@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Syne, Outfit } from 'next/font/google';
-import { ArrowRight, BarChart3, PieChart, TrendingDown, Clock, Globe, ShoppingCart, Info, CheckCircle } from 'lucide-react';
+import { ArrowRight, BarChart3, PieChart, TrendingDown, Clock, Globe, ShoppingCart, Info, CheckCircle, Zap } from 'lucide-react';
 
 const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'] });
 const outfit = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });

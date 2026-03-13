@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Syne, Outfit } from 'next/font/google';
-import { ArrowLeft, CheckCircle, Smartphone, Zap, Shield, AlertTriangle, Monitor, MoveDownIcon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Smartphone, Zap, Shield, AlertTriangle, Monitor, MoveDownIcon } from 'lucide-react';
 
 const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'] });
 const outfit = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
@@ -151,7 +151,7 @@ export default function ShopifyExitIntent() {
                 </div>
                 <div className="space-y-6">
                     <h3 className="text-2xl font-bold text-white">For High-Ticket Brands</h3>
-                    <p className="text-indigo-100/70 leading-relaxed">Luxury consumers hate popups. Our pre-checkout engine captures their details with a professional, theme-matched modal that increases brand trust while securing the lead. <Link href="/cart-recovery-high-ticket-stores" className="text-amber-400 hover:underline">See High-Ticket Blueprint.</Link></p>
+                    <p className="text-indigo-100/70 leading-relaxed">Luxury consumers hate popups. Our pre-checkout engine captures their details with a professional, theme-matched modal that increases brand trust while securing the lead. <Link href="/cart-recovery-for-high-ticket-stores" className="text-amber-400 hover:underline">See High-Ticket Blueprint.</Link></p>
                 </div>
             </div>
         </section>
@@ -162,7 +162,7 @@ export default function ShopifyExitIntent() {
              <h2 className={`${syne.className} text-3xl font-bold text-white`}>Calculate Your Recovery Potential</h2>
              <p className="text-indigo-100/60 max-w-md">See exactly how much revenue you're losing to poor exit intent and what you stand to gain with pre-checkout capture.</p>
            </div>
-           <Link href="/tools/roas-calculator" className="px-10 py-5 bg-amber-500 text-black font-bold rounded-full hover:scale-105 transition-transform shadow-[0_0_30px_rgba(245,158,11,0.3)]">Launch Calculator</Link>
+           <Link href="/tools/break-even-roas" className="px-10 py-5 bg-amber-500 text-black font-bold rounded-full hover:scale-105 transition-transform shadow-[0_0_30px_rgba(245,158,11,0.3)]">Launch Calculator</Link>
         </section>
 
         {/* Global CTA */}
