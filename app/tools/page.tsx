@@ -19,7 +19,7 @@ import {
 
 import { Syne, Outfit } from 'next/font/google'
 export const metadata = {
-  alternates: { canonical: "https://boostacart.com/tools" }
+  alternates: { canonical: "https://boostacart.com/tools" },
   openGraph: {
     title: "Ecommerce Profit Margin Calculator",
     description: "Calculate net profit and margins factoring in ads, shipping, and fees.",
