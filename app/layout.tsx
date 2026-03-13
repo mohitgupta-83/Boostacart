@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import CanonicalTag from "@/components/CanonicalTag"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://boostacart.com"),
@@ -26,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <CanonicalTag />
+      </head>
       <body className="font-sans antialiased">
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         <Analytics />

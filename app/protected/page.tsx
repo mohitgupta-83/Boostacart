@@ -1,5 +1,10 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/protected" }
+};
+
+
 
 export default async function ProtectedPage() {
   const supabase = await createClient()

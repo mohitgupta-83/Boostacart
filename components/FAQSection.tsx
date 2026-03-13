@@ -1,26 +1,36 @@
 import React from "react";
+import { Syne } from 'next/font/google';
+
+const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'] });
 
 interface FAQSectionProps {
     topic: string;
 }
 
 export default function FAQSection({ topic }: FAQSectionProps) {
+    const topicLower = topic.toLowerCase();
+    
+    // Specifically request specific questions from the user's prompt alongside dynamic ones
     const faqs = [
         {
-            question: `What is a good ${topic} for a Shopify store?`,
-            answer: `A healthy metric for ${topic} depends highly on your specific niche, Average Order Value (AOV), and baseline profit margins. Most profitable ecommerce businesses aim for benchmarks that allow sustainable customer acquisition without dipping heavily into recurring net profit.`
+            question: "What is ecommerce profit margin?",
+            answer: "Ecommerce profit margin is the percentage of revenue remaining after deducting the costs associated with producing and selling goods. It reveals the financial health of your store and indicates whether your pricing structure and marketing spend are sustainable for long-term growth."
         },
         {
-            question: "How can I improve my metrics without increasing ad spend?",
-            answer: "Optimizing your checkout flow, using trust badges, offering clear shipping policies, and employing add-to-cart lead capture plugins like BoostACart are proven strategies to boost your conversion rate and improve bottom-line metrics without higher CPA."
+            question: "How do you calculate ROAS?",
+            answer: "Return on Ad Spend (ROAS) is calculated by dividing your total revenue generated from ads by your total ad spend. For example, if you spend $1,000 on ads and generate $5,000 in revenue, your ROAS is a 5x return or 500%."
         },
         {
-            question: "What is the average cart abandonment rate?",
-            answer: "Across the ecommerce industry, the average cart abandonment rate is approximately 70%. Specifically for mobile shoppers, this number can be even higher. Recovering just 10-20% of these abandoned carts has a monumental impact on overall store profitability."
+            question: "What is a good conversion rate?",
+            answer: "A good ecommerce conversion rate typically falls between 2% and 3%, though top-performing stores can push past 5%. Conversion rates vary significantly by industry, traffic source, and average order value. Implementing cart recovery solutions is the easiest way to instantly bump this metric."
         },
         {
-            question: "Why should I track this specific metric regularly?",
-            answer: `Consistently tracking ${topic} allows you to identify trends and seasonal shifts in your business before they become critical issues. It provides an objective baseline to compare the performance of new marketing campaigns or website redesigns against historic data.`
+            question: `Why is calculating ${topicLower} necessary for scaling?`,
+            answer: `If you attempt to scale traffic without a clear understanding of your ${topicLower}, you risk amplifying losses rather than scaling profits. Precision tracking isolates exactly which components of your sales funnel are bleeding ad spend and which are driving sustainable growth.`
+        },
+        {
+            question: `Does tracking ${topicLower} help reduce CPA?`,
+            answer: `Absolutely. By accurately measuring your ${topicLower}, you gain hard data on which ad variations, audience segments, and product bundles are underperforming. Reallocating budget away from those losers and into your winners naturally decreases your overarching Customer Acquisition Cost (CPA).`
         }
     ];
 
@@ -38,8 +48,8 @@ export default function FAQSection({ topic }: FAQSectionProps) {
     };
 
     return (
-        <section className="mt-16 bg-slate-900/40 p-8 rounded-2xl border border-slate-800/50">
-            <h2 className="text-3xl font-bold text-white mb-8">Frequently Asked Questions</h2>
+        <section className="mt-16 bg-[#0b102b]/30 p-8 rounded-[2rem] border border-white/5 relative z-10">
+            <h2 className={`${syne.className} text-3xl font-bold text-white mb-8`}>Frequently Asked Questions</h2>
 
             <script
                 type="application/ld+json"
@@ -48,9 +58,15 @@ export default function FAQSection({ topic }: FAQSectionProps) {
 
             <div className="space-y-6">
                 {faqs.map((faq, index) => (
-                    <div key={index} className="border-b border-slate-800 pb-6 last:border-0 last:pb-0">
-                        <h3 className="text-xl font-semibold text-slate-200 mb-3">{faq.question}</h3>
-                        <p className="text-slate-400 leading-relaxed">{faq.answer}</p>
+                    <div key={index} className="bg-white/[0.02] p-6 rounded-2xl border border-white/5 shadow-md">
+                        <h3 className="text-xl font-bold text-white mb-3 flex gap-3">
+                            <span className="text-cyan-400 font-black">Q.</span>
+                            {faq.question}
+                        </h3>
+                        <p className="text-indigo-100/70 leading-relaxed pl-8">
+                            <strong className="text-emerald-400 font-bold mr-2">A.</strong> 
+                            {faq.answer}
+                        </p>
                     </div>
                 ))}
             </div>

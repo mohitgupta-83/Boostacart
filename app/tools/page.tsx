@@ -18,6 +18,18 @@ import {
 } from "lucide-react"
 
 import { Syne, Outfit } from 'next/font/google'
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/tools" }
+  openGraph: {
+    title: "Ecommerce Profit Margin Calculator",
+    description: "Calculate net profit and margins factoring in ads, shipping, and fees.",
+    url: "https://boostacart.com/tools",
+    type: "website",
+    images: [{ url: "https://boostacart.com/og-image.png", width: 1200, height: 630, alt: "Ecommerce Profit Margin Calculator" }]
+  },
+};
+
+
 
 const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'] })
 const outfit = Outfit({ subsets: ['latin'], weight: ['300', '400', '500', '600'] })

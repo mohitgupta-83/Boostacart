@@ -28,6 +28,21 @@ const nextConfig = {
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.boostacart.com',
+          },
+        ],
+        destination: 'https://boostacart.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
 }
 
 export default nextConfig

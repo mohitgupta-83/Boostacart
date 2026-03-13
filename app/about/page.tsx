@@ -1,5 +1,10 @@
 import Link from "next/link"
 import { ArrowLeft, TrendingUp, Target, Heart } from "lucide-react"
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/about" }
+};
+
+
 
 export default function AboutPage() {
   return (

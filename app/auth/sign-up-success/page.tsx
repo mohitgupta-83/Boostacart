@@ -1,4 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/auth/sign-up-success" }
+};
+
+
 
 export default function Page() {
   return (

@@ -64,9 +64,75 @@ const UsersIcon = () => (
 )
 
 export default function LandingPage() {
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BoostACart",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://boostacart.com",
+    "description": "BoostACart captures email and phone numbers when shoppers click Add-to-Cart, enabling automated WhatsApp, SMS, and email follow-ups to recover abandoned carts.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free trial available"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "120"
+    }
+  };
+
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "BoostACart",
+    "url": "https://boostacart.com",
+    "logo": "https://boostacart.com/favicon.png",
+    "sameAs": [],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "url": "https://boostacart.com/contact"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is BoostACart?",
+        "acceptedAnswer": { "@type": "Answer", "text": "BoostACart is a Shopify cart recovery tool that captures email and phone numbers when shoppers click Add to Cart, enabling instant WhatsApp, SMS, and email follow-ups to recover abandoned carts." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does BoostACart recover abandoned carts?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Unlike traditional tools that wait for checkout, BoostACart intercepts shoppers the moment they click Add to Cart, capturing up to 10x more leads before they abandon." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good ecommerce conversion rate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The average ecommerce conversion rate is 2-3%. With cart recovery tools like BoostACart, brands can recover 15-25% of abandoned carts, significantly boosting overall revenue." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate ROAS?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ROAS (Return on Ad Spend) = Revenue from ads / Ad spend. A ROAS of 3x means you earn $3 for every $1 spent on ads." }
+      }
+    ]
+  };
 
   return (
     <main className={`min-h-screen bg-[#04091A] text-slate-200 selection:bg-fuchsia-500/30 overflow-hidden ${outfit.className}`}>
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       {/* Abstract Background Noise & Geometry */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 

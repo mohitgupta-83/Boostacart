@@ -1,6 +1,11 @@
 import Link from "next/link"
 import { MessageCircle, Mail, Phone, ArrowLeft } from "lucide-react"
 import { getWhatsAppLink } from "@/lib/whatsapp"
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/contact" }
+};
+
+
 
 export default function ContactPage() {
   return (

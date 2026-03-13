@@ -20,84 +20,55 @@ export default function Footer() {
                     <div>
                         <h3 className="text-white font-semibold mb-4">Product</h3>
                         <ul className="space-y-3 text-sm text-gray-400">
-                            <li>
-                                <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
-                            </li>
-                            <li>
-                                <Link href="/features" className="hover:text-white transition-colors">Features</Link>
-                            </li>
-                            <li>
-                                <Link href="/tools" className="hover:text-white transition-colors">Free Tools</Link>
-                            </li>
-                            <li>
-                                <Link href="/cart-recovery-tool-for-shopify" className="hover:text-white transition-colors">Cart Recovery</Link>
-                            </li>
-                            <li>
-                                <Link href="/setup/shopify" className="hover:text-white transition-colors">Setup Guide</Link>
-                            </li>
+                            <li><Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
+                            <li><Link href="/features" className="hover:text-white transition-colors">Features</Link></li>
+                            <li><Link href="/tools" className="hover:text-white transition-colors">Free Tools</Link></li>
+                            <li><Link href="/abandoned-cart-recovery" className="hover:text-white transition-colors">Strategy Hub</Link></li>
+                            <li><Link href="/best-shopify-cart-recovery-apps" className="hover:text-white transition-colors">App Reviews</Link></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 className="text-white font-semibold mb-4">Top Use Cases</h3>
+                        <h3 className="text-white font-semibold mb-4">Industries</h3>
                         <ul className="space-y-3 text-sm text-gray-400">
-                            <li>
-                                <Link href="/shopify-cart-recovery" className="hover:text-white transition-colors">Shopify Cart Recovery</Link>
-                            </li>
-                            <li>
-                                <Link href="/whatsapp-cart-recovery-tool" className="hover:text-white transition-colors">WhatsApp Cart Recovery</Link>
-                            </li>
-                            <li>
-                                <Link href="/recover-add-to-cart-customers" className="hover:text-white transition-colors">Recover Add-to-Cart</Link>
-                            </li>
-                            <li>
-                                <Link href="/stop-abandoned-carts-shopify" className="hover:text-white transition-colors">Stop Abandoned Carts</Link>
-                            </li>
-                            <li>
-                                <Link href="/case-study-recovered-37-orders" className="hover:text-white transition-colors">Success Stories</Link>
-                            </li>
+                            <li><Link href="/cart-recovery-for-dropshipping" className="hover:text-white transition-colors">Dropshipping</Link></li>
+                            <li><Link href="/cart-recovery-for-high-ticket-stores" className="hover:text-white transition-colors">High-Ticket</Link></li>
+                            <li><Link href="/cart-recovery-for-fashion-brands" className="hover:text-white transition-colors">Fashion & Apparel</Link></li>
+                            <li><Link href="/cart-recovery-for-beauty-brands" className="hover:text-white transition-colors">Beauty & Cosmetics</Link></li>
+                            <li><Link href="/shopify-cart-recovery" className="hover:text-white transition-colors">All Shopify Stores</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 className="text-white font-semibold mb-4">Comparisons</h3>
                         <ul className="space-y-3 text-sm text-gray-400">
-                            <li>
-                                <Link href="/boostacart-vs-klaviyo" className="hover:text-white transition-colors">Vs Klaviyo</Link>
-                            </li>
-                            <li>
-                                <Link href="/klaviyo-alternative" className="hover:text-white transition-colors">Klaviyo Alternative</Link>
-                            </li>
-                            <li>
-                                <Link href="/boostacart-vs-recart" className="hover:text-white transition-colors">Vs Recart</Link>
-                            </li>
-                            <li>
-                                <Link href="/recart-alternative" className="hover:text-white transition-colors">Recart Alternative</Link>
-                            </li>
-                            <li>
-                                <Link href="/boostacart-vs-cartloop" className="hover:text-white transition-colors">Vs Cartloop</Link>
-                            </li>
+                            <li><Link href="/privy-alternative" className="hover:text-white transition-colors">Privy Alternative</Link></li>
+                            <li><Link href="/omnisend-alternative" className="hover:text-white transition-colors">Omnisend Alternative</Link></li>
+                            <li><Link href="/klaviyo-alternative" className="hover:text-white transition-colors">Klaviyo Alternative</Link></li>
+                            <li><Link href="/boostacart-vs-klaviyo" className="hover:text-white transition-colors">Vs Klaviyo</Link></li>
+                            <li><Link href="/boostacart-vs-recart" className="hover:text-white transition-colors">Vs Recart</Link></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 className="text-white font-semibold mb-4">Resources</h3>
+                        <ul className="space-y-3 text-sm text-gray-400">
+                            <li><Link href="/abandoned-cart-statistics" className="hover:text-white transition-colors">2025 Statistics</Link></li>
+                            <li><Link href="/abandoned-cart-whatsapp-template" className="hover:text-white transition-colors">WhatsApp Templates</Link></li>
+                            <li><Link href="/abandoned-cart-sms-template" className="hover:text-white transition-colors">SMS Templates</Link></li>
+                            <li><Link href="/reduce-cart-abandonment" className="hover:text-white transition-colors">Reduce Abandonment</Link></li>
+                            <li><Link href="/shopify-email-capture-popup" className="hover:text-white transition-colors">Lead Capture Guide</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 className="text-white font-semibold mb-4">Company</h3>
                         <ul className="space-y-3 text-sm text-gray-400">
-                            <li>
-                                <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
-                            </li>
-                            <li>
-                                <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-                            </li>
-                            <li>
-                                <Link href="/affiliate" className="hover:text-white transition-colors">Partner Program</Link>
-                            </li>
-                            <li>
-                                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                            </li>
-                            <li>
-                                <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-                            </li>
+                            <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                            <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                            <li><Link href="/affiliate" className="hover:text-white transition-colors">Partners</Link></li>
+                            <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
+                            <li><Link href="/terms" className="hover:text-white transition-colors">Terms</Link></li>
                         </ul>
                     </div>
 

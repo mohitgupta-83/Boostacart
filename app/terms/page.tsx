@@ -1,5 +1,10 @@
 import Link from "next/link"
 import { ArrowLeft, FileText, AlertCircle, Shield } from "lucide-react"
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/terms" }
+};
+
+
 
 export default function TermsPage() {
   return (

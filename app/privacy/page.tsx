@@ -1,5 +1,10 @@
 import Link from "next/link"
 import { ArrowLeft, Shield, Lock, Eye, UserCheck } from "lucide-react"
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/privacy" }
+};
+
+
 
 export default function PrivacyPage() {
   return (

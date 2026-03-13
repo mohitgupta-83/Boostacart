@@ -1,5 +1,10 @@
 import Link from "next/link"
 import {
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/setup" }
+};
+
+
   ArrowLeft,
   CheckCircle,
   Copy,

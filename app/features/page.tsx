@@ -1,5 +1,10 @@
 import Link from "next/link"
 import { ArrowLeft, ShoppingCart, Mail, Phone, BarChart3, Download, Zap, Users, Clock, Shield } from "lucide-react"
+export const metadata = {
+  alternates: { canonical: "https://boostacart.com/features" }
+};
+
+
 
 export default function FeaturesPage() {
   return (
