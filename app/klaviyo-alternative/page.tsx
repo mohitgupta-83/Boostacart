@@ -112,7 +112,7 @@ export default function KlaviyoAlternative() {
                 </tr>
                 <tr className="hover:bg-white/[0.02] transition-colors">
                   <td className="p-6 font-medium">Javascript Weight</td>
-                  <td className="p-6 border-l border-white/5 bg-rose-500/5"><span className="flex items-center gap-2 text-rose-300"><Check className="w-5 h-5"/> Invisible (< 5kb Async)</span></td>
+                  <td className="p-6 border-l border-white/5 bg-rose-500/5"><span className="flex items-center gap-2 text-rose-300"><Check className="w-5 h-5"/> Invisible (&lt; 5kb Async)</span></td>
                   <td className="p-6 border-l border-white/5"><span className="flex items-center gap-2"><Blocks className="w-5 h-5 text-indigo-400"/> Historically Heavy bloat</span></td>
                 </tr>
                 <tr className="hover:bg-white/[0.02] transition-colors">
