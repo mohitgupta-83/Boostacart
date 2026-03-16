@@ -102,6 +102,9 @@ export default function AbandonedCartStats() {
                             </div>
                         ))}
                     </div>
+                    <div className="pt-4 text-center">
+                        <Link href="/cart-abandonment-rate-by-industry" className="text-cyan-400 text-sm font-bold hover:underline">View Detailed Industry Breakdown Benchmarks →</Link>
+                    </div>
                 </div>
             </div>
         </section>

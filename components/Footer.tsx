@@ -54,6 +54,7 @@ export default function Footer() {
                         <h3 className="text-white font-semibold mb-4">Resources</h3>
                         <ul className="space-y-3 text-sm text-gray-400">
                             <li><Link href="/abandoned-cart-statistics" className="hover:text-white transition-colors">2025 Statistics</Link></li>
+                            <li><Link href="/cart-abandonment-rate-by-industry" className="hover:text-white transition-colors">Industry Benchmarks</Link></li>
                             <li><Link href="/abandoned-cart-whatsapp-template" className="hover:text-white transition-colors">WhatsApp Templates</Link></li>
                             <li><Link href="/abandoned-cart-sms-template" className="hover:text-white transition-colors">SMS Templates</Link></li>
                             <li><Link href="/reduce-cart-abandonment" className="hover:text-white transition-colors">Reduce Abandonment</Link></li>
