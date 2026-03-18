@@ -2,31 +2,31 @@ import type { Metadata } from 'next';
 import SeoLandingPage, { SeoPageData } from '@/components/seo/SeoLandingPage';
 
 export const metadata: Metadata = {
-  title: "Best Omnisend Alternative for Shopify (2025) - BoostACart",
-  description: "Looking for a Omnisend alternative? See why modern Shopify brands are switching to BoostACart for higher-converting, intent-driven lead capture.",
+  title: "Best PushOwl Alternative for Shopify (2025) - BoostACart",
+  description: "Looking for a PushOwl alternative? See why modern Shopify brands are switching to BoostACart for higher-converting, intent-driven lead capture.",
   alternates: {
-    canonical: "https://boostacart.com/omnisend-alternative"
+    canonical: "https://boostacart.com/pushowl-alternative"
   },
   openGraph: {
-    title: "Best Omnisend Alternative for Shopify (2025) - BoostACart",
-    description: "Looking for a Omnisend alternative? See why modern Shopify brands are switching to BoostACart for higher-converting, intent-driven lead capture.",
-    url: "https://boostacart.com/omnisend-alternative",
+    title: "Best PushOwl Alternative for Shopify (2025) - BoostACart",
+    description: "Looking for a PushOwl alternative? See why modern Shopify brands are switching to BoostACart for higher-converting, intent-driven lead capture.",
+    url: "https://boostacart.com/pushowl-alternative",
     type: "website"
   }
 };
 
 const pageData: SeoPageData = {
-  "slug": "omnisend-alternative",
-  "metaTitle": "Best Omnisend Alternative for Shopify (2025) - BoostACart",
-  "metaDescription": "Looking for a Omnisend alternative? See why modern Shopify brands are switching to BoostACart for higher-converting, intent-driven lead capture.",
-  "heroBadge": "Omnisend Alternative",
+  "slug": "pushowl-alternative",
+  "metaTitle": "Best PushOwl Alternative for Shopify (2025) - BoostACart",
+  "metaDescription": "Looking for a PushOwl alternative? See why modern Shopify brands are switching to BoostACart for higher-converting, intent-driven lead capture.",
+  "heroBadge": "PushOwl Alternative",
   "heroTitleLight": "The Superior Alternative To",
-  "heroTitleHighlight": "Omnisend",
+  "heroTitleHighlight": "PushOwl",
   "heroSubtitle": "If you are tired of legacy popup flows and low cart recovery rates, our pre-checkout capture system is the exact upgrade you need.",
   "problemBadge": "The Core Problem",
-  "problemTitle": "Omnisend Waits Too Long",
+  "problemTitle": "PushOwl Waits Too Long",
   "problemHighlight": "To Save Carts",
-  "problemText1": "Most Omnisend users rely entirely on customers reaching the checkout page or triggering annoying popups. But generic popups annoy users, and waiting for checkout means you lose 80% of your traffic.",
+  "problemText1": "Most PushOwl users rely entirely on customers reaching the checkout page or triggering annoying popups. But generic popups annoy users, and waiting for checkout means you lose 80% of your traffic.",
   "problemText2": "If a user drops off at the product page or cart drawer, traditional tools are completely blind. You can't remarket to them because you never got their contact info.",
   "problemStat1": "High bounce rates on standard popups",
   "problemStat2": "Misses pre-checkout abandoners",
@@ -38,7 +38,7 @@ const pageData: SeoPageData = {
   "solutionFeature2Title": "WhatsApp & SMS Ready",
   "solutionFeature2Text": "Instantly push captured leads into automated WhatsApp loops for unignorable recovery.",
   "featuresTitle": "Why Brands Switch From",
-  "featuresHighlight": "Omnisend",
+  "featuresHighlight": "PushOwl",
   "featuresSubtitle": "It is a fundamental shift in how you secure and retain your existing store traffic.",
   "features": [
     {
@@ -100,11 +100,11 @@ const pageData: SeoPageData = {
   ],
   "faqs": [
     {
-      "question": "Why is BoostACart a great Omnisend alternative?",
+      "question": "Why is BoostACart a great PushOwl alternative?",
       "answer": "Because it operates before checkout. Traditional popups annoy users. Capturing emails silently at the Add-to-Cart click provides a frictionless 10x lead generation boost."
     },
     {
-      "question": "Is it hard to uninstall Omnisend and install BoostACart?",
+      "question": "Is it hard to uninstall PushOwl and install BoostACart?",
       "answer": "Not at all. You just disable your legacy app and install our lightweight async snippet in less than two minutes. No coding required."
     },
     {

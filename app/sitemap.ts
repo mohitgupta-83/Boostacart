@@ -8,7 +8,8 @@ const COMPARISON_PAGES = [
     'boostacart-vs-klaviyo', 'boostacart-vs-recart', 'boostacart-vs-cartloop',
     'boostacart-vs-shopify-email', 'klaviyo-alternative', 'recart-alternative',
     'cartloop-alternative', 'cart-recovery-tool-alternative', 'privy-alternative',
-    'omnisend-alternative', 'comparisons', 'alternatives'
+    'omnisend-alternative', 'pushowl-alternative', 'tidio-alternative-for-shopify',
+    'best-recart-alternatives', 'comparisons', 'alternatives'
 ]
 
 const CASE_STUDY_PAGES = [
