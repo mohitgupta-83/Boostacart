@@ -20,11 +20,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { href: "/dashboard/total-leads", label: "Total Leads", icon: Users },
     { href: "/dashboard/saved-leads", label: "Saved Leads", icon: Bookmark },
     { href: "/dashboard/referrals", label: "Referrals & Earnings", icon: Gift },
+    { href: "/dashboard/whatsapp", label: "WhatsApp Templates", icon: MessageCircle },
     { href: "/dashboard/account", label: "Account", icon: UserIcon },
   ]
 
   const comingSoonItems = [
-    { label: "WhatsApp Follow-ups", icon: MessageCircle },
     { label: "AI Voice Agent", icon: PhoneCall },
   ]
 

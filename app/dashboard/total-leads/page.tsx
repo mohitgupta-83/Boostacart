@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Users, Download, Save, ArrowLeft, Check } from "lucide-react"
+import { defaultTemplates, WATemplate, generateWhatsAppLink } from "@/lib/whatsapp-templates"
 
 interface Lead {
   id: string
@@ -26,6 +27,8 @@ export default function TotalLeadsPage() {
   const [selectedLeads, setSelectedLeads] = useState<Set<string>>(new Set())
   const [storeId, setStoreId] = useState<string | null>(null)
   const [isSaving, setIsSaving] = useState(false)
+  const [waTemplates, setWaTemplates] = useState<WATemplate[]>([])
+  const [activeWaTemplate, setActiveWaTemplate] = useState<string>("")
 
   useEffect(() => {
     const loadLeads = async () => {
@@ -67,7 +70,31 @@ export default function TotalLeadsPage() {
     }
 
     loadLeads()
+
+    const stored = localStorage.getItem("wa_templates")
+    if (stored) {
+      try { setWaTemplates(JSON.parse(stored)) } catch (e) {}
+    } else {
+      setWaTemplates(defaultTemplates)
+      localStorage.setItem("wa_templates", JSON.stringify(defaultTemplates))
+    }
+    
+    const active = localStorage.getItem("wa_active_template")
+    if (active) setActiveWaTemplate(active)
+    else {
+      setActiveWaTemplate(defaultTemplates[0].id)
+      localStorage.setItem("wa_active_template", defaultTemplates[0].id)
+    }
   }, [router, supabase])
+
+  const handleWaTemplateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setActiveWaTemplate(e.target.value)
+    localStorage.setItem("wa_active_template", e.target.value)
+  }
+
+  const getActiveTemplate = () => {
+    return waTemplates.find(t => t.id === activeWaTemplate) || defaultTemplates[0]
+  }
 
   const toggleSelectAll = () => {
     if (selectedLeads.size === leads.length) {
@@ -205,7 +232,19 @@ export default function TotalLeadsPage() {
             </div>
           </div>
 
-          {selectedLeads.size > 0 && (
+          <div className="flex items-center space-x-4">
+            <select
+              value={activeWaTemplate}
+              onChange={handleWaTemplateChange}
+              className="bg-white/10 border border-white/20 text-white text-sm rounded-lg px-3 py-2 outline-none focus:border-green-500/50"
+            >
+              <option disabled value="">Select WhatsApp Template</option>
+              {waTemplates.map(t => (
+                <option key={t.id} value={t.id} className="text-slate-900">{t.name}</option>
+              ))}
+            </select>
+
+            {selectedLeads.size > 0 && (
             <div className="flex items-center space-x-3">
               <span className="text-sm text-gray-300">{selectedLeads.size} selected</span>
               <button
@@ -237,6 +276,7 @@ export default function TotalLeadsPage() {
               </button>
             </div>
           )}
+          </div>
         </div>
 
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden">
@@ -269,6 +309,9 @@ export default function TotalLeadsPage() {
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Status
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Action
                   </th>
                 </tr>
               </thead>
@@ -314,6 +357,25 @@ export default function TotalLeadsPage() {
                           <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
                             <Check className="h-3 w-3 mr-1" />
                             Saved
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {lead.phone ? (
+                          <a 
+                            href={generateWhatsAppLink(lead, getActiveTemplate())} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white rounded-full text-xs font-semibold shadow-md transition-colors inline-block"
+                          >
+                            WhatsApp
+                          </a>
+                        ) : (
+                          <span 
+                            className="px-3 py-1.5 bg-slate-800 text-slate-500 rounded-full text-xs font-semibold cursor-not-allowed inline-block"
+                            title="No phone number"
+                          >
+                            WhatsApp
                           </span>
                         )}
                       </td>

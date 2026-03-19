@@ -121,16 +121,20 @@ function SignUpForm() {
   }
 
   return (
-    <div className="min-h-screen bg-[#030303] flex items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen bg-[#04091A] flex items-center justify-center p-6 md:p-10 relative overflow-hidden font-sans selection:bg-cyan-500/30">
+      {/* Abstract Background Glows */}
+      <div className="absolute top-[0%] right-[-10%] w-[40vw] h-[40vw] bg-fuchsia-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse"></div>
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-cyan-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+      
+      <div className="w-full max-w-sm relative z-10">
         <div className="flex flex-col gap-6">
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10 shadow-xl">
+          <Card className="bg-[#0b102b]/80 backdrop-blur-xl border border-white/10 shadow-2xl">
             <CardHeader>
-              <CardTitle className="text-2xl text-white">Create Your Store</CardTitle>
-              <CardDescription className="text-white/60">
+              <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-indigo-200">Create Your Store</CardTitle>
+              <CardDescription className="text-indigo-200/60 font-light">
                 Set up your BoostACart account and store
                 {refCode && (
-                  <span className="block mt-1 text-green-400 text-xs">
+                  <span className="block mt-2 px-2 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs rounded-md w-fit">
                     Referral code applied: {refCode.toUpperCase()}
                   </span>
                 )}
@@ -148,7 +152,7 @@ function SignUpForm() {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20"
+                      className="bg-[#0a0f24] border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500 focus:ring-cyan-500/20 backdrop-blur-sm"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -159,7 +163,7 @@ function SignUpForm() {
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20"
+                      className="bg-[#0a0f24] border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500 focus:ring-cyan-500/20 backdrop-blur-sm"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -170,7 +174,7 @@ function SignUpForm() {
                       required
                       value={repeatPassword}
                       onChange={(e) => setRepeatPassword(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20"
+                      className="bg-[#0a0f24] border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500 focus:ring-cyan-500/20 backdrop-blur-sm"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -182,7 +186,7 @@ function SignUpForm() {
                       required
                       value={storeName}
                       onChange={(e) => setStoreName(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20"
+                      className="bg-[#0a0f24] border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500 focus:ring-cyan-500/20 backdrop-blur-sm"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -194,7 +198,7 @@ function SignUpForm() {
                       required
                       value={storeDomain}
                       onChange={(e) => setStoreDomain(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20"
+                      className="bg-[#0a0f24] border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500 focus:ring-cyan-500/20 backdrop-blur-sm"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -215,23 +219,23 @@ function SignUpForm() {
                           setReferralValid(null)
                         }
                       }}
-                      className={`bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 focus:ring-blue-400/20 ${referralValid === true ? "border-green-500" : referralValid === false ? "border-red-500" : ""
+                      className={`bg-[#0a0f24] border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500 focus:ring-cyan-500/20 backdrop-blur-sm ${referralValid === true ? "border-emerald-500/50" : referralValid === false ? "border-rose-500/50" : ""
                         }`}
                     />
                     {referralChecking && (
-                      <p className="text-xs text-slate-400">Checking code...</p>
+                      <p className="text-xs text-indigo-200/50">Checking code...</p>
                     )}
                     {!referralChecking && referralValid === true && (
-                      <p className="text-xs text-green-400">✓ Valid referral code applied</p>
+                      <p className="text-xs text-emerald-400">✓ Valid referral code applied</p>
                     )}
                     {!referralChecking && referralValid === false && referralCode.trim() && (
-                      <p className="text-xs text-red-400">Invalid referral code</p>
+                      <p className="text-xs text-rose-400">Invalid referral code</p>
                     )}
                   </div>
-                  {error && <p className="text-sm text-red-400">{error}</p>}
+                  {error && <p className="text-sm text-rose-400">{error}</p>}
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 hover:brightness-110 text-white font-bold border-0 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] transition-all duration-300 hover:-translate-y-0.5"
                     disabled={isLoading}
                   >
                     {isLoading ? "Creating account..." : "Create Store Account"}
@@ -241,7 +245,7 @@ function SignUpForm() {
                   <span className="text-white/60">Already have an account? </span>
                   <Link
                     href="/auth/login"
-                    className="text-blue-400 hover:text-blue-300 underline underline-offset-4 transition-colors"
+                    className="text-cyan-400 hover:text-cyan-300 font-medium tracking-wide underline underline-offset-4 transition-colors"
                   >
                     Login
                   </Link>

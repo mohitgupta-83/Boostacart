@@ -84,9 +84,13 @@ export default function ShopifySetupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#030303]">
+    <div className="min-h-screen bg-[#04091A] font-sans selection:bg-cyan-500/30 overflow-hidden relative">
+      {/* Background Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-cyan-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+
       {/* Header */}
-      <header className="bg-black/20 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      <header className="bg-[#04091A]/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link
@@ -106,33 +110,33 @@ export default function ShopifySetupPage() {
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">Shopify Integration Setup</h1>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-4">Shopify Integration Setup</h1>
+          <p className="text-xl text-indigo-100/70 max-w-2xl mx-auto font-light">
             Follow these simple steps to integrate BoostACart into your Shopify store and start capturing more leads.
           </p>
         </div>
 
-        <div className="mb-12 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm p-6 rounded-2xl text-white border border-white/10">
+        <div className="mb-12 bg-[#0b102b]/60 backdrop-blur-xl p-6 rounded-2xl text-white border border-cyan-500/20 shadow-2xl">
           <div className="flex items-center mb-4">
-            <HelpCircle className="h-6 w-6 mr-2 text-blue-400" />
+            <HelpCircle className="h-6 w-6 mr-2 text-cyan-400" />
             <h3 className="text-xl font-bold">Need Help Getting Started?</h3>
           </div>
-          <p className="text-white/70 mb-4">Our support team is here to assist you with the integration process.</p>
+          <p className="text-indigo-100/70 mb-4">Our support team is here to assist you with the integration process.</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href="https://youtu.be/sQOZcoPP31I"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-medium shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 text-center"
+              className="flex-1 px-4 py-3 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-lg hover:brightness-110 transition-all duration-300 font-bold border-0 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] hover:-translate-y-0.5 text-center"
             >
               Watch Setup Video
             </a>
             <Link
               href="/contact"
-              className="flex-1 px-4 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all duration-300 font-medium border border-white/20 hover:border-white/30 backdrop-blur-sm text-center"
+              className="flex-1 px-4 py-3 bg-[#0a0f24] text-white rounded-lg hover:bg-white/5 transition-all duration-300 font-bold border border-white/10 text-center"
             >
               Contact Support
             </Link>
@@ -140,7 +144,7 @@ export default function ShopifySetupPage() {
               href={getWhatsAppLink("918303208502", "support")}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 font-medium shadow-lg shadow-green-500/25 hover:shadow-green-500/40 text-center"
+              className="flex-1 px-4 py-3 bg-gradient-to-r from-emerald-400 to-green-600 text-white rounded-lg hover:brightness-110 transition-all duration-300 font-bold border-0 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:-translate-y-0.5 text-center"
             >
               WhatsApp Support
             </a>
@@ -150,89 +154,89 @@ export default function ShopifySetupPage() {
         {/* Step-by-Step Instructions */}
         <div className="space-y-8 mb-12">
           {/* Step 1 */}
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-all duration-300">
+          <div className="bg-[#0b102b]/60 backdrop-blur-xl p-8 rounded-2xl border border-white/5 shadow-xl hover:border-emerald-500/30 transition-all duration-300">
             <div className="flex items-center mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-green-500/25 text-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-emerald-500/20 text-lg">
                 1
               </div>
               <h2 className="text-2xl font-bold text-white">Access Your Shopify Admin</h2>
             </div>
-            <p className="text-white/70 mb-4">
+            <p className="text-indigo-100/70 mb-4">
               Log in to your Shopify admin dashboard and navigate to your store's theme editor.
             </p>
-            <div className="bg-black/20 p-4 rounded-lg border border-white/10">
-              <p className="text-white/60 text-sm">
-                <span className="text-green-400 font-medium">Path:</span> Online Store → Themes → Click "Edit Code" on
+            <div className="bg-[#030510] p-4 rounded-lg border border-white/5">
+              <p className="text-indigo-200/60 text-sm">
+                <span className="text-emerald-400 font-medium">Path:</span> Online Store → Themes → Click "Edit Code" on
                 your active theme
               </p>
             </div>
           </div>
 
           {/* Step 2 */}
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-all duration-300">
+          <div className="bg-[#0b102b]/60 backdrop-blur-xl p-8 rounded-2xl border border-white/5 shadow-xl hover:border-emerald-500/30 transition-all duration-300">
             <div className="flex items-center mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-green-500/25 text-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-emerald-500/20 text-lg">
                 2
               </div>
               <h2 className="text-2xl font-bold text-white">Open theme.liquid File</h2>
             </div>
-            <p className="text-white/70 mb-4">In the code editor sidebar, locate and open the main layout file.</p>
-            <div className="bg-black/20 p-4 rounded-lg border border-white/10">
-              <p className="text-white/60 text-sm">
-                <span className="text-green-400 font-medium">File:</span> Layout/theme.liquid
+            <p className="text-indigo-100/70 mb-4">In the code editor sidebar, locate and open the main layout file.</p>
+            <div className="bg-[#030510] p-4 rounded-lg border border-white/5">
+              <p className="text-indigo-200/60 text-sm">
+                <span className="text-emerald-400 font-medium">File:</span> Layout/theme.liquid
               </p>
             </div>
           </div>
 
           {/* Step 3 */}
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-all duration-300">
+          <div className="bg-[#0b102b]/60 backdrop-blur-xl p-8 rounded-2xl border border-white/5 shadow-xl hover:border-emerald-500/30 transition-all duration-300">
             <div className="flex items-center mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-green-500/25 text-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-emerald-500/20 text-lg">
                 3
               </div>
               <h2 className="text-2xl font-bold text-white">Locate the Closing Body Tag</h2>
             </div>
-            <p className="text-white/70 mb-4">Scroll to the bottom of the file and find the closing body tag.</p>
-            <div className="bg-black/20 p-4 rounded-lg border border-white/10">
-              <p className="text-white/60 text-sm font-mono">
-                Look for: <span className="text-blue-300">{"</body>"}</span> and{" "}
-                <span className="text-blue-300">{"</html>"}</span>
+            <p className="text-indigo-100/70 mb-4">Scroll to the bottom of the file and find the closing body tag.</p>
+            <div className="bg-[#030510] p-4 rounded-lg border border-white/5">
+              <p className="text-indigo-200/60 text-sm font-mono">
+                Look for: <span className="text-cyan-400">{"</body>"}</span> and{" "}
+                <span className="text-cyan-400">{"</html>"}</span>
               </p>
             </div>
           </div>
 
           {/* Step 4 */}
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-all duration-300">
+          <div className="bg-[#0b102b]/60 backdrop-blur-xl p-8 rounded-2xl border border-white/5 shadow-xl hover:border-emerald-500/30 transition-all duration-300">
             <div className="flex items-center mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-green-500/25 text-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-emerald-500/20 text-lg">
                 4
               </div>
               <h2 className="text-2xl font-bold text-white">Paste the BoostACart Code</h2>
             </div>
-            <p className="text-white/70 mb-4">
+            <p className="text-indigo-100/70 mb-4">
               Copy the code below and paste it just before the closing {"</body>"} tag.
             </p>
-            <div className="bg-black/20 p-4 rounded-lg border border-white/10">
-              <p className="text-white/60 text-sm">
-                <span className="text-green-400 font-medium">Position:</span> Just before {"</body>"} and {"</html>"}
+            <div className="bg-[#030510] p-4 rounded-lg border border-white/5">
+              <p className="text-indigo-200/60 text-sm">
+                <span className="text-emerald-400 font-medium">Position:</span> Just before {"</body>"} and {"</html>"}
               </p>
             </div>
           </div>
 
           {/* Step 5 */}
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-all duration-300">
+          <div className="bg-[#0b102b]/60 backdrop-blur-xl p-8 rounded-2xl border border-white/5 shadow-xl hover:border-emerald-500/30 transition-all duration-300">
             <div className="flex items-center mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-green-500/25 text-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 shadow-lg shadow-emerald-500/20 text-lg">
                 5
               </div>
               <h2 className="text-2xl font-bold text-white">Save and Deploy</h2>
             </div>
-            <p className="text-white/70 mb-4">
+            <p className="text-indigo-100/70 mb-4">
               Click the "Save" button in Shopify to deploy your changes. Your BoostACart widget is now live!
             </p>
-            <div className="bg-black/20 p-4 rounded-lg border border-white/10">
-              <p className="text-white/60 text-sm">
-                <span className="text-green-400 font-medium">Status:</span> Changes are live immediately after saving
+            <div className="bg-[#030510] p-4 rounded-lg border border-white/5">
+              <p className="text-indigo-200/60 text-sm">
+                <span className="text-emerald-400 font-medium">Status:</span> Changes are live immediately after saving
               </p>
             </div>
           </div>
@@ -240,10 +244,10 @@ export default function ShopifySetupPage() {
 
         {/* Code Display Section */}
         <div className="mb-12">
-          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 shadow-lg">
+          <div className="bg-[#0b102b]/60 backdrop-blur-xl p-8 rounded-2xl border border-white/5 shadow-xl">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/25">
+                <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20">
                   <Code className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">Embed Code</h3>
@@ -271,9 +275,9 @@ export default function ShopifySetupPage() {
             </div>
 
             {/* Code Block */}
-            <div className="bg-black/40 rounded-lg border border-white/10 overflow-hidden">
+            <div className="bg-[#030510] rounded-lg border border-white/5 overflow-hidden">
               <div className="overflow-x-auto">
-                <pre className="p-4 text-sm text-blue-300 font-mono whitespace-pre-wrap break-words">
+                <pre className="p-4 text-sm text-cyan-400 font-mono whitespace-pre-wrap break-words">
                   <code>{embedCode}</code>
                 </pre>
               </div>
@@ -282,9 +286,9 @@ export default function ShopifySetupPage() {
         </div>
 
         {/* Support Section */}
-        <div className="mt-12 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm p-8 rounded-2xl text-white text-center border border-white/10">
+        <div className="mt-12 bg-gradient-to-r from-[#0d163a] to-[#0a0f24] backdrop-blur-sm p-8 rounded-2xl text-white text-center border border-cyan-500/20 shadow-2xl">
           <h3 className="text-2xl font-bold mb-4">Need Help?</h3>
-          <p className="text-white/70 mb-6">
+          <p className="text-indigo-100/70 mb-6">
             If you encounter any issues during the integration process, our support team is here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -292,13 +296,13 @@ export default function ShopifySetupPage() {
               href="https://youtu.be/sQOZcoPP31I"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-medium shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
+              className="px-6 py-3 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 text-white rounded-lg hover:brightness-110 transition-all duration-300 font-bold border-0 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] hover:-translate-y-0.5"
             >
               Watch Setup Video
             </a>
             <Link
               href="/contact"
-              className="px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all duration-300 font-medium border border-white/20 hover:border-white/30 backdrop-blur-sm"
+              className="px-6 py-3 bg-[#0a0f24] text-white rounded-lg hover:bg-white/5 transition-all duration-300 font-bold border border-white/10"
             >
               Contact Support
             </Link>
@@ -306,7 +310,7 @@ export default function ShopifySetupPage() {
               href={getWhatsAppLink("918303208502", "support")}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 font-medium shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
+              className="px-6 py-3 bg-gradient-to-r from-emerald-400 to-green-600 text-white rounded-lg hover:brightness-110 transition-all duration-300 font-bold border-0 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:-translate-y-0.5"
             >
               WhatsApp Support
             </a>

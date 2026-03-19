@@ -7,6 +7,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
+import { defaultTemplates, WATemplate, generateWhatsAppLink } from "@/lib/whatsapp-templates"
 
 interface LeadsAnalyticsProps {
   store: Store
@@ -25,6 +26,8 @@ const LeadsAnalytics: React.FC<LeadsAnalyticsProps> = ({ store, leads: initialLe
     leadsThisMonth: 0,
     leadsToday: 0,
   })
+  const [waTemplates, setWaTemplates] = useState<WATemplate[]>([])
+  const [activeWaTemplate, setActiveWaTemplate] = useState<string>("")
   const supabase = createClient()
 
   useEffect(() => {
@@ -99,7 +102,31 @@ const LeadsAnalytics: React.FC<LeadsAnalyticsProps> = ({ store, leads: initialLe
     }
 
     fetchLeads()
+
+    const stored = localStorage.getItem("wa_templates")
+    if (stored) {
+      try { setWaTemplates(JSON.parse(stored)) } catch (e) {}
+    } else {
+      setWaTemplates(defaultTemplates)
+      localStorage.setItem("wa_templates", JSON.stringify(defaultTemplates))
+    }
+    
+    const active = localStorage.getItem("wa_active_template")
+    if (active) setActiveWaTemplate(active)
+    else {
+      setActiveWaTemplate(defaultTemplates[0].id)
+      localStorage.setItem("wa_active_template", defaultTemplates[0].id)
+    }
   }, [store?.id, supabase])
+
+  const handleWaTemplateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setActiveWaTemplate(e.target.value)
+    localStorage.setItem("wa_active_template", e.target.value)
+  }
+
+  const getActiveTemplate = () => {
+    return waTemplates.find(t => t.id === activeWaTemplate) || defaultTemplates[0]
+  }
 
   if (!store) {
     return (
@@ -314,14 +341,25 @@ const LeadsAnalytics: React.FC<LeadsAnalyticsProps> = ({ store, leads: initialLe
               <Users className="h-5 w-5 mr-2 text-blue-400" />
               Recent Leads (Last 20)
             </h3>
-            <button
-              onClick={downloadCSV}
-              disabled={leads.length === 0}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              <Download className="h-4 w-4" />
-              <span>Download CSV</span>
-            </button>
+            <div className="flex items-center space-x-3">
+              <select
+                value={activeWaTemplate}
+                onChange={handleWaTemplateChange}
+                className="bg-white/10 border border-white/20 text-white text-sm rounded-lg px-3 py-2 outline-none focus:border-green-500/50"
+              >
+                {waTemplates.map(t => (
+                  <option key={t.id} value={t.id} className="text-slate-900">{t.name}</option>
+                ))}
+              </select>
+              <button
+                onClick={downloadCSV}
+                disabled={leads.length === 0}
+                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <Download className="h-4 w-4" />
+                <span>Download CSV</span>
+              </button>
+            </div>
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -340,6 +378,9 @@ const LeadsAnalytics: React.FC<LeadsAnalyticsProps> = ({ store, leads: initialLe
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Timestamp
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Action
                 </th>
               </tr>
             </thead>
@@ -381,6 +422,25 @@ const LeadsAnalytics: React.FC<LeadsAnalyticsProps> = ({ store, leads: initialLe
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-gray-400 text-sm">{new Date(lead.created_at).toLocaleString()}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {lead.phone ? (
+                        <a 
+                          href={generateWhatsAppLink(lead, getActiveTemplate())} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white rounded-full text-xs font-semibold shadow-md transition-colors inline-block"
+                        >
+                          WhatsApp
+                        </a>
+                      ) : (
+                        <span 
+                          className="px-3 py-1.5 bg-slate-800 text-slate-500 rounded-full text-xs font-semibold cursor-not-allowed inline-block"
+                          title="No phone number"
+                        >
+                          WhatsApp
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))
