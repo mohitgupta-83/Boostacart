@@ -344,8 +344,8 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-8 relative z-10">
         {activeTab === "analytics" && (
           <>
-            {/* Setup Video for New Users */}
-            {store.total_leads === 0 && (
+            {/* Setup Video for New Users (shown until 5 leads) */}
+            {(store.total_leads ?? 0) < 5 && (
               <div className="mb-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl">
                 <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
                   <div>

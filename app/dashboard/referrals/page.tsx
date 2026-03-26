@@ -52,6 +52,26 @@ export default function ReferralsPage() {
   const [withdrawError, setWithdrawError] = useState<string | null>(null)
   const [withdrawSuccess, setWithdrawSuccess] = useState(false)
 
+  const [generatingCode, setGeneratingCode] = useState(false)
+
+  // Ensure the user has a referral_code — if not, call the API to generate one
+  const ensureReferralCode = useCallback(async (uid: string) => {
+    setGeneratingCode(true)
+    try {
+      const res = await fetch("/api/ensure-referral-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: uid }),
+      })
+      const json = await res.json()
+      if (json.referral_code) setReferralCode(json.referral_code)
+    } catch (e) {
+      console.error("Failed to generate referral code", e)
+    } finally {
+      setGeneratingCode(false)
+    }
+  }, [])
+
   const loadData = useCallback(async (uid: string) => {
     const [profileRes, walletRes, referralsRes, withdrawalsRes] = await Promise.all([
       supabase.from("profiles").select("referral_code").eq("id", uid).single(),
@@ -68,11 +88,27 @@ export default function ReferralsPage() {
         .order("created_at", { ascending: false }),
     ])
 
-    if (profileRes.data) setReferralCode(profileRes.data.referral_code)
-    if (walletRes.data) setWallet(walletRes.data)
+    const code = profileRes.data?.referral_code
+    if (code) {
+      setReferralCode(code)
+    } else {
+      // Profile exists but no referral code — generate one via API
+      await ensureReferralCode(uid)
+    }
+
+    // Handle missing wallet gracefully
+    if (walletRes.data) {
+      setWallet(walletRes.data)
+    } else {
+      // Try to create wallet if missing
+      await supabase.from("referral_wallet").insert({ user_id: uid }).onConflict("user_id").ignore()
+      const { data: newWallet } = await supabase.from("referral_wallet").select("*").eq("user_id", uid).single()
+      if (newWallet) setWallet(newWallet)
+    }
+
     if (referralsRes.data) setReferrals(referralsRes.data as Referral[])
     if (withdrawalsRes.data) setWithdrawals(withdrawalsRes.data)
-  }, [supabase])
+  }, [supabase, ensureReferralCode])
 
   useEffect(() => {
     const init = async () => {
@@ -208,42 +244,60 @@ export default function ReferralsPage() {
             <Tag className="h-4 w-4 text-blue-400" />
             <h2 className="text-white font-semibold">My Coupon Code</h2>
           </div>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="bg-white/10 border border-white/20 rounded-lg px-6 py-3">
-              <span className="text-2xl font-bold text-white font-mono tracking-wider">{referralCode}</span>
+
+          {generatingCode ? (
+            <div className="flex items-center gap-3 text-slate-400 text-sm py-3">
+              <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+              Generating your unique referral code...
             </div>
-            <button
-              onClick={copyCouponCode}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors"
-            >
-              {copiedCoupon ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-              {copiedCoupon ? "Copied" : "Copy Code"}
-            </button>
-            <button
-              onClick={shareLink}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded-lg transition-colors"
-            >
-              <Share2 className="h-4 w-4" />
-              Share
-            </button>
-          </div>
-          <div className="bg-white/5 border border-white/10 rounded-lg p-3">
-            <p className="text-slate-400 text-xs mb-1">Share this signup link:</p>
-            <div className="flex gap-2">
-              <input
-                readOnly
-                value={referralLink}
-                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-1.5 text-xs text-white/80 font-mono truncate focus:outline-none"
-              />
-              <button
-                onClick={copyLink}
-                className="flex items-center gap-1 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs rounded-lg transition-colors"
-              >
-                {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-                {copied ? "Copied" : "Copy"}
-              </button>
+          ) : !referralCode ? (
+            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 text-yellow-300 text-sm flex items-start gap-2">
+              <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-medium mb-1">No referral code found</p>
+                <p className="text-yellow-300/70 text-xs">Refresh the page. If this persists, please contact support.</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <>
+              <div className="flex items-center gap-3 mb-3 flex-wrap">
+                <div className="bg-white/10 border border-white/20 rounded-lg px-6 py-3">
+                  <span className="text-2xl font-bold text-white font-mono tracking-wider">{referralCode}</span>
+                </div>
+                <button
+                  onClick={copyCouponCode}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors"
+                >
+                  {copiedCoupon ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  {copiedCoupon ? "Copied" : "Copy Code"}
+                </button>
+                <button
+                  onClick={shareLink}
+                  className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded-lg transition-colors"
+                >
+                  <Share2 className="h-4 w-4" />
+                  Share
+                </button>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+                <p className="text-slate-400 text-xs mb-1">Share this signup link:</p>
+                <div className="flex gap-2">
+                  <input
+                    readOnly
+                    value={referralLink}
+                    className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-1.5 text-xs text-white/80 font-mono truncate focus:outline-none"
+                  />
+                  <button
+                    onClick={copyLink}
+                    className="flex items-center gap-1 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs rounded-lg transition-colors"
+                  >
+                    {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    {copied ? "Copied" : "Copy"}
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Commission Model */}

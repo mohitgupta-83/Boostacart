@@ -42,21 +42,19 @@ function SignUpForm() {
     }
     setReferralChecking(true)
     try {
-      const supabase = createClient()
-      // Use ilike for case-insensitive matching to handle codes like "372F70"
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("id, referral_code")
-        .ilike("referral_code", code.trim())
-        .maybeSingle()
-      
-      if (error) {
-        // If there's an RLS/permission error, don't block user — assume valid
-        console.warn("Referral validation error (will allow sign-up):", error.message)
+      // Use server-side API to validate — avoids any RLS issues
+      const res = await fetch("/api/validate-referral-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: code.trim() }),
+      })
+      if (!res.ok) {
+        // Server error — don't block sign-up, just clear validation
         setReferralValid(null)
         return
       }
-      setReferralValid(!!data)
+      const json = await res.json()
+      setReferralValid(json.valid === true)
     } catch {
       // Network or unknown error — don't block sign-up
       setReferralValid(null)
@@ -241,7 +239,15 @@ function SignUpForm() {
                       <p className="text-xs text-rose-400">Invalid referral code</p>
                     )}
                   </div>
-                  {error && <p className="text-sm text-rose-400">{error}</p>}
+                  {error && (
+                    <div className="space-y-1.5">
+                      <p className="text-sm text-rose-400">{error}</p>
+                      <a href="/contact" className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors">
+                        <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                        Need help? Contact Support
+                      </a>
+                    </div>
+                  )}
                   <Button
                     type="submit"
                     className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 hover:brightness-110 text-white font-bold border-0 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] transition-all duration-300 hover:-translate-y-0.5"
