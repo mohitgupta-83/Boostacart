@@ -171,9 +171,9 @@ export default function LandingPage() {
       />
 
       {/* Call to Action Section */}
-      <section className="py-16 relative z-10">
+      <section className="py-10 sm:py-16 relative z-10">
         <div className="max-w-4xl mx-auto text-center px-4 relative">
-          <p className="text-xl text-indigo-100/70 mb-8 leading-relaxed">
+          <p className="text-base sm:text-xl text-indigo-100/70 mb-8 leading-relaxed px-2">
             BoostACart helps online stores capture email and phone numbers the moment a shopper clicks "Add to Cart", so
             you can recover lost sales with WhatsApp, SMS, and email follow-ups.
           </p>
@@ -181,7 +181,30 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* What Is BoostACart Section */}
+
+      {/* YouTube Demo Video Section */}
+      <section className="py-8 sm:py-12 relative z-10">
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="text-center mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 text-fuchsia-300 text-sm font-medium">
+              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              Watch How It Works
+            </span>
+          </div>
+          <div className="bg-[#0b102b]/60 backdrop-blur-xl border border-white/5 rounded-2xl shadow-xl overflow-hidden hover:border-fuchsia-500/20 transition-all duration-300 hover:shadow-fuchsia-500/10 hover:shadow-2xl">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/sQOZcoPP31I"
+                title="BoostACart Demo – See How It Works"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-12 sm:py-20 relative z-10">
         <div className="max-w-4xl mx-auto px-4 relative">
           <SpotlightCard className="p-8 sm:p-10">

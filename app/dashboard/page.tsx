@@ -344,6 +344,30 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-8 relative z-10">
         {activeTab === "analytics" && (
           <>
+            {/* Setup Video for New Users */}
+            {store.total_leads === 0 && (
+              <div className="mb-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+                <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
+                  <div>
+                    <h2 className="text-white font-semibold flex items-center gap-2">
+                      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse inline-block" />
+                      👋 Welcome! Watch the setup video to get started
+                    </h2>
+                    <p className="text-gray-400 text-sm mt-0.5">Follow these steps to install BoostACart on your Shopify store</p>
+                  </div>
+                  <a href="/setup" className="text-xs text-blue-400 hover:text-blue-300 transition-colors whitespace-nowrap">Setup Guide →</a>
+                </div>
+                <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/sQOZcoPP31I"
+                    title="BoostACart Setup Tutorial"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            )}
             <LeadsAnalytics store={storeWithSettings} leads={[]} />
 
             <div className="mt-12">

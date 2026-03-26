@@ -43,14 +43,23 @@ function SignUpForm() {
     setReferralChecking(true)
     try {
       const supabase = createClient()
-      const { data } = await supabase
+      // Use ilike for case-insensitive matching to handle codes like "372F70"
+      const { data, error } = await supabase
         .from("profiles")
-        .select("id")
-        .eq("referral_code", code.toUpperCase())
+        .select("id, referral_code")
+        .ilike("referral_code", code.trim())
         .maybeSingle()
+      
+      if (error) {
+        // If there's an RLS/permission error, don't block user — assume valid
+        console.warn("Referral validation error (will allow sign-up):", error.message)
+        setReferralValid(null)
+        return
+      }
       setReferralValid(!!data)
     } catch {
-      setReferralValid(false)
+      // Network or unknown error — don't block sign-up
+      setReferralValid(null)
     } finally {
       setReferralChecking(false)
     }
@@ -74,9 +83,9 @@ function SignUpForm() {
       return
     }
 
-    // Block submission if referral code is entered but invalid
+    // Block submission only if referral code is entered AND explicitly confirmed invalid
     if (referralCode.trim() && referralValid === false) {
-      setError("Invalid referral code")
+      setError("Invalid referral code. Please check and try again, or leave it blank.")
       setIsLoading(false)
       return
     }
