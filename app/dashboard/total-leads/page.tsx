@@ -2,11 +2,13 @@
 
 export const dynamic = "force-dynamic"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
-import { Users, Download, Save, ArrowLeft, Check } from "lucide-react"
+import { Users, Download, Save, ArrowLeft, Check, Sparkles, PhoneCall, CheckCircle2 } from "lucide-react"
 import { defaultTemplates, WATemplate, generateWhatsAppLink } from "@/lib/whatsapp-templates"
+
+type LeadStatus = "new" | "contacted" | "converted"
 
 interface Lead {
   id: string
@@ -17,6 +19,44 @@ interface Lead {
   detected_product?: string
   created_at: string
   is_saved?: boolean
+  status: LeadStatus
+}
+
+// ── Status config ─────────────────────────────────────────────────────────────
+const STATUS_CONFIG: Record<LeadStatus, { label: string; color: string; bg: string; border: string; icon: React.ReactNode }> = {
+  new:       { label: "New",       color: "text-sky-300",    bg: "bg-sky-500/10",    border: "border-sky-500/30",    icon: <Sparkles    className="h-3 w-3" /> },
+  contacted: { label: "Contacted", color: "text-amber-300",  bg: "bg-amber-500/10",  border: "border-amber-500/30",  icon: <PhoneCall   className="h-3 w-3" /> },
+  converted: { label: "Converted", color: "text-emerald-300",bg: "bg-emerald-500/10",border: "border-emerald-500/30",icon: <CheckCircle2 className="h-3 w-3" /> },
+}
+
+// ── StatusDropdown ────────────────────────────────────────────────────────────
+import React from "react"
+function StatusDropdown({ leadId, currentStatus, onStatusChange }: { leadId: string; currentStatus: LeadStatus; onStatusChange: (id: string, s: LeadStatus) => void }) {
+  const [updating, setUpdating] = useState(false)
+  const supabase = createClient()
+  const cfg = STATUS_CONFIG[currentStatus]
+  const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = e.target.value as LeadStatus
+    setUpdating(true)
+    try {
+      const { error } = await supabase.from("leads").update({ status: newStatus }).eq("id", leadId)
+      if (!error) onStatusChange(leadId, newStatus)
+    } finally { setUpdating(false) }
+  }
+  return (
+    <div className="relative">
+      {updating && <span className="absolute right-6 top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-white/40 border-t-transparent rounded-full animate-spin" />}
+      <select value={currentStatus} onChange={handleChange} disabled={updating}
+        className={`appearance-none pl-2 pr-6 py-1 text-xs font-semibold rounded-full border cursor-pointer outline-none focus:ring-1 focus:ring-white/20 transition-all ${cfg.color} ${cfg.bg} ${cfg.border} disabled:opacity-60`}
+        style={{ backgroundImage: "none" }}
+      >
+        {(Object.keys(STATUS_CONFIG) as LeadStatus[]).map(s => (
+          <option key={s} value={s} className="bg-slate-900 text-white font-normal">{STATUS_CONFIG[s].label}</option>
+        ))}
+      </select>
+      <span className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-white/40 text-[10px]">▾</span>
+    </div>
+  )
 }
 
 export default function TotalLeadsPage() {
@@ -29,6 +69,10 @@ export default function TotalLeadsPage() {
   const [isSaving, setIsSaving] = useState(false)
   const [waTemplates, setWaTemplates] = useState<WATemplate[]>([])
   const [activeWaTemplate, setActiveWaTemplate] = useState<string>("")
+
+  const handleStatusChange = useCallback((id: string, newStatus: LeadStatus) => {
+    setLeads(prev => prev.map(l => l.id === id ? { ...l, status: newStatus } : l))
+  }, [])
 
   useEffect(() => {
     const loadLeads = async () => {
@@ -168,12 +212,13 @@ export default function TotalLeadsPage() {
       return
     }
 
-    const headers = ["Name", "Email", "Phone", "Product", "Timestamp", "Saved"]
+    const headers = ["Name", "Email", "Phone", "Product", "Status", "Timestamp", "Saved"]
     const csvRows = leadsToDownload.map((lead) => [
       lead.name || "",
       lead.email || "",
       lead.phone || "",
       lead.product_name || lead.detected_product || "Unknown",
+      lead.status || "new",
       new Date(lead.created_at).toLocaleString(),
       lead.is_saved ? "Yes" : "No",
     ])
@@ -353,12 +398,11 @@ export default function TotalLeadsPage() {
                         <div className="text-gray-400 text-sm">{new Date(lead.created_at).toLocaleString()}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {lead.is_saved && (
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
-                            <Check className="h-3 w-3 mr-1" />
-                            Saved
-                          </span>
-                        )}
+                        <StatusDropdown
+                          leadId={lead.id}
+                          currentStatus={lead.status ?? "new"}
+                          onStatusChange={handleStatusChange}
+                        />
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {lead.phone ? (
