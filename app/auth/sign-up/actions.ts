@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js"
 
-export async function ensureStoreExists(userId: string, storeName: string, storeDomain: string) {
+export async function ensureStoreExists(userId: string, email: string, storeName: string, storeDomain: string) {
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
     auth: {
       autoRefreshToken: false,
@@ -24,6 +24,7 @@ export async function ensureStoreExists(userId: string, storeName: string, store
       .from("stores")
       .insert({
         user_id: userId,
+        owner_email: email,
         name: storeName,
         domain: storeDomain,
         shopify_domain: storeDomain,
