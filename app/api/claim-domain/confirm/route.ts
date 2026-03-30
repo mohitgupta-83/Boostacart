@@ -46,9 +46,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Store not found" }, { status: 404 })
     }
 
-    if (store.is_verified_owner) {
-      return NextResponse.json({ error: "Store is already owned by a verified user. Contact support." }, { status: 400 })
-    }
+    // We intentionally removed the is_verified_owner block here to permit claiming
+    // across legacy unassociated accounts or valid internal transfers, given
+    // they pass the domain email verify check above.
 
     // Transfer ownership
     const { error: updateError } = await adminSupabase

@@ -11,15 +11,49 @@ export async function ensureStoreExists(userId: string, email: string, storeName
   })
 
   try {
-    // Check if store already exists
-    const { data: existingStore } = await supabase.from("stores").select("id").eq("user_id", userId).single()
+    // Check if store already exists for this exact user
+    const { data: existingStore } = await supabase.from("stores").select("id").eq("user_id", userId).maybeSingle()
 
     if (existingStore) {
       console.log("[v0] Store already exists for user:", userId)
       return { success: true, storeId: existingStore.id }
     }
 
-    // Create store explicitly
+    // Check if the domain itself is already in the database
+    const { data: existingDomainStore } = await supabase
+      .from("stores")
+      .select("id, deleted_at")
+      .eq("domain", storeDomain)
+      .maybeSingle()
+
+    if (existingDomainStore) {
+      if (existingDomainStore.deleted_at) {
+        // Assume ownership of the existing store
+        const { error: updateErr } = await supabase
+          .from("stores")
+          .update({
+            user_id: userId,
+            owner_email: email,
+            name: storeName,
+            shopify_domain: storeDomain,
+            is_verified_owner: true,
+            deleted_at: null,
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", existingDomainStore.id)
+          
+        if (updateErr) {
+          console.error("[v0] Failed to reclaim store:", updateErr)
+          return { success: false, error: updateErr.message }
+        }
+        console.log("[v0] Store reclaimed successfully:", existingDomainStore.id)
+        return { success: true, storeId: existingDomainStore.id }
+      } else {
+        return { success: false, error: "Store domain already registered" }
+      }
+    }
+
+    // Create store explicitly for fresh domain
     const { data: newStore, error } = await supabase
       .from("stores")
       .insert({
@@ -34,6 +68,8 @@ export async function ensureStoreExists(userId: string, email: string, storeName
         total_leads: 0,
         leads_this_month: 0,
         installed: false,
+        is_verified_owner: true,
+        deleted_at: null
       })
       .select("id")
       .single()

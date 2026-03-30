@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { getWhatsAppLink } from "@/lib/whatsapp"
-import { LogOut, User, AlertCircle, TrendingUp } from "lucide-react"
+import { LogOut, User, AlertCircle, TrendingUp, AlertTriangle } from "lucide-react"
 
 interface Store {
   id: string
@@ -27,6 +27,10 @@ export default function AccountPage() {
   const [store, setStore] = useState<Store | null>(null)
   const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleteInput, setDeleteInput] = useState("")
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
     const loadUserAndStore = async () => {
@@ -128,6 +132,27 @@ export default function AccountPage() {
   const handleSignOut = async () => {
     await supabase.auth.signOut()
     router.push("/")
+  }
+
+  const handleDeleteAccount = async () => {
+    if (deleteInput !== "DELETE") return
+    setIsDeleting(true)
+    try {
+      const res = await fetch("/api/delete-account", {
+        method: "POST",
+      })
+      if (!res.ok) {
+        throw new Error("Failed to delete account")
+      }
+      await supabase.auth.signOut()
+      router.push("/")
+    } catch (err) {
+      console.error("Failed to delete account:", err)
+      alert("Something went wrong attempting to delete your account. Please try again or contact support.")
+    } finally {
+      setIsDeleting(false)
+      setShowDeleteModal(false)
+    }
   }
 
   if (loading) {
@@ -316,8 +341,80 @@ export default function AccountPage() {
               Upgrade Plan
             </a>
           </div>
+
+          {/* SECTION 3 — Danger Zone */}
+          <div className="bg-white/10 backdrop-blur-md border border-red-500/20 rounded-2xl p-6 shadow-xl relative overflow-hidden group hover:border-red-500/40 transition-colors">
+            <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-red-500 to-rose-600 group-hover:w-3 transition-all duration-300"></div>
+            <div className="flex items-start gap-4 mb-4">
+              <div className="p-3 bg-red-500/10 rounded-xl text-red-400 mt-1">
+                <AlertTriangle className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">Danger Zone</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  Permanently delete your account. Your store ownership will be removed, and you will lose access exactly right now.
+                  Past leads captured by your store domain will remain intact for compliance, but your account and its connection to the store will be purged.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setShowDeleteModal(true)}
+                  className="px-6 py-2.5 bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white border border-red-500/30 font-semibold rounded-lg transition-all duration-300 shadow-md"
+                >
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => !isDeleting && setShowDeleteModal(false)}></div>
+          <div className="bg-[#0b102b] border border-red-500/30 p-8 rounded-2xl shadow-2xl relative z-10 max-w-md w-full animate-in fade-in zoom-in duration-200">
+            <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+              <AlertTriangle className="w-8 h-8 text-red-500" />
+            </div>
+            <h2 className="text-2xl font-bold text-white text-center mb-4">Are you absolutely sure?</h2>
+            <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
+              <ul className="text-sm text-red-200 space-y-2 list-disc list-inside">
+                <li>Your account will be permanently removed.</li>
+                <li>Your ownership of the store will be revoked.</li>
+                <li><strong>Note:</strong> Captured leads are tied to the domain and will NOT be deleted.</li>
+              </ul>
+            </div>
+            <p className="text-gray-300 text-sm mb-4 text-center">
+              Please type <strong className="text-white bg-white/10 px-2 py-0.5 rounded select-none">DELETE</strong> to confirm.
+            </p>
+            <input
+              type="text"
+              value={deleteInput}
+              onChange={(e) => setDeleteInput(e.target.value)}
+              className="w-full bg-[#04091A] border border-white/20 text-white p-3 rounded-lg mb-6 text-center focus:border-red-500 outline-none transition-colors font-mono"
+              placeholder=""
+              disabled={isDeleting}
+            />
+            <div className="flex gap-4">
+              <button
+                type="button"
+                className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors border border-white/10"
+                onClick={() => setShowDeleteModal(false)}
+                disabled={isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={deleteInput !== "DELETE" || isDeleting}
+                onClick={handleDeleteAccount}
+                className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-bold disabled:opacity-50 disabled:cursor-not-allowed border border-red-400/50"
+              >
+                {isDeleting ? "Deleting..." : "Delete Permanently"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

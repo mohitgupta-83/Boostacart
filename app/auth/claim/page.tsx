@@ -60,11 +60,6 @@ function ClaimForm() {
           setIsLoading(false)
           return
         }
-        if (json.exists && json.isVerifiedOwner) {
-          setError("This store is already owned by a verified user. If this is a mistake, please contact support.")
-          setIsLoading(false)
-          return
-        }
       }
       const { error } = await supabase.auth.signInWithOtp({
         email,

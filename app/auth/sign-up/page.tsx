@@ -22,6 +22,7 @@ function SignUpForm() {
   const [referralChecking, setReferralChecking] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [domainExistsState, setDomainExistsState] = useState<"verified" | "unverified" | null>(null)
+  const [associatedEmailState, setAssociatedEmailState] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -102,6 +103,7 @@ function SignUpForm() {
         const json = await res.json()
         if (json.exists) {
           setDomainExistsState(json.isVerifiedOwner ? "verified" : "unverified")
+          setAssociatedEmailState(json.associatedEmail || null)
           setIsLoading(false)
           return
         }
@@ -160,6 +162,9 @@ function SignUpForm() {
                 <h2 className="text-xl font-bold text-white mb-2">Domain Already Exists</h2>
                 <p className="text-white/60 text-sm mb-6">
                   The domain <strong className="text-white">{storeDomain}</strong> is already registered.
+                  {associatedEmailState && (
+                    <span className="block mt-2 text-white/50">Associated email: <strong className="text-white/80">{associatedEmailState}</strong></span>
+                  )}
                 </p>
                 <div className="flex flex-col gap-3 w-full">
                   <Button variant="outline" className="w-full bg-white/5 border-white/10 hover:bg-white/10 text-white" asChild>
@@ -171,7 +176,7 @@ function SignUpForm() {
                   <Button variant="link" className="w-full text-cyan-400 hover:text-cyan-300" asChild>
                     <Link href="/contact">Contact Support</Link>
                   </Button>
-                  <Button variant="ghost" className="w-full text-white/40 hover:text-white mt-4" onClick={() => setDomainExistsState(null)}>
+                  <Button variant="ghost" className="w-full text-white/40 hover:text-white mt-4" onClick={() => { setDomainExistsState(null); setAssociatedEmailState(null) }}>
                     Go Back
                   </Button>
                 </div>

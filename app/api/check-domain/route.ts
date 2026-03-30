@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     const { data, error } = await adminSupabase
       .from("stores")
-      .select("id, is_verified_owner")
+      .select("id, user_id, is_verified_owner, owner_email, deleted_at")
       .eq("domain", domain.trim().toLowerCase())
       .maybeSingle()
 
@@ -24,13 +24,49 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    if (!data) {
+    if (!data || data.deleted_at) {
       return NextResponse.json({ exists: false })
+    }
+
+    // Attempt to get the associated email
+    let associatedEmail = data.owner_email
+
+    if (!associatedEmail && data.user_id) {
+      // Try to get from profiles if owner_email is null
+      const { data: profile } = await adminSupabase
+        .from("profiles")
+        .select("email")
+        .eq("id", data.user_id)
+        .single()
+      
+      if (profile?.email) {
+        associatedEmail = profile.email
+      } else {
+        // Fallback to auth.users using admin api
+        const { data: authUser } = await adminSupabase.auth.admin.getUserById(data.user_id)
+        if (authUser?.user?.email) {
+          associatedEmail = authUser.user.email
+        }
+      }
+    }
+
+    // Mask the email for privacy (e.g. te***@gmail.com)
+    let maskedEmail = null
+    if (associatedEmail) {
+      const [localPart, domainPart] = associatedEmail.split("@")
+      if (localPart && domainPart) {
+        if (localPart.length <= 2) {
+          maskedEmail = `${localPart[0]}***@${domainPart}`
+        } else {
+          maskedEmail = `${localPart.substring(0, 2)}***@${domainPart}`
+        }
+      }
     }
 
     return NextResponse.json({ 
       exists: true, 
-      isVerifiedOwner: data.is_verified_owner 
+      isVerifiedOwner: data.is_verified_owner,
+      associatedEmail: maskedEmail
     })
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 })
