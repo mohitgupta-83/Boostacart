@@ -8,17 +8,59 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useState, Suspense } from "react"
+import { useState, Suspense, useEffect } from "react"
 
 function ClaimForm() {
   const searchParams = useSearchParams()
   const [domain, setDomain] = useState(searchParams.get("domain") || "")
   const [email, setEmail] = useState("")
-  const [otp, setOtp] = useState("")
-  const [step, setStep] = useState<"domain" | "email" | "otp" | "success">(domain ? "email" : "domain")
+  const [step, setStep] = useState<"domain" | "email" | "link" | "success">(domain ? "email" : "domain")
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isFinalizing, setIsFinalizing] = useState(false)
+  const supabase = createClient()
   const router = useRouter()
+
+  // Auto-finalize if user returns from magic link
+  useEffect(() => {
+    const handleAuthRedirect = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session && domain && !isFinalizing && step !== "success") {
+        setIsFinalizing(true)
+        try {
+          await finalizeClaim(domain, session.user.email!)
+        } catch (err) {
+          console.error("Auto-finalize error:", err)
+          setIsFinalizing(false)
+        }
+      }
+    }
+    handleAuthRedirect()
+  }, [domain, step])
+
+  const finalizeClaim = async (targetDomain: string, userEmail: string) => {
+    setIsLoading(true)
+    try {
+      const res = await fetch("/api/claim-domain/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ domain: targetDomain, email: userEmail })
+      })
+
+      if (!res.ok) {
+        const errData = await res.json()
+        throw new Error(errData.error || "Failed to transfer ownership")
+      }
+
+      setStep("success")
+    } catch (err: any) {
+      setError(err.message || "Failed to finalize ownership transfer.")
+    } finally {
+      setIsLoading(true) 
+      // Keep loading true for success state transition if needed, 
+      // but actually setStep handles it.
+    }
+  }
 
   const handleDomainSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -30,7 +72,7 @@ function ClaimForm() {
     setStep("email")
   }
 
-  const handleSendOtp = async (e: React.FormEvent) => {
+  const handleSendLink = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
     setIsLoading(true)
@@ -39,80 +81,31 @@ function ClaimForm() {
     const emailDomain = email.split("@")[1]?.toLowerCase()
     const targetDomain = domain.toLowerCase()
     
-    // Check if the domains match exactly, or if the email is a subdomain of the target domain
     if (emailDomain !== targetDomain && !emailDomain.endsWith(`.${targetDomain}`)) {
       setError(`Your email must end with @${targetDomain} to claim this store.`)
       setIsLoading(false)
       return
     }
 
-    const supabase = createClient()
     try {
-      const dbCheck = await fetch("/api/check-domain", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain }),
-      })
-      if (dbCheck.ok) {
-        const json = await dbCheck.json()
-        if (!json.exists) {
-          setError("This store domain is not registered. Please go to Sign Up to create it.")
-          setIsLoading(false)
-          return
-        }
-      }
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
           shouldCreateUser: true,
+          emailRedirectTo: window.location.href, // Redirect back to this exact page
         }
       })
       
       if (error) throw error
-      setStep("otp")
+      setStep("link")
     } catch (err: any) {
-      setError(err.message || "Failed to send verification code. Please try again.")
+      setError(err.message || "Failed to send verification link. Please try again.")
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleVerifyOtp = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setIsLoading(true)
-
-    const supabase = createClient()
-    try {
-      const { data, error } = await supabase.auth.verifyOtp({
-        email,
-        token: otp,
-        type: "email"
-      })
-
-      if (error) throw error
-
-      if (data.user) {
-        // Once verified and logged in, transfer ownership
-        const res = await fetch("/api/claim-domain/confirm", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ domain, email })
-        })
-
-        if (!res.ok) {
-          const errData = await res.json()
-          throw new Error(errData.error || "Failed to transfer ownership")
-        }
-
-        setStep("success")
-      }
-    } catch (err: any) {
-      setError(err.message || "Invalid verification code.")
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  // Removed handleVerifyOtp as we use Magic Link now
 
   return (
     <div className="min-h-screen bg-[#04091A] flex items-center justify-center p-6 md:p-10 relative overflow-hidden font-sans selection:bg-cyan-500/30">
@@ -181,7 +174,7 @@ function ClaimForm() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSendOtp} className="space-y-4">
+                <form onSubmit={handleSendLink} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-white">Work Email Address</Label>
                     <Input
@@ -200,50 +193,49 @@ function ClaimForm() {
                     className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Sending code..." : "Send Verification Code"}
+                    {isLoading ? "Sending link..." : "Send Verification Link"}
                   </Button>
                 </form>
               </CardContent>
             </>
           )}
 
-          {step === "otp" && (
+          {step === "link" && (
             <>
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-white">Check Your Email</CardTitle>
-                <CardDescription className="text-white/60">
-                  We sent a 6-digit verification code to <strong className="text-white">{email}</strong>.
+                <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <svg className="w-8 h-8 text-blue-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <CardTitle className="text-2xl font-bold text-white text-center">Check Your Email</CardTitle>
+                <CardDescription className="text-white/60 text-center">
+                  We sent a secure magic link to <strong className="text-white">{email}</strong>.
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleVerifyOtp} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="otp" className="text-white">Verification Code</Label>
-                    <Input
-                      id="otp"
-                      type="text"
-                      placeholder="123456"
-                      required
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      className="bg-[#0a0f24] border-white/10 text-white focus:border-cyan-500 text-center tracking-widest text-lg"
-                      maxLength={6}
-                    />
-                  </div>
-                  {error && <p className="text-sm text-rose-400">{error}</p>}
-                  <Button
-                    type="submit"
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Verifying..." : "Verify & Claim Store"}
-                  </Button>
-                  <div className="text-center pt-2">
-                    <button type="button" onClick={() => setStep("email")} className="text-white/40 hover:text-white text-sm transition-colors">
-                      Use a different email
+              <CardContent className="space-y-6">
+                <div className="bg-blue-500/5 border border-blue-500/20 p-4 rounded-xl">
+                    <p className="text-sm text-blue-200 leading-relaxed text-center">
+                        Please click the link in the email to automatically verify your business and claim <strong className="text-white">{domain}</strong>.
+                    </p>
+                </div>
+                {isFinalizing && (
+                    <div className="flex items-center justify-center space-x-2 text-cyan-400">
+                        <div className="w-4 h-4 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+                        <span className="text-sm font-medium">Finalizing ownership...</span>
+                    </div>
+                )}
+                {error && <p className="text-sm text-rose-400 text-center">{error}</p>}
+                <div className="text-center pt-2">
+                    <button 
+                        type="button" 
+                        onClick={() => setStep("email")} 
+                        className="text-white/40 hover:text-white text-sm underline transition-colors"
+                        disabled={isFinalizing}
+                    >
+                        Use a different email
                     </button>
-                  </div>
-                </form>
+                </div>
               </CardContent>
             </>
           )}
