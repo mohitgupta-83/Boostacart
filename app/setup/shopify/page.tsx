@@ -58,7 +58,7 @@ export default function ShopifySetupPage() {
     // 2️⃣ Open widget in new tab
     const params = new URLSearchParams(productData).toString();
     const widgetUrl =
-      'https://boostacaartt.netlify.app/widget/' +
+      'https://boostacart.com/widget/' +
       productData.shop +
       '?' +
       params;
@@ -166,9 +166,18 @@ export default function ShopifySetupPage() {
             </p>
             <div className="bg-[#030510] p-4 rounded-lg border border-white/5">
               <p className="text-indigo-200/60 text-sm">
-                <span className="text-emerald-400 font-medium">Path:</span> Online Store → Themes → Click "Edit Code" on
+                <span className="text-emerald-400 font-medium">Path:</span> Online Store &rarr; Themes &rarr; Click "Edit Code" on
                 your active theme
               </p>
+            </div>
+            
+            {/* Step 1 Image */}
+            <div className="mt-6 overflow-hidden rounded-xl border border-white/10 shadow-2xl bg-black/40">
+              <img 
+                src="/setup/shopify/step1.png" 
+                alt="Shopify Admin Access" 
+                className="w-full h-auto block opacity-90 hover:opacity-100 transition-opacity duration-500"
+              />
             </div>
           </div>
 
@@ -185,6 +194,15 @@ export default function ShopifySetupPage() {
               <p className="text-indigo-200/60 text-sm">
                 <span className="text-emerald-400 font-medium">File:</span> Layout/theme.liquid
               </p>
+            </div>
+            
+            {/* Step 2 Image */}
+            <div className="mt-6 overflow-hidden rounded-xl border border-white/10 shadow-2xl bg-black/40">
+              <img 
+                src="/setup/shopify/step2.png" 
+                alt="Open theme.liquid" 
+                className="w-full h-auto block opacity-90 hover:opacity-100 transition-opacity duration-500"
+              />
             </div>
           </div>
 
