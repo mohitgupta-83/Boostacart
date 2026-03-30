@@ -43,7 +43,7 @@ export default function ShopifySetupPage() {
       product_url: window.location.href,
       variant_id: variantId,
       quantity: getQuantity(),
-      shop: "{{ shop.permanent_domain }}"
+      shop: "{{ shop.domain }}"
     };
 
     // 1️⃣ Add product to cart (AJAX-safe)
@@ -170,12 +170,12 @@ export default function ShopifySetupPage() {
                 your active theme
               </p>
             </div>
-            
+
             {/* Step 1 Image */}
             <div className="mt-6 overflow-hidden rounded-xl border border-white/10 shadow-2xl bg-black/40">
-              <img 
-                src="/setup/shopify/step1.png" 
-                alt="Shopify Admin Access" 
+              <img
+                src="/setup/shopify/step1.png"
+                alt="Shopify Admin Access"
                 className="w-full h-auto block opacity-90 hover:opacity-100 transition-opacity duration-500"
               />
             </div>
@@ -195,12 +195,12 @@ export default function ShopifySetupPage() {
                 <span className="text-emerald-400 font-medium">File:</span> Layout/theme.liquid
               </p>
             </div>
-            
+
             {/* Step 2 Image */}
             <div className="mt-6 overflow-hidden rounded-xl border border-white/10 shadow-2xl bg-black/40">
-              <img 
-                src="/setup/shopify/step2.png" 
-                alt="Open theme.liquid" 
+              <img
+                src="/setup/shopify/step2.png"
+                alt="Open theme.liquid"
                 className="w-full h-auto block opacity-90 hover:opacity-100 transition-opacity duration-500"
               />
             </div>
@@ -272,11 +272,10 @@ export default function ShopifySetupPage() {
               </div>
               <button
                 onClick={handleCopy}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                  copied
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${copied
                     ? "bg-green-600/20 text-green-400 border border-green-500/50"
                     : "bg-blue-600/20 text-blue-400 border border-blue-500/50 hover:bg-blue-600/30"
-                }`}
+                  }`}
               >
                 {copied ? (
                   <>

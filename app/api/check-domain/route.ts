@@ -50,23 +50,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Mask the email for privacy (e.g. te***@gmail.com)
-    let maskedEmail = null
-    if (associatedEmail) {
-      const [localPart, domainPart] = associatedEmail.split("@")
-      if (localPart && domainPart) {
-        if (localPart.length <= 2) {
-          maskedEmail = `${localPart[0]}***@${domainPart}`
-        } else {
-          maskedEmail = `${localPart.substring(0, 2)}***@${domainPart}`
-        }
-      }
-    }
-
+    // Removed email masking per user request
     return NextResponse.json({ 
       exists: true, 
       isVerifiedOwner: data.is_verified_owner,
-      associatedEmail: maskedEmail
+      associatedEmail: associatedEmail
     })
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 })
