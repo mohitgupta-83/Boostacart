@@ -165,11 +165,9 @@ function SignUpForm() {
                   <Button variant="outline" className="w-full bg-white/5 border-white/10 hover:bg-white/10 text-white" asChild>
                     <Link href="/auth/login">Login to Existing Account</Link>
                   </Button>
-                  {domainExistsState === "unverified" && (
-                    <Button variant="default" className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 border-0" asChild>
-                      <Link href={`/auth/claim?domain=${encodeURIComponent(storeDomain)}`}>Claim Ownership</Link>
-                    </Button>
-                  )}
+                  <Button variant="default" className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 border-0" asChild>
+                    <Link href={`/auth/claim?domain=${encodeURIComponent(storeDomain)}`}>Claim Ownership</Link>
+                  </Button>
                   <Button variant="link" className="w-full text-cyan-400 hover:text-cyan-300" asChild>
                     <Link href="/contact">Contact Support</Link>
                   </Button>

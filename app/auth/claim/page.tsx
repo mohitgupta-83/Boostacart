@@ -12,14 +12,23 @@ import { useState, Suspense } from "react"
 
 function ClaimForm() {
   const searchParams = useSearchParams()
-  const domain = searchParams.get("domain") || ""
-  
+  const [domain, setDomain] = useState(searchParams.get("domain") || "")
   const [email, setEmail] = useState("")
   const [otp, setOtp] = useState("")
-  const [step, setStep] = useState<"email" | "otp" | "success">("email")
+  const [step, setStep] = useState<"domain" | "email" | "otp" | "success">(domain ? "email" : "domain")
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+
+  const handleDomainSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!domain.trim()) {
+      setError("Please enter a domain.")
+      return
+    }
+    setError(null)
+    setStep("email")
+  }
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,6 +48,24 @@ function ClaimForm() {
 
     const supabase = createClient()
     try {
+      const dbCheck = await fetch("/api/check-domain", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ domain }),
+      })
+      if (dbCheck.ok) {
+        const json = await dbCheck.json()
+        if (!json.exists) {
+          setError("This store domain is not registered. Please go to Sign Up to create it.")
+          setIsLoading(false)
+          return
+        }
+        if (json.exists && json.isVerifiedOwner) {
+          setError("This store is already owned by a verified user. If this is a mistake, please contact support.")
+          setIsLoading(false)
+          return
+        }
+      }
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
@@ -92,22 +119,6 @@ function ClaimForm() {
     }
   }
 
-  if (!domain) {
-    return (
-      <div className="min-h-screen bg-[#04091A] flex items-center justify-center p-6 text-center">
-        <Card className="bg-[#0b102b]/80 border-white/10 max-w-sm w-full">
-          <CardContent className="pt-6">
-            <h2 className="text-xl font-bold text-white mb-2">Invalid Request</h2>
-            <p className="text-white/60 text-sm mb-4">No domain specified for claiming.</p>
-            <Button asChild className="w-full bg-cyan-500 hover:bg-cyan-600">
-              <Link href="/auth/sign-up">Go to Sign Up</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-[#04091A] flex items-center justify-center p-6 md:p-10 relative overflow-hidden font-sans selection:bg-cyan-500/30">
       {/* Abstract Background Glows */}
@@ -115,7 +126,52 @@ function ClaimForm() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-fuchsia-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
 
       <div className="w-full max-w-sm relative z-10">
+
         <Card className="bg-[#0b102b]/80 backdrop-blur-xl border border-white/10 shadow-2xl">
+          {step === "domain" && (
+            <>
+              <CardHeader>
+                <div className="w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center mb-2">
+                  <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                </div>
+                <CardTitle className="text-2xl font-bold text-white">Find Your Store</CardTitle>
+                <CardDescription className="text-white/60">
+                  Enter your store's domain to begin the claim process.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleDomainSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="storeDomain" className="text-white">Store Domain</Label>
+                    <Input
+                      id="storeDomain"
+                      type="text"
+                      placeholder="e.g. mystore.com"
+                      required
+                      value={domain}
+                      onChange={(e) => setDomain(e.target.value.toLowerCase().trim())}
+                      className="bg-[#0a0f24] border-white/10 text-white focus:border-cyan-500"
+                    />
+                  </div>
+                  {error && <p className="text-sm text-rose-400">{error}</p>}
+                  <Button
+                    type="submit"
+                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold"
+                  >
+                    Continue
+                  </Button>
+                </form>
+                <div className="mt-4 text-center text-sm">
+                  <Link href="/auth/sign-up" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                    Looking to create a new store?
+                  </Link>
+                </div>
+              </CardContent>
+            </>
+          )}
+
           {step === "email" && (
             <>
               <CardHeader>
