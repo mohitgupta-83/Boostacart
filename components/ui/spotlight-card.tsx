@@ -58,7 +58,6 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({ children, className = "",
       backgroundAttachment: "fixed",
       border: "var(--border-size) solid var(--backup-border)",
       position: "relative" as const,
-      touchAction: "none" as const,
     }
   }
 

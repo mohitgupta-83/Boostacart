@@ -127,7 +127,7 @@ export default function LandingPage() {
   };
 
   return (
-    <main className={`min-h-screen bg-[#04091A] text-slate-200 selection:bg-fuchsia-500/30 overflow-hidden ${outfit.className}`}>
+    <main className={`min-h-screen bg-[#04091A] text-slate-200 selection:bg-fuchsia-500/30 overflow-x-hidden ${outfit.className}`}>
       {/* JSON-LD Structured Data */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
