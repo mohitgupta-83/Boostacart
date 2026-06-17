@@ -30,7 +30,121 @@ const guides = [
         title: "Pre-Checkout Email Capture Explained",
         description: "How moving your email capture from exit-intent popups to the Add-to-Cart button doubles your list size.",
         href: "/pre-checkout-capture-tool",
-        category: "Lead Generation"
+        category: "Lead Gen"
+    },
+    {
+        title: "Best Shopify Abandoned Cart Apps",
+        description: "A comprehensive review of the top abandoned cart recovery apps available on the Shopify App Store.",
+        href: "/shopify-abandoned-cart-app",
+        category: "Apps"
+    },
+    {
+        title: "How to Reduce Cart Abandonment",
+        description: "Proven strategies and design principles to reduce shopping cart abandonment rates on ecommerce stores.",
+        href: "/reduce-cart-abandonment",
+        category: "Optimization"
+    },
+    {
+        title: "Shopify Add to Cart Popup Guide",
+        description: "How to implement high-converting Add-to-Cart popups that capture leads without disrupting user experience.",
+        href: "/shopify-add-to-cart-popup",
+        category: "Lead Gen"
+    },
+    {
+        title: "Shopify Email Capture Popup Playbook",
+        description: "Best practices for designing, timing, and targeting email capture popups on Shopify websites.",
+        href: "/shopify-email-capture-popup",
+        category: "Lead Gen"
+    },
+    {
+        title: "Add-to-Cart Rate Optimization",
+        description: "How to optimize your product pages and buttons to increase the percentage of visitors adding items to their carts.",
+        href: "/add-to-cart-rate-optimization",
+        category: "CRO"
+    },
+    {
+        title: "Cart Recovery Tools for Shopify Compared",
+        description: "Compare automated cart recovery features, pricing, and setup difficulty for Shopify store owners.",
+        href: "/cart-recovery-tool-for-shopify",
+        category: "Comparison"
+    },
+    {
+        title: "Dropshipping Conversion Rate Tips",
+        description: "Specific conversion rate optimization (CRO) tips designed for dropshipping stores utilizing paid traffic.",
+        href: "/dropshipping-conversion-tips",
+        category: "Dropshipping"
+    },
+    {
+        title: "DTC Cart Recovery Strategy",
+        description: "Building a cohesive, multi-channel recovery flow using email, SMS, and WhatsApp for direct-to-consumer brands.",
+        href: "/dtc-cart-recovery-strategy",
+        category: "Strategy"
+    },
+    {
+        title: "Ecommerce Conversion Rate Optimization (CRO)",
+        description: "The complete guide to analyzing and optimizing your ecommerce conversion funnel from landing to purchase.",
+        href: "/ecommerce-conversion-rate-optimization",
+        category: "CRO"
+    },
+    {
+        title: "Ecommerce Lead Generation Strategies",
+        description: "Modern lead generation tactics to build a high-quality email and SMS list of prospective buyers.",
+        href: "/ecommerce-lead-generation-strategies",
+        category: "Lead Gen"
+    },
+    {
+        title: "Email Followup Sequences for Abandoned Carts",
+        description: "A step-by-step blueprint for writing high-converting checkout recovery emails that win back lost buyers.",
+        href: "/email-followup-abandoned-carts",
+        category: "Email"
+    },
+    {
+        title: "Email vs SMS vs WhatsApp Marketing",
+        description: "An analytical comparison of open rates, click rates, and ROI across email, SMS, and WhatsApp recovery channels.",
+        href: "/email-vs-sms-vs-whatsapp-marketing",
+        category: "Channels"
+    },
+    {
+        title: "How to Increase Shopify Conversion Rate",
+        description: "Practical speed, design, trust, and pricing updates that will immediately boost your Shopify store conversion rate.",
+        href: "/how-to-increase-shopify-conversion-rate",
+        category: "CRO"
+    },
+    {
+        title: "Shopify Add-to-Cart Lead Capture",
+        description: "A deep dive into capturing lead information at the exact moment a customer clicks the Add-to-Cart button.",
+        href: "/shopify-add-to-cart-lead-capture",
+        category: "Lead Gen"
+    },
+    {
+        title: "Shopify Conversion Rate Benchmarks",
+        description: "See where your store stands compared to average Shopify conversion rates by industry, country, and traffic source.",
+        href: "/shopify-conversion-rate-benchmarks",
+        category: "CRO"
+    },
+    {
+        title: "SMS Cart Recovery App Setup",
+        description: "How to launch compliance-friendly SMS cart recovery automations that convert mobile traffic.",
+        href: "/sms-cart-recovery-app",
+        category: "SMS"
+    },
+    {
+        title: "SMS Marketing for Shopify Stores",
+        description: "The complete guide to list building, compliance, and automated text messaging campaigns on Shopify.",
+        href: "/sms-marketing-for-shopify",
+        category: "SMS"
+    },
+    {
+        title: "WhatsApp Business API for Ecommerce",
+        description: "How to access, integrate, and scale your customer support and recovery using the official WhatsApp Business API.",
+        href: "/whatsapp-business-api-ecommerce",
+        category: "WhatsApp"
+    },
+    {
+        title: "WhatsApp Marketing for Ecommerce Stores",
+        description: "Utilize high-open-rate WhatsApp campaigns to recover carts, share updates, and increase customer lifetime value.",
+        href: "/whatsapp-marketing-for-ecommerce",
+        category: "WhatsApp"
     }
 ];
 

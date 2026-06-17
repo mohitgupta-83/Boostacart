@@ -139,6 +139,13 @@ const tools = [
         href: "/tools/discount-impact-calculator",
         icon: Percent,
         color: "text-red-400"
+    },
+    {
+        title: "SaaS Pricing Model Calculator",
+        description: "Model SaaS pricing tiers, lifetime value (LTV), and churn rate impact.",
+        href: "/tools/saas-pricing-calculator",
+        icon: Calculator,
+        color: "text-indigo-400"
     }
 ]
 

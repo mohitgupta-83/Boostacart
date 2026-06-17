@@ -37,22 +37,40 @@ export default function CaseStudiesHub() {
       tag: "Niche Tactics"
     },
     {
-      title: "WhatsApp Cart Recovery Implementation",
-      description: "Analyzing the astoundingly high open rates of WhatsApp vs standard email recovery.",
-      href: "/abandoned-cart-whatsapp-template",
-      tag: "Omnichannel Deployment"
+      title: "WhatsApp Cart Recovery Case Study",
+      description: "Analyzing the astoundingly high open rates of WhatsApp vs standard email recovery in a live ecommerce environment.",
+      href: "/whatsapp-cart-recovery-case-study",
+      tag: "Omnichannel"
     },
     {
-      title: "High-Ticket Recovery Playbook",
-      description: "The concierge approach to recovering premium orders over $1,000.",
-      href: "/cart-recovery-for-high-ticket-stores",
-      tag: "Elite Strategy"
+      title: "Concierge Cart Recovery Case Study",
+      description: "How a high-ticket store implemented concierge recovery to recover orders over $1,000.",
+      href: "/case-study/cart-recovery",
+      tag: "High-Ticket ROI"
     },
     {
-      title: "Fashion Brand Recovery Blueprint",
-      description: "The visual-first tactics used by 7-figure apparel stores to reclaim lost sales.",
-      href: "/cart-recovery-for-fashion-brands",
-      tag: "Style ROI"
+      title: "BoostACart Performance Results",
+      description: "Compiled data across 500+ Shopify stores demonstrating overall revenue growth, cart capture, and recovery statistics.",
+      href: "/boostacart-results",
+      tag: "Performance Study"
+    },
+    {
+      title: "BoostACart Merchant Reviews",
+      description: "In-depth reviews and detailed breakdown of results shared by independent merchants using BoostACart.",
+      href: "/boostacart-reviews",
+      tag: "Merchant Feedback"
+    },
+    {
+      title: "BoostACart User Feedback Teardown",
+      description: "A deep dive study on user experience, checkout flow sentiment, and customer feedback on pre-checkout modals.",
+      href: "/boostacart-user-feedback",
+      tag: "UX Teardown"
+    },
+    {
+      title: "D2C Portfolio 25x ROI Case Study",
+      description: "Read the in-depth case study on how a major D2C portfolio achieved a 25x ROI scaling their brand on Shopify.",
+      href: "/case-study",
+      tag: "25x ROI Study"
     }
   ];
 

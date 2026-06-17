@@ -41,6 +41,72 @@ export default function ComparisonsHub() {
       description: "Compare the conversion rates and UX of the industry's most popular lead capture solutions.",
       href: "/best-shopify-lead-capture-tools",
       tag: "Listicle Review"
+    },
+    {
+      title: "BoostACart vs Cartloop",
+      description: "A head-to-head comparison detailing the cost-to-benefit ratio of conversational SMS versus automated pre-checkout widgets.",
+      href: "/boostacart-vs-cartloop",
+      tag: "vs Cartloop"
+    },
+    {
+      title: "BoostACart vs Shopify Email",
+      description: "Why relying solely on Shopify's native checkout recovery emails could be leaving up to 70% of potential recoveries on the table.",
+      href: "/boostacart-vs-shopify-email",
+      tag: "vs Shopify Email"
+    },
+    {
+      title: "Klaviyo Alternative",
+      description: "A strategic overview of Klaviyo alternatives focused specifically on conversion optimization and pre-checkout data capture.",
+      href: "/klaviyo-alternative",
+      tag: "Klaviyo Alternative"
+    },
+    {
+      title: "Recart Alternative",
+      description: "Compare modern approaches to SMS and Messenger marketing with pre-checkout lead capture that doesn't annoy customers.",
+      href: "/recart-alternative",
+      tag: "Recart Alternative"
+    },
+    {
+      title: "Cartloop Alternative",
+      description: "Find the best SMS recovery alternative for your store. Compare conversion rates and compliance rules.",
+      href: "/cartloop-alternative",
+      tag: "Cartloop Alternative"
+    },
+    {
+      title: "Cart Recovery Tool Alternative",
+      description: "Explore why standard cart recovery tools fail to capture early-stage drop-offs and find the best alternatives.",
+      href: "/cart-recovery-tool-alternative",
+      tag: "Tool Alternative"
+    },
+    {
+      title: "Privy Alternative",
+      description: "Compare high-impact email capture methods. Learn how to transition from annoying popups to frictionless pre-checkout capture.",
+      href: "/privy-alternative",
+      tag: "Privy Alternative"
+    },
+    {
+      title: "Omnisend Alternative",
+      description: "Evaluate your email and SMS marketing options. Compare omnichannel recovery structures for scaling Shopify brands.",
+      href: "/omnisend-alternative",
+      tag: "Omnisend Alternative"
+    },
+    {
+      title: "PushOwl Alternative",
+      description: "Compare web push notifications with direct SMS and email pre-checkout capture channels.",
+      href: "/pushowl-alternative",
+      tag: "PushOwl Alternative"
+    },
+    {
+      title: "Tidio Alternative for Shopify",
+      description: "Learn how to replace manual live chat recovery with automated high-conversion cart recapture sequences.",
+      href: "/tidio-alternative-for-shopify",
+      tag: "Tidio Alternative"
+    },
+    {
+      title: "Best Recart Alternatives",
+      description: "An in-depth guide comparing alternatives to Recart for automated text messaging and pre-checkout capture.",
+      href: "/best-recart-alternatives",
+      tag: "Alternatives List"
     }
   ];
 

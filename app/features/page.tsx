@@ -39,24 +39,34 @@ export default function FeaturesPage() {
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-white mb-12 text-center">Core Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-xl hover:border-blue-500/50 transition-all">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                <ShoppingCart className="h-6 w-6 text-blue-400" />
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-xl hover:border-blue-500/50 transition-all flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                  <ShoppingCart className="h-6 w-6 text-blue-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">Add-to-Cart Lead Capture</h3>
+                <p className="text-gray-400">
+                  Capture leads instantly when customers add products to cart, not when they abandon it.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Add-to-Cart Lead Capture</h3>
-              <p className="text-gray-400">
-                Capture leads instantly when customers add products to cart, not when they abandon it.
-              </p>
+              <Link href="/pre-checkout-capture-tool" className="inline-flex items-center text-blue-400 text-sm hover:underline mt-4">
+                Learn how it works <ArrowRight className="h-4 w-4 ml-1" />
+              </Link>
             </div>
 
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-xl hover:border-purple-500/50 transition-all">
-              <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
-                <Phone className="h-6 w-6 text-purple-400" />
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-xl hover:border-purple-500/50 transition-all flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
+                  <Phone className="h-6 w-6 text-purple-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">Phone + Email Collection</h3>
+                <p className="text-gray-400">
+                  Collect both phone numbers and email addresses with smart validation to ensure quality leads.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Phone + Email Collection</h3>
-              <p className="text-gray-400">
-                Collect both phone numbers and email addresses with smart validation to ensure quality leads.
-              </p>
+              <Link href="/collect-email-at-add-to-cart" className="inline-flex items-center text-purple-400 text-sm hover:underline mt-4">
+                Explore email capture <ArrowRight className="h-4 w-4 ml-1" />
+              </Link>
             </div>
 
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-xl hover:border-green-500/50 transition-all">
@@ -141,10 +151,15 @@ export default function FeaturesPage() {
               <p className="text-gray-400">Maximize ROI on every ad click by capturing leads before checkout</p>
             </div>
 
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-8 rounded-xl text-center">
-              <Shield className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-3">D2C Brands</h3>
-              <p className="text-gray-400">Build your customer list and recover abandoned carts systematically</p>
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-8 rounded-xl text-center flex flex-col justify-between items-center">
+              <div>
+                <Shield className="h-12 w-12 text-purple-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-3">D2C Brands</h3>
+                <p className="text-gray-400">Build your customer list and recover abandoned carts systematically</p>
+              </div>
+              <Link href="/recover-add-to-cart-customers" className="inline-flex items-center text-purple-400 text-sm hover:underline mt-4">
+                See D2C playbook <ArrowRight className="h-4 w-4 ml-1" />
+              </Link>
             </div>
 
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-8 rounded-xl text-center">
